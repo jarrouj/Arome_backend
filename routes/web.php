@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\PromoController;
 use App\Http\Controllers\Admin\TermController;
+use App\Http\Controllers\Admin\PrivacyController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
@@ -57,6 +58,12 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/add_term' , [TermController::class , 'add_term']);
     Route::post('/update_term/{id}' , [TermController::class , 'update_term']);
     Route::get('/delete_term/{id}' , [TermController::class , 'delete_term']);
+
+    // {{ Privacy }}
+    Route::get('/show_privacy' , [PrivacyController::class , 'show_privacy']);
+    Route::post('/add_privacy' , [PrivacyController::class , 'add_privacy']);
+    Route::post('/update_privacy/{id}' , [PrivacyController::class , 'update_privacy']);
+    Route::get('/delete_privacy/{id}' , [PrivacyController::class , 'delete_privacy']);
 
 
 });
