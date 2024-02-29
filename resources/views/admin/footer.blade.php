@@ -5,7 +5,7 @@
                 <div class="copyright text-center text-sm text-muted text-lg-start">
                     Copy Rights ©
                     {{ Date('Y') }} -
-                    <a href="https://www.snap-itech.com" class="font-weight-bold" target="_blank">Snap It Technologies</a>
+                    <a href="https://www.codergize.com" class="font-weight-bold" target="_blank">CoderGize</a>
                     ALL RIGHTS RESERVED
                 </div>
             </div>

@@ -1,22 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CmsController;
-use App\Http\Controllers\Admin\CustomerController;
-use App\Http\Controllers\Admin\DescriptionController;
-use App\Http\Controllers\Admin\HeroController;
-use App\Http\Controllers\Admin\InfoController;
-use App\Http\Controllers\Admin\PartnerController;
-use App\Http\Controllers\Admin\PopController;
-use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SocialController;
-use App\Http\Controllers\Admin\ProcessControler;
-use App\Http\Controllers\Admin\ProjectController;
-use App\Http\Controllers\Admin\ServicePageController;
-use App\Http\Controllers\Admin\ServiceSliderController;
-use App\Http\Controllers\Admin\StrategyController;
-use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +37,14 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/show_social',[SocialController::class,'show_social']);
     Route::post('/update_social_confirm/{id}',[SocialController::class,'update_social_confirm']);
     Route::get('/update_social/{id}',[SocialController::class,'update_social']);
+
+    // {{ Subscriber }}
+    Route::get('/show_subscriber',[SubscriberController::class,'show_subscriber']);
+    Route::post('/add_subscriber',[SubscriberController::class,'add_subscriber']);
+    Route::post('/update_subscriber/{id}',[SubscriberController::class,'update_subscriber']);
+    Route::get('/delete_subscriber/{id}',[SubscriberController::class,'delete_subscriber']);
+
+
 });
 
 Route::get('/', function () {

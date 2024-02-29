@@ -5,7 +5,7 @@
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
         <a class="" href="{{ url('/') }}">
-            <img src="/images/logo.png" width="200px" class="d-block mx-auto p-3" alt="main_logo">
+            <img src="/logo/codergize.svg" width="250px" class="d-block mx-auto p-3" alt="main_logo">
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -200,7 +200,16 @@
                 </a>
             </li>
 
-
+            <li class="nav-item">
+                <a class="nav-link rounded-3 {{ 'admin/show_subscriber' == request()->path() ? 'main-color' : '' }}"
+                    href="{{ url('/admin/show_subscriber') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="bi bi-bullseye text-primary text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Subscriber</span>
+                </a>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link rounded-3 {{ 'admin/show_social' == request()->path() ? 'main-color' : '' }}"
