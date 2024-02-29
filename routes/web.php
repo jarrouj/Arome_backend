@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CmsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\SubscriberController;
+use App\Http\Controllers\Admin\PromoController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,11 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/update_subscriber/{id}',[SubscriberController::class,'update_subscriber']);
     Route::get('/delete_subscriber/{id}',[SubscriberController::class,'delete_subscriber']);
 
+    // {{ Promo }}
+    Route::get('/show_promo' , [PromoController::class , 'show_promo']);
+    Route::post('/add_promo' , [PromoController::class , 'add_promo']);
+    Route::post('/update_promo/{id}' , [PromoController::class , 'update_promo']);
+    Route::get('/delete_promo/{id}' , [PromoController::class , 'delete_promo']);
 
 });
 
