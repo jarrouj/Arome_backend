@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\PromoController;
+use App\Http\Controllers\Admin\TermController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
@@ -49,7 +50,14 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/show_promo' , [PromoController::class , 'show_promo']);
     Route::post('/add_promo' , [PromoController::class , 'add_promo']);
     Route::post('/update_promo/{id}' , [PromoController::class , 'update_promo']);
-    Route::get('/delete_promo/{id}' , [PromoController::class , 'delete_promo']);
+    Route::get('/delete_promo' , [PromoController::class , 'delete_promo']);
+
+    // {{ Term }}
+    Route::get('/show_term' , [TermController::class , 'show_term']);
+    Route::post('/add_term' , [TermController::class , 'add_term']);
+    Route::post('/update_term/{id}' , [TermController::class , 'update_term']);
+    Route::get('/delete_term/{id}' , [TermController::class , 'delete_term']);
+
 
 });
 

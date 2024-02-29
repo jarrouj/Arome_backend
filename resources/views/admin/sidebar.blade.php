@@ -131,13 +131,13 @@
 
 
             <li class="nav-item">
-                <a class="nav-link rounded-3 {{ 'admin/show_project' == request()->path() ? 'main-color' : '' }}"
-                    href="{{ url('/admin/show_project') }}">
+                <a class="nav-link rounded-3 {{ 'admin/show_term' == request()->path() ? 'main-color' : '' }}"
+                    href="{{ url('/admin/show_term') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="bi bi-kanban-fill text-success text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Project</span>
+                    <span class="nav-link-text ms-1">Term</span>
                 </a>
             </li>
 
