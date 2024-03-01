@@ -37,12 +37,17 @@
                                         <tr class="text-center">
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Test English
+                                                Name
                                             </th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Title Arabic
+                                                Text
                                             </th>
+
+                                            <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Role
+                                        </th>
 
                                             <th class="text-secondary opacity-7"></th>
                                             <th class="text-secondary opacity-7"></th>
@@ -55,13 +60,19 @@
 
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->texten }}
+                                                        {{ $data->name }}
                                                     </p>
                                                 </td>
 
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->textar }}
+                                                        {{ $data->text }}
+                                                    </p>
+                                                </td>
+
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $data->role }}
                                                     </p>
                                                 </td>
 

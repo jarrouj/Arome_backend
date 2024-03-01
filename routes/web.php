@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\PromoController;
 use App\Http\Controllers\Admin\TermController;
 use App\Http\Controllers\Admin\PrivacyController;
+use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
@@ -22,9 +23,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::prefix('/admin')->middleware('auth')->group(function () {
 
@@ -65,6 +63,11 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/update_privacy/{id}' , [PrivacyController::class , 'update_privacy']);
     Route::get('/delete_privacy/{id}' , [PrivacyController::class , 'delete_privacy']);
 
+    // {{ Testimonial }}
+    Route::get('/show_testimonial' , [TestimonialController::class , 'show_testimonial']);
+    Route::post('/add_testimonial' , [TestimonialController::class , 'add_testimonial']);
+    Route::post('/update_testimonial/{id}' , [TestimonialController::class , 'update_testimonial']);
+    Route::get('/delete_testimonial/{id}' , [TestimonialController::class , 'delete_testimonial']);
 
 });
 
@@ -73,5 +76,4 @@ Route::get('/', function () {
 });
 
 //Register Route
-
 Route::post('/register_user',[RegisterController::class,'register'])->name('register');
