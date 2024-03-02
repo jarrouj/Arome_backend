@@ -17,14 +17,14 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h6>Category</h6>
+                            <h6>Collections</h6>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-12">
                                 <div class="d-flex justify-content-center">
 
-                                    @include('admin.category.add_category')
+                                    @include('admin.collection.add_collection')
 
                                 </div>
                             </div>
@@ -35,48 +35,45 @@
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr class="text-center">
-
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                <img src="/images/en.png" width="15px" alt="">
-
-                                                Title
+                                                Image
                                             </th>
                                             <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            <img src="/images/ar.png" width="15px" alt="">
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
-                                            Title
-                                        </th>
+                                                Name
+                                            </th>
 
                                             <th class="text-secondary opacity-7"></th>
                                             <th class="text-secondary opacity-7"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($category as $data)
+                                        @forelse ($collection as $data)
                                             <tr class="text-center">
+                                                <td class="bg-primary">
+                                                        <img src="/collection/{{ $data->img }}" async class="d-block m-auto" width="50px" alt="">
+
+                                                </td>
 
 
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->titleen }}
+                                                        {{ $data->name }}
                                                     </p>
                                                 </td>
 
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->titlear }}
-                                                    </p>
+                                              
+                                                <td class="align-middle">
+                                                  @include('admin.collection.update_collection')
                                                 </td>
-
-
 
                                                 <td class="align-middle">
-                                                    <a href="{{ url('admin/delete_category', $data->id) }}"
+                                                    <a href="{{ url('admin/delete_collection', $data->id) }}"
                                                         class="text-danger font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit category"
-                                                        onclick="return confirm('Are you sure you want to delete this category?')">
+                                                        data-toggle="tooltip" data-original-title="Edit collection"
+                                                        onclick="return confirm('Are you sure you want to delete this collection?')">
                                                         Delete
                                                         <i class="bi bi-trash"></i>
                                                     </a>
@@ -93,7 +90,7 @@
                                         @endforelse
                                     </tbody>
                                 </table>
-                                {{ $category->render('admin.pagination') }}
+                                {{ $collection->render('admin.pagination') }}
                             </div>
                         </div>
                     </div>

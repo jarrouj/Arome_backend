@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PromoController;
 use App\Http\Controllers\Admin\TermController;
 use App\Http\Controllers\Admin\PrivacyController;
 use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\CollectionController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
@@ -68,6 +69,12 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/add_testimonial' , [TestimonialController::class , 'add_testimonial']);
     Route::post('/update_testimonial/{id}' , [TestimonialController::class , 'update_testimonial']);
     Route::get('/delete_testimonial/{id}' , [TestimonialController::class , 'delete_testimonial']);
+
+    // {{ Collection }}
+    Route::get('/show_collection' , [CollectionController::class , 'show_collection']);
+    Route::post('/add_collection' , [CollectionController::class , 'add_collection']);
+    Route::post('/update_collection/{id}' , [CollectionController::class , 'update_collection']);
+    Route::get('/delete_collection/{id}' , [CollectionController::class , 'delete_collection']);
 
 });
 
