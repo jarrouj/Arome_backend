@@ -87,10 +87,13 @@
                                                 </td>
 
                                                 <td>
-                                                    <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->active }}
-                                                    </p>
+                                                    @if($data->active == 1)
+                                                    <span class="badge badge-sm bg-gradient-success w-30">Active</span>
+                                                    @else
+                                                    <span class="badge badge-sm bg-gradient-danger w-30">Not Active</span>
+                                                    @endif
                                                 </td>
+
 
 
 

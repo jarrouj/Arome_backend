@@ -20,7 +20,7 @@
                             <h6>All Users</h6>
                         </div>
 
-                        {{-- <div class="row">
+                        <div class="row">
                             <div class="col-12">
                                 <div class="d-block w-50 m-auto">
                                     <form action="{{ url('/admin/search_user') }}" method="POST">
@@ -47,7 +47,7 @@
                                     </form>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
 
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\PrivacyController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\CollectionController;
 use App\Http\Controllers\Admin\LandingController;
+use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
@@ -83,11 +84,16 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/update_landing/{id}' , [LandingController::class , 'update_landing']);
     Route::get('/delete_landing/{id}' , [LandingController::class , 'delete_landing']);
 
+    // {{ Tag }}
+    Route::get('/show_tag' , [TagController::class , 'show_tag']);
+    Route::post('/add_tag' , [TagController::class , 'add_tag']);
+    Route::post('/update_tag/{id}' , [TagController::class , 'update_tag']);
+    Route::get('/delete_tag/{id}' , [TagController::class , 'delete_tag']);
+
 });
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+Route::redirect('/', '/login');
+
 
 //Register Route
 Route::post('/register_user',[RegisterController::class,'register'])->name('register');

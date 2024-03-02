@@ -118,14 +118,14 @@
 
 
             <li class="nav-item">
-                <a class="nav-link rounded-3 {{ 'admin/show_description' == request()->path() ? 'main-color' : '' }}"
-                    href="{{ url('/admin/show_description') }}">
+                <a class="nav-link rounded-3 {{ 'admin/show_tag' == request()->path() ? 'main-color' : '' }}"
+                    href="{{ url('/admin/show_tag') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="bi bi-card-text text-secondary-emphasis text-sm opacity-10"></i>
 
                     </div>
-                    <span class="nav-link-text ms-1">Description</span>
+                    <span class="nav-link-text ms-1">Tag</span>
                 </a>
             </li>
 

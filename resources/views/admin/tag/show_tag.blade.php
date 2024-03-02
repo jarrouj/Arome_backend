@@ -17,14 +17,14 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h6>Pop</h6>
+                            <h6>Tags</h6>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-12">
                                 <div class="d-flex justify-content-center">
 
-                                    @include('admin.pop.add_pop')
+                                    @include('admin.tag.add_tag')
 
                                 </div>
                             </div>
@@ -35,56 +35,54 @@
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr class="text-center">
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Color
-                                            </th>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                <img src="/images/en.png" width="15px" alt="">
-                                                Title
-                                            </th>
+
                                             <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            <img src="/images/ar.png" width="15px" alt="">
 
-                                            Title
+                                            Name
                                         </th>
+
+                                        <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                        Color
+                                    </th>
+
+
 
                                             <th class="text-secondary opacity-7"></th>
                                             <th class="text-secondary opacity-7"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($pop as $data)
+                                        @forelse ($tag as $data)
                                             <tr class="text-center">
-                                                <td style="text-align: center; vertical-align: middle;">
-                                                    <p class="text-xs font-weight-bold mb-0" style="display: inline-block;">
-                                                        <input type="color" class="form-control form-control-color" id="exampleColorInput" value="{{$data->color}}" disabled>
-                                                    </p>
-                                                </td>
 
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->titleen }}
+                                                        {{ $data->name }}
                                                     </p>
                                                 </td>
 
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->titlear }}
-                                                    </p>
+                                                <td class="p-3">
+                                                    <input type="color" class="m-auto form-control form-control-color"
+                                                        id="exampleColorInput" value="{{ $data->color }}"
+                                                        title="Choose your color" disabled>
                                                 </td>
 
-                                                <td class="align-middle">
-                                                  @include('admin.pop.update_pop')
-                                                </td>
+
+
+
 
                                                 <td class="align-middle">
-                                                    <a href="{{ url('admin/delete_pop', $data->id) }}"
+                                                    @include('admin.tag.update_tag')
+                                                  </td>
+
+                                                <td class="align-middle">
+                                                    <a href="{{ url('admin/delete_tag', $data->id) }}"
                                                         class="text-danger font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit pop"
-                                                        onclick="return confirm('Are you sure you want to delete this pop?')">
+                                                        data-toggle="tooltip" data-original-title="Edit tag"
+                                                        onclick="return confirm('Are you sure you want to delete this tag?')">
                                                         Delete
                                                         <i class="bi bi-trash"></i>
                                                     </a>
@@ -101,7 +99,7 @@
                                         @endforelse
                                     </tbody>
                                 </table>
-                                {{ $pop->render('admin.pagination') }}
+                                {{ $tag->render('admin.pagination') }}
                             </div>
                         </div>
                     </div>
