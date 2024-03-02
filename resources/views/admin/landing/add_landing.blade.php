@@ -1,17 +1,17 @@
 <button type="button" class="btn btn-dark mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
     <i class="me-2 fs-6 bi bi-plus-lg"></i>
-    Add Hero
+    Add Landing
 </button>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Hero
+                <h5 class="modal-title" id="exampleModalLabel">Add Landing
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ url('/admin/add_hero') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('/admin/add_landing') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="modal-body">
@@ -25,38 +25,34 @@
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">
-                            <img src="/images/en.png" width="15px" alt="">
 
                             Title
                         </label>
-                        <input type="text" name="titleen" class="form-control" required>
+                        <input type="text" name="title" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">
-                            <img src="/images/ar.png" width="15px" alt="">
 
-                            Title
+                            Sibtitle
                         </label>
-                        <input type="text" name="titlear" class="form-control" required>
+                        <input type="text" name="subtitle" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">
-                            <img src="/images/en.png" width="15px" alt="">
 
-                            Service
+                            Text 1
                         </label>
-                        <input type="text" name="serviceen" class="form-control" required>
+                        <input type="text" name="text1" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">
-                            <img src="/images/ar.png" width="15px" alt="">
 
-                            Service
+                            Text 2
                         </label>
-                        <input type="text" name="servicear" class="form-control" required>
+                        <input type="text" name="text2" class="form-control" required>
                     </div>
 
 

@@ -11,49 +11,45 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModal{{ $data->id }}Label{{ $data->id }}">
-                    Hero
+                    Landing
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ url('/admin/update_hero/' . $data->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('/admin/update_landing/' . $data->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="modal-body">
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">
-                            <img src="/images/en.png" width="15px" alt="">
 
                             Title
                         </label>
-                        <input type="text" name="titleen" class="form-control" required value="{{ $data->titleen }}">
+                        <input type="text" name="title" class="form-control" required value="{{ $data->title }}">
                     </div>
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">
-                            <img src="/images/ar.png" width="15px" alt="">
 
-                            Title
+                            Subtitle
                         </label>
-                        <input type="text" name="titlear" class="form-control" required value="{{ $data->titlear }}">
+                        <input type="text" name="subtitle" class="form-control" required value="{{ $data->subtitle }}">
                     </div>
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">
-                            <img src="/images/en.png" width="15px" alt="">
 
-                            Service
+                            Text 1
                         </label>
-                        <input type="text" name="serviceen" class="form-control" required value="{{ $data->serviceen }}">
+                        <input type="text" name="text1" class="form-control" required value="{{ $data->text1 }}">
                     </div>
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">
-                            <img src="/images/ar.png" width="15px" alt="">
 
-                            Service
+                            Text 2
                         </label>
-                        <input type="text" name="servicear" class="form-control" required value="{{ $data->servicear }}">
+                        <input type="text" name="text2" class="form-control" required value="{{ $data->text2 }}">
                     </div>
 
                     <div class="mb-3">
@@ -61,7 +57,7 @@
                             Image
                         </label>
                     <div>
-                        <img src="/hero/{{ $data->img }}" width="100px" />
+                        <img src="/landing/{{ $data->img }}" width="100px" />
                     </div>
 
                         <input type="file" name="img" class="form-control mt-3"  required>

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\TermController;
 use App\Http\Controllers\Admin\PrivacyController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\CollectionController;
+use App\Http\Controllers\Admin\LandingController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
@@ -75,6 +76,12 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/add_collection' , [CollectionController::class , 'add_collection']);
     Route::post('/update_collection/{id}' , [CollectionController::class , 'update_collection']);
     Route::get('/delete_collection/{id}' , [CollectionController::class , 'delete_collection']);
+
+    // {{ Landing }}
+    Route::get('/show_landing' , [LandingController::class , 'show_landing']);
+    Route::post('/add_landing' , [LandingController::class , 'add_landing']);
+    Route::post('/update_landing/{id}' , [LandingController::class , 'update_landing']);
+    Route::get('/delete_landing/{id}' , [LandingController::class , 'delete_landing']);
 
 });
 

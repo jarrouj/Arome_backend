@@ -38,7 +38,8 @@ class Authenticate extends Middleware
         $user = Auth::user();
 
         if ($user->usertype != 1) {
-            return redirect('/');
+            Auth::logout();
+            return redirect('/')->with('error', 'Unauthorized access. Please login with admin credentials.');
         }
 
         return $next($request);

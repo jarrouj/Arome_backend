@@ -17,14 +17,14 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h6>Hero</h6>
+                            <h6>Landing</h6>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-12">
                                 <div class="d-flex justify-content-center">
 
-                                    @include('admin.hero.add_hero')
+                                    @include('admin.landing.add_landing')
 
                                 </div>
                             </div>
@@ -41,73 +41,65 @@
                                             </th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                <img src="/images/en.png" width="15px" alt="">
-
                                                 Title
                                             </th>
                                             <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            <img src="/images/ar.png" width="15px" alt="">
 
-                                            Title
+                                            Subtitle
                                         </th>
                                         <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        <img src="/images/en.png" width="15px" alt="">
 
-                                        Service
+                                        Text 1
                                     </th> <th
                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    <img src="/images/ar.png" width="15px" alt="">
 
-                                    Service
+                                    Text 2
                                 </th>
-                                            {{-- <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Created At
-                                            </th> --}}
+
                                             <th class="text-secondary opacity-7"></th>
                                             <th class="text-secondary opacity-7"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($hero as $data)
+                                        @forelse ($landing as $data)
                                             <tr class="text-center">
                                                 <td class="bg-primary">
-                                                        <img src="/hero/{{ $data->img }}" async class="d-block m-auto" width="50px" alt="">
+                                                        <img src="/landing/{{ $data->img }}" async class="d-block m-auto" width="50px" alt="">
 
                                                 </td>
 
 
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->titleen }}
+                                                        {{ $data->title }}
                                                     </p>
                                                 </td>
 
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->titlear }}
+                                                        {{ $data->subtitle }}
                                                     </p>
                                                 </td>
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->serviceen }}
+                                                        {{ $data->text1 }}
                                                     </p>
                                                 </td>   <td>
                                                     <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->servicear }}
+                                                        {{ $data->text2 }}
                                                     </p>
                                                 </td>
                                                 <td class="align-middle">
-                                                  @include('admin.hero.update_hero')
+                                                  @include('admin.landing.update_landing')
                                                 </td>
 
                                                 <td class="align-middle">
-                                                    <a href="{{ url('admin/delete_hero', $data->id) }}"
+                                                    <a href="{{ url('admin/delete_landing', $data->id) }}"
                                                         class="text-danger font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit hero"
-                                                        onclick="return confirm('Are you sure you want to delete this hero?')">
+                                                        data-toggle="tooltip" data-original-title="Edit landing"
+                                                        onclick="return confirm('Are you sure you want to delete this landing?')">
                                                         Delete
                                                         <i class="bi bi-trash"></i>
                                                     </a>
@@ -124,7 +116,7 @@
                                         @endforelse
                                     </tbody>
                                 </table>
-                                {{ $hero->render('admin.pagination') }}
+                                {{ $landing->render('admin.pagination') }}
                             </div>
                         </div>
                     </div>
