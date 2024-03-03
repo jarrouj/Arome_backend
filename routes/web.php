@@ -11,6 +11,10 @@ use App\Http\Controllers\Admin\PrivacyController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\CollectionController;
 use App\Http\Controllers\Admin\LandingController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductImageController;
+use App\Http\Controllers\Admin\SizeController;
+use App\Http\Controllers\Admin\SmellController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ApiController;
@@ -96,6 +100,27 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/add_category' , [CategoriesController::class , 'add_category']);
     Route::post('/update_category/{id}' , [CategoriesController::class , 'update_category']);
     Route::get('/delete_category/{id}' , [CategoriesController::class , 'delete_category']);
+
+    // {{ Product }}
+    Route::get('/show_product' , [ProductController::class , 'show_product']);
+    Route::post('/add_product' , [ProductController::class , 'add_product']);
+    Route::get('/update_product/{id}' , [ProductController::class , 'update_product']);
+    Route::post('/update_product_confirm/{id}' , [ProductController::class , 'update_product_confirm']);
+    Route::get('/delete_product/{id}' , [ProductController::class , 'delete_product']);
+
+    // {{ Product Image }}
+    Route::post('/update_product_image/{id}' , [ProductImageController::class , 'update_product_image']);
+    Route::get('/delete_product_image/{id}' , [ProductImageController::class , 'delete_product_image']);
+
+    // {{ Size }}
+    Route::post('/add_size/{id}' , [SizeController::class , 'add_size']);
+    Route::post('/update_size/{id}' , [SizeController::class , 'update_size']);
+    Route::get('/delete_size/{id}' , [SizeController::class , 'delete_size']);
+
+    // {{ Smell }}
+    Route::post('/add_smell/{id}' , [SmellController::class , 'add_smell']);
+    Route::post('/update_smell/{id}' , [SmellController::class , 'update_smell']);
+    Route::get('/delete_smell/{id}' , [SmellController::class , 'delete_smell']);
 
 });
 
