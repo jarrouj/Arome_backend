@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\CmsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SocialController;
@@ -89,6 +90,12 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/add_tag' , [TagController::class , 'add_tag']);
     Route::post('/update_tag/{id}' , [TagController::class , 'update_tag']);
     Route::get('/delete_tag/{id}' , [TagController::class , 'delete_tag']);
+
+    // {{ Category }}
+    Route::get('/show_category' , [CategoriesController::class , 'show_category']);
+    Route::post('/add_category' , [CategoriesController::class , 'add_category']);
+    Route::post('/update_category/{id}' , [CategoriesController::class , 'update_category']);
+    Route::get('/delete_category/{id}' , [CategoriesController::class , 'delete_category']);
 
 });
 

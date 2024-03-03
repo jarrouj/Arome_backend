@@ -11,51 +11,32 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModal{{ $data->id }}Label{{ $data->id }}">
-                    Info
+                    Category
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ url('/admin/update_info/' . $data->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('/admin/update_category/' . $data->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="modal-body">
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">
-                            <img src="/images/en.png" width="15px" alt="">
-
-                            Text
+                            Name
                         </label>
-                        <textarea type="text" name="texten" class="form-control" cols="30" rows="3" required>{{ $data->texten }}</textarea>
+                        <input type="text" name="name" class="form-control" required value="{{ $data->name }}">
                     </div>
-
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">
-                            <img src="/images/ar.png" width="15px" alt="">
-
-                            Title
-                        </label>
-                        <textarea type="text" name="textar" class="form-control" cols="30" rows="3" required>{{ $data->textar }}</textarea>
-                    </div>
-
 
 
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">
-                            Image
-                        </label>
-                    <div>
-                        <img src="/info/{{ $data->img }}" width="100px" />
+                        <select class="form-select" name="collection_id" id="selectOption">
+                            @foreach($collections as $collection)
+                                <option value="{{ $collection->id }}" {{ $collection->id == $data->collection_id ? 'selected' : '' }}>
+                                    {{ $collection->name }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
-
-                        <input type="file" name="img" class="form-control mt-3"  required>
-                    </div>
-
-
-
-
-
-
                 </div>
 
 
