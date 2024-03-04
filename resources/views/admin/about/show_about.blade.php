@@ -37,8 +37,8 @@
                                     </label>
 
                                     <div class="">
-                                        @if ($about->image != null)
-                                            <img src="/about/{{ $about->image }}" class="w-25 m-auto" alt="">
+                                        @if ($aboutImage->img != null)
+                                            <img src="/aboutimage/{{ $aboutImage->img }}" class="w-10 m-auto" alt="">
                                         @else
                                             <p class="text-danger">No Data</p>
                                         @endif
@@ -58,82 +58,63 @@
                                 </div>
                                 <div class="col-4">
                                     <label for="">
-                                        <img src="/images/fr.png" width="15px" alt="">
-                                        Title1
+                                        Subtitle
                                     </label>
                                     <p>
-                                        {{ $about->title1 }}
+                                        {{ $about->subtitle }}
                                     </p>
                                 </div>
                                 <div class="col-4">
                                     <label for="">
-                                        <img src="/images/ar.png" width="15px" alt="">
-                                        Title2
+                                        Text
                                     </label>
                                     <p>
-                                        {{ $about->title2 }}
+                                        {{ $about->text }}
                                     </p>
                                 </div>
                             </div>
 
 
-                            <div class="row text-center">
-                                <div class="col-12">
-                                    {{-- <label for="">
-                                        History Image
+
+
+                            <div class="row text-center my-3">
+                                <label class="text-lg">About Point </label>
+                                <div class="col-4">
+                                    <label for="">
+                                       Title
+                                    </label>
+                                    <p>
+                                        {{ $aboutPoint->title }}
+                                    </p>
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="">
+                                        Image
                                         <span class="text-danger fw-light text-sm">
                                             **1900px Width & 1268px Height**
                                         </span>
-                                    </label> --}}
-{{--
+                                    </label>
+
                                     <div class="">
-                                        @if ($about->himage != null)
-                                            <img src="/about/{{ $about->himage }}" class="w-25 m-auto" alt="">
+                                        @if ($aboutPoint->img != null)
+                                            <img src="/aboutpoint/{{ $aboutPoint->img }}" class="w-40 m-auto" alt="">
                                         @else
                                             <p class="text-danger">No Data</p>
                                         @endif
-                                    </div> --}}
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="row text-center my-3">
                                 <div class="col-4">
                                     <label for="">
-                                        <img src="/images/en.png" width="15px" alt="">
-                                       Text1
+                                      Subtitle
                                     </label>
                                     <p>
-                                        {{ $about->text1 }}
+                                        {{ $aboutPoint->subtitle }}
                                     </p>
                                 </div>
-                                <div class="col-4">
-                                    <label for="">
-                                        <img src="/images/fr.png" width="15px" alt="">
-                                      Text2
-                                    </label>
-                                    <p>
-                                        {{ $about->text2 }}
-                                    </p>
-                                </div>
-                                <div class="col-4">
-                                    <label for="">
-                                        <img src="/images/ar.png" width="15px" alt="">
-                                        Subtitle 1
-                                    </label>
-                                    <p>
-                                        {{ $about->subtitle1 }}
-                                    </p>
-                                </div>
-                              <div class="row">
-                                <div class="col-12 my-4 mx-4">
-                                    <label for="">
-                                        <img src="/images/ar.png" width="15px" alt="">
-                                        Subtitle 2
-                                    </label>
-                                    <p>
-                                        {{ $about->subtitle2 }}
-                                    </p>
-                                </div>
+
+                             
                               </div>
                             </div>
                         </div>

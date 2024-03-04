@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Collection;
-
-
+use App\Models\Product;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -81,7 +81,11 @@ class CollectionController extends Controller
     public function delete_collection($id)
     {
         $collection = Collection::find($id);
+        $category   = Category::where('collection_id' , '=' , $id);
+        $product    = Product::where('category_id' , '=' , $category->id);
 
+        $product->delete();
+        $category->delete();
         $collection->delete();
 
         return redirect()->back()->with('message' , 'Delete Collection');

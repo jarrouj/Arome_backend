@@ -40,16 +40,16 @@
                                         </label>
 
                                         <div class="">
-                                            @if ($about->image == null)
+                                            @if ($aboutImage->img == null)
                                                 <p class="text-danger">No Data</p>
                                             @else
-                                                <img src="/about/{{ $about->image }}" class="w-25 m-auto"
+                                                <img src="/aboutimage/{{ $aboutImage->img }}" class="w-25 m-auto"
                                                     alt="">
                                             @endif
                                         </div>
 
                                         <input type="file" class="form-control w-25 m-auto"
-                                            value="{{ $about->image }}" name="image" required>
+                                            value="{{ $aboutImage->img }}" name="img" >
                                     </div>
                                 </div>
 
@@ -59,80 +59,63 @@
                                             <img src="/images/en.png" width="15px" alt="">
                                             Title
                                         </label>
-                                        <input required name="title" id="" class="p-3 form-control" cols="5" rows="2" value="{{$about->title}}" />
+                                        <input required name="title" id="" class="p-3 form-control"  value="{{$about->title}}" />
                                     </div>
                                     <div class="col-4">
                                         <label for="">
-                                            <img src="/images/fr.png" width="15px" alt="">
-                                            Title 1
+                                            Subtitle
                                         </label>
-                                        <input required name="title1" id="" class="p-3 form-control" cols="5" rows="2" value=" {{$about->title1}} " />
+                                        <input required name="subtitle" id="" class="p-3 form-control"  value=" {{$about->subtitle}} " />
                                     </div>
                                     <div class="col-4">
                                         <label for="">
-                                            <img src="/images/ar.png" width="15px" alt="">
-                                            Title2
+                                            Text
                                         </label>
-                                        <input required name="title2" id="" class="p-3 form-control" cols="5" rows="2" value=" {{ $about->title2 }} ">
+                                        <textarea required name="text" id="" class="p-3 form-control" cols="5" rows="2" >{{ $about->text }}</textarea>
                                     </div>
                                 </div>
 
 
-                                {{-- <div class="row text-center">
+
+
+                                <div class="row text-center my-3">
+                                    <label class="text-lg">About Point </label>
+                                    <div class="col-6">
+                                        <label for="">
+                                            Title
+                                        </label>
+                                        <input required name="titlepoint" id="" class="p-3 form-control"  value="{{$aboutPoint->title}}" />
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="">
+                                            Subtitle
+                                        </label>
+                                        <input required name="subtitlepoint" id="" class="p-3 form-control"  value="{{$aboutPoint->subtitle}}" />
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row text-center">
                                     <div class="col-12">
                                         <label for="">
-                                            History Image
+                                            Image
                                             <span class="text-danger fw-light text-sm">
                                                 **1900px Width & 1268px Height**
                                             </span>
                                         </label>
 
                                         <div class="">
-                                            @if ($about->himage == null)
+                                            @if ($aboutPoint->img == null)
                                                 <p class="text-danger">No Data</p>
                                             @else
-                                                <img src="/about/{{ $about->himage }}" class="w-25 m-auto"
+                                                <img src="/aboutpoint/{{ $aboutPoint->img }}" class="w-25 m-auto"
                                                     alt="">
                                             @endif
-
                                         </div>
-                                        <input type="file" class="form-control w-25 m-auto" name="himage"
-                                            value="{{ $about->himage }}">
-                                    </div>
-                                </div> --}}
 
-                                <div class="row text-center my-3">
-                                    <div class="col-4">
-                                        <label for="">
-                                            <img src="/images/en.png" width="15px" alt="">
-                                            Text 1
-                                        </label>
-                                        <textarea  name="text1" id="" class="p-3 form-control" cols="5" rows="2">{{ $about->text1 }}</textarea>
-                                    </div>
-                                    <div class="col-4">
-                                        <label for="">
-                                            <img src="/images/fr.png" width="15px" alt="">
-                                            Text 2
-                                        </label>
-                                        <textarea  name="text2" id="" class="p-3 form-control" cols="5" rows="2">{{ $about->text2 }}</textarea>
-                                    </div>
-                                    <div class="col-4">
-                                        <label for="">
-                                            <img src="/images/ar.png" width="15px" alt="">
-                                           Subtitle 1
-                                        </label>
-                                        <input required name="subtitle1" id="" class="p-3 form-control" cols="5" rows="2" value=" {{$about->subtitle1}} " />
-                                    </div>
-
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-12">
-                                        <label for="">
-                                            <img src="/images/ar.png" width="15px" alt="">
-                                           Subtitle 2
-                                        </label>
-                                        <input required name="subtitle2" id="" class="p-3 form-control" cols="5" rows="2" value=" {{$about->subtitle2}} " />
+                                        <input type="file" class="form-control w-25 m-auto"
+                                            value="{{ $aboutPoint->img }}" name="imgpoint" >
                                     </div>
                                 </div>
 

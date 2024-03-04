@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\CmsController;
 use App\Http\Controllers\Admin\UserController;
@@ -121,6 +122,11 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/add_smell/{id}' , [SmellController::class , 'add_smell']);
     Route::post('/update_smell/{id}' , [SmellController::class , 'update_smell']);
     Route::get('/delete_smell/{id}' , [SmellController::class , 'delete_smell']);
+
+    // {{ About }}
+    Route::get('/show_about' , [AboutController::class , 'show_about']);
+    Route::get('/update_about/{id}' , [AboutController::class , 'update_about']);
+    Route::post('/update_about_confirm/{id}' , [AboutController::class , 'update_about_confirm']);
 
 });
 

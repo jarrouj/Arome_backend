@@ -58,13 +58,13 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link rounded-3 {{ 'admin/show_strategy' == request()->path() ? 'main-color' : '' }}"
-                    href="{{ url('/admin/show_strategy') }}">
+                <a class="nav-link rounded-3 {{ 'admin/show_about' == request()->path() ? 'main-color' : '' }}"
+                    href="{{ url('/admin/show_about') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="bi bi-info-circle text-primary text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Strategy</span>
+                    <span class="nav-link-text ms-1">About</span>
                 </a>
             </li>
 
