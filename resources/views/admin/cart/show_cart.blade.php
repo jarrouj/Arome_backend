@@ -35,10 +35,10 @@
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr class="text-center">
-                                            <th
+                                            {{-- <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Product Image
-                                            </th>
+                                            </th> --}}
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 User
@@ -47,7 +47,7 @@
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Product Name
                                             </th>
-                                            <th
+                                            {{-- <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
                                             Category
@@ -61,7 +61,7 @@
                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
                                     Price
-                                </th>
+                                </th> --}}
 
                                             <th class="text-secondary opacity-7"></th>
                                             <th class="text-secondary opacity-7"></th>
@@ -70,24 +70,35 @@
                                     <tbody>
                                         @forelse ($cart as $data)
                                             <tr class="text-center">
-                                                <td class="bg-primary">
+                                                {{-- <td class="bg-primary">
                                                         <img src="/productimage/{{ $productImage->img }}" async class="d-block m-auto" width="50px" alt="">
 
-                                                </td>
+                                                </td> --}}
 
 
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->user_id }}
+                                                        @foreach ($users as $user)
+                                                        @if ($user->id == $data->user_id)
+                                                        {{ $user->f_name}} {{ $user->l_name}}
+
+                                                        @endif
+                                                        @endforeach
+
                                                     </p>
                                                 </td>
 
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->product_id }}
+                                                        @foreach ($products as $product)
+                                                        @if ($product->id == $data->product_id)
+                                                        {{ $product->name}}
+
+                                                        @endif
+                                                        @endforeach
                                                     </p>
                                                 </td>
-                                                
+
                                                 <td class="align-middle">
                                                   @include('admin.cart.update_cart')
                                                 </td>

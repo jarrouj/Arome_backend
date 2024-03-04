@@ -8,18 +8,19 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Models\User;
 
 class CartController extends Controller
 {
     public function show_cart()
     {
         $cart          = Cart::latest()->paginate(10);
-        $product       = Product::where('id' , '=' , $cart->product_id)->get();
-        $productImage  = ProductImage::where('product_id' , '=' , $product->id)->first();
+        $users          = User::all();
+        $products       = Product::all();
+        // $productImage  = ProductImage::where('product_id' , '=' , $products->id)->first();
         // $size          = Size::where('product_id' , '=' , $product->id);
 
-        return view('admin.cart.show_cart' , compact('cart' , 'product' , 'productImage'));
+        return view('admin.cart.show_cart' , compact('cart' , 'products' , 'users' ));
     }
 
     public function add_cart(Request $request)

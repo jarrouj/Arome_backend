@@ -20,37 +20,23 @@
 
                     <div class="mb-3">
                         <label for="userSelect" class="form-label">User</label>
-                        <select id="userSelect" class="form-control" name="user_id">
-                            <option value="">Select a User</option>
+                        <select id="userSelect" class="form-select" name="user_id">
+                            <option value="" disabled selected>Select a User</option>
                             @foreach($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                <option value="{{ $user->id }}">{{ $user->f_name }} {{$user->l_name}}</option>
                             @endforeach
                         </select>
                     </div>
 
 
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">
-
-                            Sibtitle
-                        </label>
-                        <input type="text" name="subtitle" class="form-control" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">
-
-                            Text 1
-                        </label>
-                        <input type="text" name="text1" class="form-control" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">
-
-                            Text 2
-                        </label>
-                        <input type="text" name="text2" class="form-control" required>
+                        <label for="productSelect" class="form-label">Product</label>
+                        <select id="productSelect" class="form-select" name="product_id">
+                            <option value="" disabled selected>Select a Product</option>
+                            @foreach($products as $product)
+                                <option value="{{ $product->id }}">{{ $product->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
 

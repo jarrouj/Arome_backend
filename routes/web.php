@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\CmsController;
 use App\Http\Controllers\Admin\UserController;
@@ -127,6 +128,12 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/show_about' , [AboutController::class , 'show_about']);
     Route::get('/update_about/{id}' , [AboutController::class , 'update_about']);
     Route::post('/update_about_confirm/{id}' , [AboutController::class , 'update_about_confirm']);
+
+     // {{ cart }}
+     Route::get('/show_cart' , [CartController::class , 'show_cart']);
+     Route::post('/add_cart' , [cartController::class , 'add_cart']);
+     Route::post('/update_cart/{id}' , [cartController::class , 'update_cart']);
+     Route::get('/delete_cart/{id}' , [cartController::class , 'delete_cart']);
 
 });
 

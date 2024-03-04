@@ -42,6 +42,7 @@ class CategoriesController extends Controller
         return redirect()->back()->with('message' , 'Category Updated');
 
     }
+    
     public function  delete_category($id)
     {
 
