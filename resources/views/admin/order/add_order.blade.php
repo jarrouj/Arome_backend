@@ -39,7 +39,7 @@
                     <div class="mb-3">
                         <label for="methodSelect" class="form-label">Method</label>
                         <select id="methodSelect" class="form-select" name="method" required>
-                            <option value="1" selected disabled>Cash</option>
+                            <option value="1" selected >Cash</option>
                             {{-- <option value="0">Not Method</option> --}}
                         </select>
                     </div>
@@ -64,7 +64,7 @@
                         <label for="offerSelect" class="form-label">Offer</label>
                         <select id="offerSelect" class="form-select" name="offer" required>
                             <option value="1">Offer</option>
-                            <option value="0">Not Offer</option>
+                            <option value="0">No Offer</option>
                         </select>
                     </div>
 

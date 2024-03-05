@@ -37,6 +37,12 @@
                                         <tr class="text-center">
 
                                             <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                            Order ID
+                                        </th>
+
+                                            <th
                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
                                     User
@@ -46,7 +52,7 @@
                                             <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
-                                            Adress
+                                            Address
                                         </th>
 
                                         <th
@@ -113,6 +119,12 @@
 
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $data->id }}
+                                                    </p>
+                                                </td>
+
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
                                                         @foreach ($users as $user)
                                                         @if ($user->id == $data->user_id)
                                                         {{ $user->f_name}} {{ $user->l_name}}
@@ -124,7 +136,7 @@
                                                 </td>
 
                                                 <td>
-                                                    @if ($data->address)
+                                                    @if ($data->address !== null )
                                                         <i class="fa fa-check text-success"></i>
                                                     @else
                                                         <i class="fa fa-times text-danger"></i>
@@ -167,7 +179,7 @@
                                                     @endif
                                                 </td>
 
-                                                
+
 
                                                 <td>
                                                     @if ($data->offer == 1)
