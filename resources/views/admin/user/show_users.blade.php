@@ -20,6 +20,7 @@
                             <h6>All Users</h6>
                         </div>
 
+                         {{-- Search --}}
                         <div class="row">
                             <div class="col-12">
                                 <div class="d-block w-50 m-auto">

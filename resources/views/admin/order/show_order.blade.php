@@ -30,6 +30,36 @@
                             </div>
                         </div>
 
+                        {{-- Search --}}
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="d-block w-50 m-auto">
+                                    <form action="{{ url('/admin/search_user') }}" method="POST">
+                                        @csrf
+                                        <p for="" class="text-center form-label">Search Names, Emails or Phone
+                                            Number
+                                        </p>
+
+                                        <div class="d-flex justify-content-center">
+
+                                            <div class="input-group mb-3 w-75">
+
+                                                <input type="text" name="text" class="form-control"
+                                                    placeholder="example@gmail.com" style="height: 41px ">
+
+                                                <button class="btn btn-dark" type="submit">
+                                                    <i class="bi bi-search"></i>
+                                                </button>
+
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
