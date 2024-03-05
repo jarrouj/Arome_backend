@@ -68,6 +68,13 @@
                                 </th>
 
 
+                                    <th
+                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                    Registered
+                                </th>
+
+
                                 <th
                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
@@ -153,6 +160,14 @@
                                                     <p class="text-xs font-weight-bold mb-0">
                                                         {{ $data->phone }}
                                                     </p>
+                                                </td>
+
+                                                <td>
+                                                    @if($data->registered == 1)
+                                                    <span class="badge badge-sm bg-gradient-success ">Registered</span>
+                                                    @else
+                                                    <span class="badge badge-sm bg-gradient-danger ">Not Registered</span>
+                                                    @endif
                                                 </td>
 
                                                 <td>

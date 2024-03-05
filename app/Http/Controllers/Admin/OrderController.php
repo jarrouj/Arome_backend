@@ -48,9 +48,9 @@ class OrderController extends Controller
     public function update_order($id)
     {
         $order  = Order::find($id);
-        $user = User::all();
+        $users = User::all();
 
-        return view('admin.order.update_order' , compact('order' , 'user'));
+        return view('admin.order.update_order' , compact('order' , 'users'));
     }
 
     public function update_order_confirm(Request $request, $id)
