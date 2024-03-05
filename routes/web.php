@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\PrivacyController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\CollectionController;
 use App\Http\Controllers\Admin\LandingController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\SizeController;
@@ -129,11 +130,18 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/update_about/{id}' , [AboutController::class , 'update_about']);
     Route::post('/update_about_confirm/{id}' , [AboutController::class , 'update_about_confirm']);
 
-     // {{ cart }}
-     Route::get('/show_cart' , [CartController::class , 'show_cart']);
-     Route::post('/add_cart' , [cartController::class , 'add_cart']);
-     Route::post('/update_cart/{id}' , [cartController::class , 'update_cart']);
-     Route::get('/delete_cart/{id}' , [cartController::class , 'delete_cart']);
+    // {{ Cart }}
+    Route::get('/show_cart' , [CartController::class , 'show_cart']);
+    Route::post('/add_cart' , [cartController::class , 'add_cart']);
+    Route::post('/update_cart/{id}' , [cartController::class , 'update_cart']);
+    Route::get('/delete_cart/{id}' , [cartController::class , 'delete_cart']);
+
+    // {{ Order }}
+    Route::get('/show_order' , [OrderController::class , 'show_order']);
+    Route::post('/add_order' , [OrderController::class , 'add_order']);
+    Route::get('/update_order/{id}' , [OrderController::class , 'update_order']);
+    Route::post('/update_order_confirm/{id}' , [OrderController::class , 'update_order_confirm']);
+    Route::get('/delete_order/{id}' , [OrderController::class , 'delete_order']);
 
 });
 
