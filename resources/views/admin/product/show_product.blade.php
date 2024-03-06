@@ -131,10 +131,14 @@
                                                     </p>
                                                 </td>
 
+                                                <td class="align-middle">
+                                                    @include('admin.product.product_modal', ['product' => $data, 'productImage' => $productImage])
+                                                </td>
+
 
                                                 <td class="align-middle">
                                                     <a href="{{ url('admin/update_product', $data->id) }}"
-                                                        class="text-primary font-weight-bold text-xs"
+                                                        class="text-success font-weight-bold text-xs"
                                                         data-toggle="tooltip">
                                                         Update
                                                         <i class="bi bi-pen"></i>

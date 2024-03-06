@@ -18,11 +18,12 @@ class ProductController extends Controller
 {
     public function show_product()
     {
-        $product  = Product::latest()->paginate(10);
-        $category = Category::all();
-        $tag      = Tag::all();
+        $product      = Product::latest()->paginate(10);
+        $category     = Category::all();
+        $tag          = Tag::all();
+        $productImage = ProductImage::all();
 
-        return view('admin.product.show_product', compact('product', 'category', 'tag'));
+        return view('admin.product.show_product', compact('product', 'category', 'tag' , 'productImage'));
     }
 
     public function add_product(Request $request)
@@ -30,7 +31,7 @@ class ProductController extends Controller
         $product      = new Product;
         $productImage = new ProductImage;
         $size         = new Size;
-        $smell         = new Smell;
+        $smell        = new Smell;
 
         //Product Data
         $product->category_id   = $request->category_id;
