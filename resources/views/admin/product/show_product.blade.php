@@ -60,6 +60,32 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            {{-- Add Image Button --}}
+                            <div class="col-4">
+                                <div class="d-flex justify-content-center">
+
+                                    @include('admin.product.add_product_image')
+                                </div>
+                            </div>
+                            {{-- Add Size Button --}}
+                            <div class="col-4">
+                                <div class="d-flex justify-content-center">
+
+                                    @include('admin.size.add_size')
+
+                                </div>
+                            </div>
+                            {{-- Add Smell Button --}}
+                            <div class="col-4">
+                                        <div class="d-flex justify-content-center">
+
+                                            @include('admin.smell.add_smell')
+
+                                        </div>
+                            </div>
+                        </div>
+
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
@@ -132,7 +158,11 @@
                                                 </td>
 
                                                 <td class="align-middle">
-                                                    @include('admin.product.product_modal', ['product' => $data, 'productImage' => $productImage])
+                                                    <a href="{{ url('admin/view_product', $data->id) }}"
+                                                        class="text-primary font-weight-bold text-xs"
+                                                        data-toggle="tooltip">
+                                                        View
+                                                        <i class="bi bi-eye"></i>                                                    </a>
                                                 </td>
 
 

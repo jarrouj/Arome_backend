@@ -108,6 +108,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/show_product' , [ProductController::class , 'show_product']);
     Route::post('/add_product' , [ProductController::class , 'add_product']);
     Route::get('/update_product/{id}' , [ProductController::class , 'update_product']);
+    Route::get('/view_product/{id}' , [ProductController::class , 'view_product']);
     Route::post('/update_product_confirm/{id}' , [ProductController::class , 'update_product_confirm']);
     Route::get('/delete_product/{id}' , [ProductController::class , 'delete_product']);
 
@@ -116,12 +117,12 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/delete_product_image/{id}' , [ProductImageController::class , 'delete_product_image']);
 
     // {{ Size }}
-    Route::post('/add_size/{id}' , [SizeController::class , 'add_size']);
+    Route::post('/add_size' , [SizeController::class , 'add_size']);
     Route::post('/update_size/{id}' , [SizeController::class , 'update_size']);
     Route::get('/delete_size/{id}' , [SizeController::class , 'delete_size']);
 
     // {{ Smell }}
-    Route::post('/add_smell/{id}' , [SmellController::class , 'add_smell']);
+    Route::post('/add_smell' , [SmellController::class , 'add_smell']);
     Route::post('/update_smell/{id}' , [SmellController::class , 'update_smell']);
     Route::get('/delete_smell/{id}' , [SmellController::class , 'delete_smell']);
 

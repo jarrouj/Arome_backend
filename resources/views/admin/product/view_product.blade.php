@@ -21,88 +21,93 @@
                                 <i class="bi bi-arrow-left"></i>
                                 back
                             </a>
-                            <h6>Edit Product</h6>
+                            <h6>View Product</h6>
                         </div>
                         <div class="card-body px-auto pt-0 pb-2">
+
+                            <div class="mt-4 row">
+                                <div class="col-md-4">
+                                    <div class="mb-3 text-center">
+                                        <label for="exampleFormControlInput1" class="form-label">Name</label>
+                                        <p class="text-xs font-weight-bold mb-0">{{ $product->name }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="mb-3 text-center">
+                                        <label for="categorySelect" class="form-label">Category</label>
+                                        @foreach($category as $category)
+                                            @if($category->id == $product->category_id)
+                                                <p class="text-xs font-weight-bold mb-0">{{ $category->name }}</p>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="mb-3 text-center">
+                                        <label for="tagSelect" class="form-label">Tag</label>
+                                        @foreach($tag as $tag)
+                                            @if($tag->id == $product->tag_id)
+                                                <p class="text-xs font-weight-bold mb-0">{{ $tag->name }}</p>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="mt-4 row justify-content-center">
+                            <div class="col-4"></div>
+                            <div class="col-4 col-md-2">
+                                <div class="mb-3 text-center">
+                                    <label for="exampleInputPassword1" class="form-label">
+                                        Description
+                                    </label>
+                                    <p class="form-control-plaintext">{{ $product->description }}</p>
+                                </div>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+
 
                             {{-- Images --}}
 
                             <div class="mt-4 row">
-
                                 <div class="col-12">
-                                    <label for="exampleInputPassword1" class="form-label">
-                                       Product Images
-                                    </label>
+                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                        <ol class="carousel-indicators">
+                                            @foreach($productImage as $index => $image)
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}"></li>
+                                            @endforeach
+                                        </ol>
+                                        <div class="carousel-inner">
+                                            @foreach($productImage as $index => $image)
+                                                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                                    <img class="d-block w-100" src="/productimage/{{ $image->img }}" alt="Slide {{ $index + 1 }}">
+                                                </div>
 
-                                    <div class="mb-3">
-                                        <div class="card-body px-0 pt-0 pb-2">
-                                            <div class="table-responsive p-0">
-                                                <table class="table align-items-center mb-0">
-                                                    <thead>
-                                                        <tr class="text-center">
-
-                                                            <th
-                                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-
-                                                                Image
-                                                            </th>
-
-
-
-                                                            <th class="text-secondary opacity-7"></th>
-                                                            <th class="text-secondary opacity-7"></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @forelse ($productImage as $data)
-                                                            <tr class="text-center">
-
-                                                                <td>
-                                                                        <img src="/productimage/{{ $data->img }}" width="100px" />
-                                                                </td>
-
-
-
-
-                                                                <td class="align-middle">
-                                                                  @include('admin.product.update_product_image')
-                                                                </td>
-
-                                                                <td class="align-middle">
-                                                                    <a href="{{ url('admin/delete_product_image', $product->id) }}"
-                                                                        class="text-danger font-weight-bold text-xs"
-                                                                        data-toggle="tooltip" data-original-title="Edit product"
-                                                                        onclick="return confirm('Are you sure you want to delete this product?')">
-                                                                        Delete
-                                                                        <i class="bi bi-trash"></i>
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-                                                        @empty
-                                                            <tr>
-                                                                <td colspan="16">
-                                                                    <p class="text-xs text-center text-danger font-weight-bold mb-0">
-                                                                        No Data !
-                                                                    </p>
-                                                                </td>
-                                                            </tr>
-                                                        @endforelse
-                                                    </tbody>
-                                                </table>
-                                                {{ $productImage->render('admin.pagination') }}
-                                            </div>
+                                            @endforeach
                                         </div>
+                                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
                                     </div>
                                 </div>
-
                             </div>
-                             {{-- Size --}}
+
+
                             <div class="mt-4 row">
 
                                 <div class="col-12">
-                                    <label for="exampleInputPassword1" class="form-label">
-                                       Size
-                                    </label>
+                                    <h6>Size</h6>
 
 
                                     <div class="mb-3">
@@ -136,8 +141,8 @@
                                                     Points
                                                 </th>
 
-                                                            <th class="text-secondary opacity-7"></th>
-                                                            <th class="text-secondary opacity-7"></th>
+                                                            {{-- <th class="text-secondary opacity-7"></th>
+                                                            <th class="text-secondary opacity-7"></th> --}}
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -168,7 +173,7 @@
                                                                     </p>
                                                                 </td>
 
-                                                                <td class="align-middle">
+                                                                {{-- <td class="align-middle">
                                                                   @include('admin.size.update_size')
                                                                 </td>
 
@@ -180,7 +185,7 @@
                                                                         Delete
                                                                         <i class="bi bi-trash"></i>
                                                                     </a>
-                                                                </td>
+                                                                </td> --}}
                                                             </tr>
                                                         @empty
                                                             <tr>
@@ -205,11 +210,18 @@
                             <div class="mt-4 row">
 
                                 <div class="col-12">
-                                    <label for="exampleInputPassword1" class="form-label">
-                                       Smell
-                                    </label>
+                                    <h6>Smell</h6>
 
-                                
+
+                                    {{-- <div class="row mb-3">
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-center">
+
+                                                @include('admin.smell.add_smell')
+
+                                            </div>
+                                        </div>
+                                    </div> --}}
                                     <div class="mb-3">
                                         <div class="card-body px-0 pt-0 pb-2">
                                             <div class="table-responsive p-0">
@@ -224,8 +236,8 @@
                                                             </th>
 
 
-                                                            <th class="text-secondary opacity-7"></th>
-                                                            <th class="text-secondary opacity-7"></th>
+                                                            {{-- <th class="text-secondary opacity-7"></th>
+                                                            <th class="text-secondary opacity-7"></th> --}}
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -240,7 +252,7 @@
 
 
 
-                                                                <td class="align-middle">
+                                                                {{-- <td class="align-middle">
                                                                   @include('admin.smell.update_smell')
                                                                 </td>
 
@@ -252,7 +264,7 @@
                                                                         Delete
                                                                         <i class="bi bi-trash"></i>
                                                                     </a>
-                                                                </td>
+                                                                </td> --}}
                                                             </tr>
                                                         @empty
                                                             <tr>
@@ -265,7 +277,7 @@
                                                         @endforelse
                                                     </tbody>
                                                 </table>
-                                                {{-- {{ $product->render('admin.pagination') }} --}}
+                                                {{ $smell->render('admin.pagination') }}
                                             </div>
                                         </div>
                                     </div>
@@ -275,74 +287,13 @@
 
 
 
-                            <form action="{{ url('/admin/update_product_confirm', $product->id) }}" method="POST"
-                                enctype="multipart/form-data">
-                                @csrf
 
-
-
-                                <div class="mt-4 row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="exampleFormControlInput1" class="form-label">Name</label>
-                                            <input type="text" name="name" class="form-control" required value="{{ $product->name }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="categorySelect" class="form-label">Category</label>
-                                            <select class="form-select" name="category_id" id="categorySelect">
-                                                <option value="" disabled>Select a Category</option>
-                                                @foreach($category as $category)
-                                                    <option value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected' : '' }}>
-                                                        {{ $category->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="tagSelect" class="form-label">Tag</label>
-                                            <select class="form-select" name="tag_id" id="tagSelect">
-                                                <option value="" disabled>Select a Tag</option>
-                                                @foreach($tag as $tag)
-                                                    <option value="{{ $tag->id }}" {{ $tag->id == $product->tag_id ? 'selected' : '' }}>
-                                                        {{ $tag->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                 <div class="mt-4 row">
-
-                                    <div class="col-12">
-                                        <label for="exampleInputPassword1" class="form-label">
-                                            Description
-                                        </label>
-                                        <div class="mb-3">
-                                           <textarea name="description" cols="5" rows="5" class="form-control" >{{ $product->description }}</textarea>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-
-
-
-                                <div class="d-flex justify-content-center">
-                                    <button type="submit" class="btn mt-3 btn-dark">Submit</button>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+
+
             @include('admin.footer')
         </div>
     </main>

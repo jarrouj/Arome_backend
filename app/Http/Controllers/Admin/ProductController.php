@@ -22,8 +22,9 @@ class ProductController extends Controller
         $category     = Category::all();
         $tag          = Tag::all();
         $productImage = ProductImage::all();
+        $products     = Product::all();
 
-        return view('admin.product.show_product', compact('product', 'category', 'tag' , 'productImage'));
+        return view('admin.product.show_product', compact('product', 'category', 'tag' , 'productImage' , 'products'));
     }
 
     public function add_product(Request $request)
@@ -98,9 +99,9 @@ class ProductController extends Controller
     public function update_product($id)
     {
         $product      = Product::find($id);
-        $productImage = ProductImage::where('product_id', $id)->get();
-        $size         = Size::where('product_id', $id)->get();
-        $smell         = Smell::where('product_id', $id)->get();
+        $productImage = ProductImage::where('product_id', $id)->paginate(10);
+        $size         = Size::where('product_id', $id)->paginate(10);
+        $smell        = Smell::where('product_id', $id)->paginate(10);
         $category     = Category::all();
         $tag          = Tag::all();
 
@@ -135,5 +136,17 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->back()->with('message', 'Product Deleted');
+    }
+
+    public function view_product($id)
+    {
+        $product      = Product::find($id);
+        $productImage = ProductImage::where('product_id' , '=' , $id);
+        $size         = Size::where('product_id' , '=' , $id)->paginate(10);
+        $smell        = Smell::where('product_id' , '=' , $id)->paginate(10);
+        $category     = Category::all();
+        $tag          = Tag::all();
+
+        return view('admin.product.view_product' , compact('product' , 'productImage' , 'size' , 'smell' , 'category' , 'tag'));
     }
 }

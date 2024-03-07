@@ -27,6 +27,7 @@ return new class extends Migration
             $table->double('total_lbp');
             $table->integer('total_pts');
             $table->double('total_usd');
+            $table->boolean('confirm')->nullable(); // 1-confirmed 2-not confirmed
             $table->timestamps();
         });
     }

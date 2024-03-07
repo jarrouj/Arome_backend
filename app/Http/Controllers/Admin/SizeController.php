@@ -8,17 +8,15 @@ use Illuminate\Http\Request;
 
 class SizeController extends Controller
 {
-    public function add_size(Request $request , $id)
+    public function add_size(Request $request)
     {
         $size = new Size;
 
-        $size->size = $request->size;
-        $size->price = $request->price;
-        $size->points = $request->points;
-        $size->qty_tq = $request->qty_tq;
-
-        //assigned the product id from the params id
-        $size->product_id = $id;
+        $size->product_id = $request->product_id;
+        $size->size       = $request->size;
+        $size->price      = $request->price;
+        $size->points     = $request->points;
+        $size->qty_tq     = $request->qty_tq;
 
         $size->save();
 

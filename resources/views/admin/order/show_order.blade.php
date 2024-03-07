@@ -69,6 +69,11 @@
                                             <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
+                                            Confirmation
+                                        </th>
+                                            <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
                                             Order ID
                                         </th>
 
@@ -153,10 +158,20 @@
                                     <tbody>
                                         @forelse ($order as $data)
                                             <tr class="text-center">
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <button type="button" class="btn btn-primary btn-sm me-1" value="1">
+                                                            <i class="bi bi-check" style="font-size: 1rem;"></i>
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger btn-sm" value="0">
+                                                            <i class="bi bi-x" style="font-size: 1rem;"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
 
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->id }}
+                                                        #{{ $data->id }}
                                                     </p>
                                                 </td>
 

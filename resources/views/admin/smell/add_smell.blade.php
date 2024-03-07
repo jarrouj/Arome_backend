@@ -11,10 +11,20 @@
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ url('/admin/add_smell/' . $product->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('/admin/add_smell') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label for="productSelect" class="form-label">Select Product:</label>
+                        <select class="form-select" id="productSelect" name="product_id">
+                            <option disabled selected>Choose a Product </option>
+                            @foreach ($products as $product)
+                                <option value="{{ $product->id }}">{{ $product->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">

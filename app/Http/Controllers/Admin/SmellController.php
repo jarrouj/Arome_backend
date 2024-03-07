@@ -8,14 +8,12 @@ use Illuminate\Http\Request;
 
 class SmellController extends Controller
 {
-    public function add_smell(Request $request , $id)
+    public function add_smell(Request $request)
     {
         $smell = new Smell;
 
-        $smell->smell = $request->smell;
-
-        //assigned the product id from the params id
-        $smell->product_id = $id;
+        $smell->smell      = $request->smell;
+        $smell->product_id = $request->product_id;
 
         $smell->save();
 
