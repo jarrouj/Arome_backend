@@ -95,6 +95,12 @@
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
+                                                Image
+                                            </th>
+
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
                                                 Name
                                             </th>
 
@@ -123,6 +129,11 @@
                                     <tbody>
                                         @forelse ($product as $data)
                                             <tr class="text-center">
+                                                <td>
+                                                    @if(isset($productImages[$data->id]))
+                                                    <img src="{{ asset('productimage/' . $productImages[$data->id]->img) }}" alt="Product Image" width="60px">
+                                                @endif
+                                                </td>
 
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">

@@ -113,6 +113,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/delete_product/{id}' , [ProductController::class , 'delete_product']);
 
     // {{ Product Image }}
+    Route::post('/add_product_image' , [ProductImageController::class , 'add_product_image']);
     Route::post('/update_product_image/{id}' , [ProductImageController::class , 'update_product_image']);
     Route::get('/delete_product_image/{id}' , [ProductImageController::class , 'delete_product_image']);
 
@@ -151,3 +152,6 @@ Route::redirect('/', '/login');
 
 //Register Route
 Route::post('/register_user',[RegisterController::class,'register'])->name('register');
+
+
+Route::post('/update-status/{id}',[OrderController::class,'update_status'])->name('update-status');

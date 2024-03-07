@@ -74,35 +74,35 @@
 
 
                             {{-- Images --}}
+                            <div class="container d-flex justify-content-center">
+                                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="max-width: 400px;">
+                                    <ol class="carousel-indicators">
+                                        @foreach($productImage as $index => $image)
+                                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}"></li>
+                                        @endforeach
+                                    </ol>
 
-                            <div class="mt-4 row">
-                                <div class="col-12">
-                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                        <ol class="carousel-indicators">
-                                            @foreach($productImage as $index => $image)
-                                                <li data-target="#carouselExampleIndicators" data-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}"></li>
-                                            @endforeach
-                                        </ol>
-                                        <div class="carousel-inner">
-                                            @foreach($productImage as $index => $image)
-                                                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                                    <img class="d-block w-100" src="/productimage/{{ $image->img }}" alt="Slide {{ $index + 1 }}">
-                                                </div>
-
-                                            @endforeach
-                                        </div>
-                                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
+                                    <div class="carousel-inner">
+                                        @foreach($productImage as $index => $image)
+                                            <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                                <img class="d-block w-100" src="{{ asset('productimage/' . $image->img) }}" alt="Slide {{ $index + 1 }}" style="max-height: 300px;">
+                                            </div>
+                                        @endforeach
                                     </div>
+
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
                                 </div>
                             </div>
 
+
+                           {{-- Size --}}
 
                             <div class="mt-4 row">
 
@@ -298,6 +298,24 @@
         </div>
     </main>
 
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // Initialize the carousel
+            $('#carouselExampleIndicators').carousel();
+
+            // Function to go to the previous slide
+            $('.carousel-control-prev').click(function(){
+                $('#carouselExampleIndicators').carousel('prev');
+            });
+
+            // Function to go to the next slide
+            $('.carousel-control-next').click(function(){
+                $('#carouselExampleIndicators').carousel('next');
+            });
+        });
+        </script>
     @include('admin.script')
 
 </body>

@@ -21,10 +21,14 @@ class ProductController extends Controller
         $product      = Product::latest()->paginate(10);
         $category     = Category::all();
         $tag          = Tag::all();
-        $productImage = ProductImage::all();
         $products     = Product::all();
 
-        return view('admin.product.show_product', compact('product', 'category', 'tag' , 'productImage' , 'products'));
+         // Group images by product_id and retrieve the first image for each product
+      $productImages = ProductImage::all()->groupBy('product_id')->map(function ($images) {
+        return $images->first();
+      });
+
+        return view('admin.product.show_product', compact('product', 'category', 'tag' , 'productImages' , 'products'));
     }
 
     public function add_product(Request $request)
@@ -141,7 +145,7 @@ class ProductController extends Controller
     public function view_product($id)
     {
         $product      = Product::find($id);
-        $productImage = ProductImage::where('product_id' , '=' , $id);
+        $productImage = ProductImage::where('product_id' , '=' , $id)->get();
         $size         = Size::where('product_id' , '=' , $id)->paginate(10);
         $smell        = Smell::where('product_id' , '=' , $id)->paginate(10);
         $category     = Category::all();
@@ -149,4 +153,7 @@ class ProductController extends Controller
 
         return view('admin.product.view_product' , compact('product' , 'productImage' , 'size' , 'smell' , 'category' , 'tag'));
     }
+
+
+    
 }

@@ -160,14 +160,37 @@
                                             <tr class="text-center">
                                                 <td>
                                                     <div class="d-flex">
-                                                        <button type="button" class="btn btn-primary btn-sm me-1" value="1">
-                                                            <i class="bi bi-check" style="font-size: 1rem;"></i>
-                                                        </button>
-                                                        <button type="button" class="btn btn-danger btn-sm" value="0">
-                                                            <i class="bi bi-x" style="font-size: 1rem;"></i>
-                                                        </button>
+                                                        @if ($data->confirm === 0)
+                                                            <form action="{{ route('update-status', ['id' => $data->id]) }}" method="POST">
+                                                                @csrf
+                                                                <button type="submit" name="conf" value="0" class="btn btn-danger btn-sm" disabled>
+                                                                    <i class="bi bi-x" style="font-size: 1rem;"></i>
+                                                                </button>
+                                                            </form>
+                                                        @elseif ($data->confirm === 1)
+                                                            <form action="{{ route('update-status', ['id' => $data->id]) }}" method="POST">
+                                                                @csrf
+                                                                <button type="submit" name="conf" value="1" class="btn btn-primary btn-sm me-1" disabled>
+                                                                    <i class="bi bi-check" style="font-size: 1rem;"></i>
+                                                                </button>
+                                                            </form>
+                                                        @else
+                                                            <form action="{{ route('update-status', ['id' => $data->id]) }}" method="POST">
+                                                                @csrf
+                                                                <button type="submit" name="conf" value="1" class="btn btn-primary btn-sm me-1">
+                                                                    <i class="bi bi-check" style="font-size: 1rem;"></i>
+                                                                </button>
+                                                            </form>
+                                                            <form action="{{ route('update-status', ['id' => $data->id]) }}" method="POST">
+                                                                @csrf
+                                                                <button type="submit" name="conf" value="0" class="btn btn-danger btn-sm">
+                                                                    <i class="bi bi-x" style="font-size: 1rem;"></i>
+                                                                </button>
+                                                            </form>
+                                                        @endif
                                                     </div>
                                                 </td>
+
 
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">
@@ -306,6 +329,9 @@
             @include('admin.footer')
         </div>
     </main>
+
+
+
 
     @include('admin.script')
 

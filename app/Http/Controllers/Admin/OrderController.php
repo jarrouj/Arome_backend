@@ -90,4 +90,25 @@ class OrderController extends Controller
 
         return redirect()->back()->with('message' , 'Order Deleted');
     }
+
+    public function update_status(Request $request, $id)
+    {
+        // Find the order by ID
+        $order = Order::find($id);
+
+        // Check if confirmation is nullable and set the status
+        if ($order->confirm === null) {
+            // Update status based on the button clicked
+            $order->confirm = $request->conf;
+            $order->save();
+
+            // Set message based on the value of $request->conf
+            $message = $request->conf == 1 ? 'Order Confirmed' : 'Order Canceled';
+
+            return redirect()->back()->with('message', $message);
+        } else {
+            return response()->json(['fail' => false, 'message' => 'Confirmation cannot be updated']);
+        }
+    }
+
 }
