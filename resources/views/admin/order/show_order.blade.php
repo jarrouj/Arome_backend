@@ -20,7 +20,7 @@
                             <h6>Orders</h6>
                         </div>
 
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <div class="col-12">
                                 <div class="d-flex justify-content-center">
 
@@ -28,7 +28,7 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         {{-- Search --}}
                         <div class="row">

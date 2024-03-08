@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('product_id');
             $table->double('price');
             $table->boolean('active');
+            $table->boolean('all_products')->nullable();
             $table->timestamps();
         });
     }
