@@ -5,7 +5,7 @@
     @include('admin.css')
 </head>
 
-<body class="g-sidenav-show   bg-gray-100">
+<body class="g-sidenav-show bg-gray-100">
 
     @include('admin.sidebar')
     <main class="main-content position-relative border-radius-lg ">
@@ -32,71 +32,62 @@
                                     <thead>
                                         <tr class="text-center">
 
-                                            <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Image
+                                            </th>
 
-                                            Product Name
-                                        </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Offer Name
+                                            </th>
 
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Price
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Active
+                                            </th>
 
-                                            <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-
-                                            Price
-                                        </th>
-                                        <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-
-                                        Active
-                                    </th>
-
-
-
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Action
+                                            </th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @forelse ($offer as $data)
-                                            <tr class="text-center">
+                                            @if ($loop->first || $data->name != $offer[$loop->index - 1]->name)
+                                                <tr class="text-center">
+                                                    <td>
+                                                        <img src="/offer/{{ $data->img }}" async class="d-block m-auto" width="100px" alt="">
 
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0">
-                                                        @foreach ($product as $products)
-                                                        @if ($products->id == $data->product_id)
-                                                            {{ $products->name }}
-                                                        @endif
-                                                        @endforeach
-                                                    </p>
-                                                </td>
-
-
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->price }}
-                                                    </p>
-                                                </td>
-
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->active }}
-                                                    </p>
-                                                </td>
-
-
-                                                {{-- <td class="align-middle">
-                                                  @include('admin.offer.update_offer')
-                                                </td> --}}
-
-                                                <td class="align-middle">
-                                                    <a href="{{ url('admin/delete_offer', $data->id) }}"
-                                                        class="text-danger font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit offer"
-                                                        onclick="return confirm('Are you sure you want to delete this offer?')">
-                                                        Delete
-                                                        <i class="bi bi-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0">
+                                                            {{ $data->name }}
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0">
+                                                            {{ $data->price }}
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0">
+                                                            {{ $data->active }}
+                                                        </p>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <a href="{{ url('admin/delete_offer', $data->id) }}"
+                                                            class="text-danger font-weight-bold text-xs"
+                                                            data-toggle="tooltip"
+                                                            data-original-title="Edit offer"
+                                                            onclick="return confirm('Are you sure you want to delete this offer?')">
+                                                            Delete
+                                                            <i class="bi bi-trash"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         @empty
                                             <tr>
                                                 <td colspan="16">

@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id');
+            $table->string('name');
+            $table->string('img')->nullable();
+            $table->integer('product_id')->nullable();
             $table->double('price');
             $table->boolean('active');
-            $table->boolean('all_products')->nullable();
+            $table->integer('all_products')->nullable();
             $table->timestamps();
         });
     }
