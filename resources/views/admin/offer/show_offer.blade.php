@@ -20,15 +20,11 @@
                             <h6>Offers</h6>
                         </div>
 
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <div class="d-flex justify-content-center">
+                        <a href="{{ url('/admin/add_offer') }}" class="btn btn-dark w-10 mx-auto">
+                            <i class="me-2 fs-6 bi bi-plus-lg"></i>
+                            Add
+                        </a>
 
-                                    @include('admin.offer.add_offer')
-
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -37,25 +33,41 @@
                                         <tr class="text-center">
 
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
-                                                Price
-                                            </th>
+                                            Product Name
+                                        </th>
+
 
                                             <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
-                                            Active
+                                            Price
                                         </th>
+                                        <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
-                                            <th class="text-secondary opacity-7"></th>
-                                            <th class="text-secondary opacity-7"></th>
+                                        Active
+                                    </th>
+
+
+
+
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @forelse ($offer as $data)
                                             <tr class="text-center">
 
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        @foreach ($product as $products)
+                                                        @if ($products->id == $data->product_id)
+                                                            {{ $products->name }}
+                                                        @endif
+                                                        @endforeach
+                                                    </p>
+                                                </td>
 
 
                                                 <td>
@@ -71,9 +83,9 @@
                                                 </td>
 
 
-                                                <td class="align-middle">
+                                                {{-- <td class="align-middle">
                                                   @include('admin.offer.update_offer')
-                                                </td>
+                                                </td> --}}
 
                                                 <td class="align-middle">
                                                     <a href="{{ url('admin/delete_offer', $data->id) }}"

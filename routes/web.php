@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\PromoController;
 use App\Http\Controllers\Admin\TermController;
+use App\Http\Controllers\Admin\offerController;
 use App\Http\Controllers\Admin\PrivacyController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\CollectionController;
@@ -144,6 +145,13 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/update_order/{id}' , [OrderController::class , 'update_order']);
     Route::post('/update_order_confirm/{id}' , [OrderController::class , 'update_order_confirm']);
     Route::get('/delete_order/{id}' , [OrderController::class , 'delete_order']);
+
+    // {{ Offer }}
+    Route::get('/show_offer', [OfferController::class,'show_offer']);
+    Route::get('/add_offer', [OfferController::class, 'add_offer']);
+    Route::post('/add_offer_confirm', [OfferController::class, 'add_offer_confirm']);
+    Route::post('/update_offer/{id}', [OfferController::class, 'update_offer']);
+    Route::get('/delete_offer/{id}', [OfferController::class, 'delete_offer']);
 
 });
 
