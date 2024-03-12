@@ -137,6 +137,33 @@ class offerController extends Controller
 
     }
 
+    public function view_offer($id)
+    {
+        $offer = Offer::find($id);
+        $category = Category::all();
+        $productImages = ProductImage::all()->groupBy('product_id')->map(function ($images) {
+            return $images->first();
+        });
+
+        $products = [];
+
+        if ($offer->all_products !== 0 ) {
+
+            // Fetch product IDs associated with the offer name
+            $productIds = Offer::where('name', $offer->name)->pluck('product_id')->toArray();
+
+            // Retrieve products based on the fetched IDs
+            $products = Product::whereIn('id', $productIds)->latest()->paginate(10);
+
+        } else {
+            // If all_product is 0, fetch all products
+            $products = Product::latest()->paginate(10);
+        }
+        // dd($products);
+
+        return view('admin.offer.view_offer', compact('offer', 'products', 'productImages', 'category'));
+    }
+
 
 
 }

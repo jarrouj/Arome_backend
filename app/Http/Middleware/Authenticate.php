@@ -33,6 +33,8 @@ class Authenticate extends Middleware
      */
     public function handle($request, Closure $next, ...$guards)
     {
+
+
         $this->authenticate($request, $guards);
 
         $user = Auth::user();

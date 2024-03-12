@@ -47,9 +47,6 @@
                                                 Active
                                             </th>
 
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Action
-                                            </th>
 
                                         </tr>
                                     </thead>
@@ -72,10 +69,31 @@
                                                         </p>
                                                     </td>
                                                     <td>
-                                                        <p class="text-xs font-weight-bold mb-0">
-                                                            {{ $data->active }}
-                                                        </p>
+                                                        @if($data->active == 1)
+                                                        <span class="badge badge-sm bg-gradient-success w-70">Active</span>
+                                                        @else
+                                                        <span class="badge badge-sm bg-gradient-danger w-70">Not Active</span>
+                                                        @endif
                                                     </td>
+
+                                                    <td class="align-middle">
+                                                        <a href="{{ url('admin/view_offer', $data->id) }}"
+                                                            class="text-primary font-weight-bold text-xs"
+                                                            data-toggle="tooltip">
+                                                            View
+                                                            <i class="bi bi-eye"></i>
+                                                        </a>
+                                                    </td>
+
+                                                    <td class="align-middle">
+                                                        <a href="{{ url('admin/update_offer', $data->id) }}"
+                                                            class="text-success font-weight-bold text-xs"
+                                                            data-toggle="tooltip">
+                                                            Update
+                                                            <i class="bi bi-pen"></i>
+                                                        </a>
+                                                    </td>
+
                                                     <td class="align-middle">
                                                         <a href="{{ url('admin/delete_offer', $data->id) }}"
                                                             class="text-danger font-weight-bold text-xs"

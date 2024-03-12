@@ -162,7 +162,7 @@
                                                     <p class="text-xs font-weight-bold mb-0">
                                                         @foreach($tag as $tagItem)
                                                             @if($tagItem->id == $data->tag_id)
-                                                                {{ $tagItem->name }}
+                                                            <span class="badge rounded-pill text-bg-{{ $tagItem->color }}">{{ $tagItem->name }}</span>
                                                             @endif
                                                         @endforeach
                                                     </p>

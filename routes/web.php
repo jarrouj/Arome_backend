@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\SmellController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\FrontEnd\CartController as FrontEndCartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -146,16 +147,25 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/update_order_confirm/{id}' , [OrderController::class , 'update_order_confirm']);
     Route::get('/delete_order/{id}' , [OrderController::class , 'delete_order']);
 
+
+
     // {{ Offer }}
     Route::get('/show_offer', [OfferController::class,'show_offer']);
     Route::get('/add_offer', [OfferController::class, 'add_offer']);
     Route::post('/add_offer_confirm', [OfferController::class, 'add_offer_confirm']);
-    Route::post('/update_offer/{id}', [OfferController::class, 'update_offer']);
+    Route::get('/update_offer/{id}', [OfferController::class, 'update_offer']);
+    Route::post('/update_offer_confirm/{id}', [OfferController::class, 'update_offer_confirm']);
     Route::get('/delete_offer/{id}', [OfferController::class, 'delete_offer']);
+    Route::get('/view_offer/{id}', [OfferController::class,'view_offer']);
+
 
 });
 
 Route::redirect('/', '/login');
+
+Route::post('/api/add_order', [OrderController::class, 'api_add_order']);
+Route::post('/api/add_cart', [FrontEndCartController::class, 'add_cart']);
+Route::get('/api/show_cart', [FrontEndCartController::class, 'show_cart']);
 
 
 //Register Route

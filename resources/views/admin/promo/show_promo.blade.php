@@ -88,9 +88,9 @@
 
                                                 <td>
                                                     @if($data->active == 1)
-                                                    <span class="badge badge-sm bg-gradient-success w-30">Active</span>
+                                                    <span class="badge badge-sm bg-gradient-success w-50">Active</span>
                                                     @else
-                                                    <span class="badge badge-sm bg-gradient-danger w-30">Not Active</span>
+                                                    <span class="badge badge-sm bg-gradient-danger w-50">Not Active</span>
                                                     @endif
                                                 </td>
 

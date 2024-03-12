@@ -12,30 +12,10 @@ use App\Models\User;
 
 class CartController extends Controller
 {
-    public function show_cart()
-    {
-        $cart          = Cart::latest()->paginate(10);
-        $users          = User::all();
-        $products       = Product::all();
-        // $productImage  = ProductImage::where('product_id' , '=' , $products->id)->first();
-        // $size          = Size::where('product_id' , '=' , $product->id);
 
-        return view('admin.cart.show_cart' , compact('cart' , 'products' , 'users' ));
-    }
 
-    public function add_cart(Request $request)
-    {
-        $cart = new Cart;
 
-        $cart->user_id    = $request->user_id;
-        $cart->product_id = $request->product_id;
-
-        $cart->save();
-
-        return redirect()->back()->with('message' , 'Cart Added');
-    }
-
-    public function update_cart(Request $request , $id)
+    public function update_cart(Request $request, $id)
     {
         $cart = Cart::find($id);
 
@@ -44,8 +24,7 @@ class CartController extends Controller
 
         $cart->save();
 
-        return redirect()->back()->with('message' , 'Cart Updated');
-
+        return redirect()->back()->with('message', 'Cart Updated');
     }
 
     public function delete_cart($id)
@@ -54,6 +33,6 @@ class CartController extends Controller
 
         $cart->delete();
 
-        return redirect()->back()->with('message' , 'Cart Deleted');
+        return redirect()->back()->with('message', 'Cart Deleted');
     }
 }
