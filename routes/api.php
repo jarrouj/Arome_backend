@@ -2,8 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use app\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\FrontEnd\CartController;
+use App\Http\Controllers\FrontEnd\OrderController;
+use App\Http\Controllers\FrontEnd\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // {{ Cart }}
-Route::post('/add_cart', [CartController::class, 'add_cart']);
-Route::get('/show_cart', [CartController::class, 'show_cart']);
-Route::get('/delete_cart', [CartController::class, 'delete_cart']);
+Route::post('/add_cart', [CartController::class, 'add_cart'])->middleware('web');
+Route::get('/show_cart', [CartController::class, 'show_cart'])->middleware('web');
+Route::get('/delete_cart', [CartController::class, 'delete_cart'])->middleware('web');
+
+
+// {{ Order }}
+Route::post('/add_order', [OrderController::class, 'add_order'])->middleware('web');
+
+
+// {{ Transaction }}
+Route::get('/show_transaction', [TransactionController::class, 'show_transaction'])->middleware('web');
+
+
+//{{ User }}
+Route::get('/show_userinfo', [OrderController::class, 'get_userInfo'])->middleware('web');

@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->integer('user_id')->nullable();
             $table->string('f_name');
             $table->string('l_name');
-            $table->string( 'email' )->unique();
+            $table->string( 'email' );
             $table->string('phone');
             $table->integer('points');
-            $table->string('addsub');
+            $table->boolean('addsub');//0=> - , 1=> + (if he bought items per points - if not add pts )
             $table->timestamps();
         });
     }

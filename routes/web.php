@@ -163,7 +163,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
 Route::redirect('/', '/login');
 
-Route::post('/api/add_order', [OrderController::class, 'api_add_order']);
+// Route::post('/api/add_order', [OrderController::class, 'api_add_order']);
 Route::post('/api/add_cart', [FrontEndCartController::class, 'add_cart']);
 Route::get('/api/show_cart', [FrontEndCartController::class, 'show_cart']);
 

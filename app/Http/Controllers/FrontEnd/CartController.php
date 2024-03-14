@@ -8,12 +8,15 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
     public function show_cart(Request $request)
     {
         $products = Product::all();
+        // Session::forget('cart.products');
+
 
         if (Auth::user()) {
             // $cart = Cart::latest()->paginate(10);
@@ -40,25 +43,36 @@ class CartController extends Controller
 
     private function api_add_cart(Request $request)
     {
+
+        $productIds = (array) $request->product_id;
+
         if (Auth::user()) {
-            $cart             = new Cart();
-            $cart->user_id    = Auth::user()->id;
+            $cart = new Cart();
+
+            $cart->user_id = Auth::user()->id;
+
             $cart->product_id = $request->product_id;
+
             $cart->save();
-        } else {
-            $product_id     = $request->product_id;
 
-            $cart   = session()->get('cart.products', []);
+        }
+        else
+        {
+            // Get the existing cart array from the session
+            $cart = session()->get('cart.products', []);
 
-            $cart[] = $product_id;
+            // Merge the existing cart array with the new product IDs
+            $cart = array_merge($cart, $productIds);
 
+            // Store the updated cart array in the session
             session()->put('cart.products', $cart);
         }
 
         return response()->json(['data' => $cart]);
     }
 
-    public function delete_cart(Request $request)
+
+    public function delete_cart(Request $request) ////////////////////to fix
 {
     $id = $request->input('product_id');
 
