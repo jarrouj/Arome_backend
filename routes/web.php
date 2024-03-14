@@ -146,6 +146,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/update_order/{id}' , [OrderController::class , 'update_order']);
     Route::post('/update_order_confirm/{id}' , [OrderController::class , 'update_order_confirm']);
     Route::get('/delete_order/{id}' , [OrderController::class , 'delete_order']);
+    Route::get('/view_order/{id}' , [OrderController::class , 'view_order']);
 
 
 

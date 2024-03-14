@@ -209,7 +209,7 @@
                                        Smell
                                     </label>
 
-                                
+
                                     <div class="mb-3">
                                         <div class="card-body px-0 pt-0 pb-2">
                                             <div class="table-responsive p-0">

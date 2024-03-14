@@ -291,8 +291,18 @@
                                                 </td>
 
                                                 <td class="align-middle">
-                                                    <a href="{{ url('admin/update_order', $data->id) }}"
+                                                    <a href="{{ url('admin/view_order', $data->id) }}"
                                                         class="text-primary font-weight-bold text-xs"
+                                                        data-toggle="tooltip">
+                                                        View
+                                                        <i class="bi bi-eye"></i>
+                                                    </a>
+                                                </td>
+
+
+                                                <td class="align-middle">
+                                                    <a href="{{ url('admin/update_order', $data->id) }}"
+                                                        class="text-success font-weight-bold text-xs"
                                                         data-toggle="tooltip">
                                                         Update
                                                         <i class="bi bi-pen"></i>

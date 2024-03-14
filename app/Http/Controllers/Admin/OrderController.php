@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderProducts;
+use App\Models\ProductImage;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -82,5 +84,29 @@ class OrderController extends Controller
             return response()->json(['fail' => false, 'message' => 'Confirmation cannot be updated']);
         }
     }
+
+    public function view_order($id)
+    {
+        // Retrieve the order details
+        $order = Order::find($id);
+
+        // Retrieve all product IDs associated with the order
+        $orderProductIds = OrderProducts::where('order_id', '=', $id)->pluck('product_id');
+
+        // Retrieve product images for each product
+        $productImages = []; // Changed variable name to productImages
+        foreach ($orderProductIds as $productId) {
+            // Retrieve the first product image for each product
+            $productImage = ProductImage::where('product_id', '=', $productId)->first();
+            if ($productImage) {
+                // Add the product image to the array
+                $productImages[] = $productImage; // Append to productImages array
+            }
+        }
+
+        return view('admin.order.view_order', compact('order', 'productImages'));
+    }
+
+
 
 }
