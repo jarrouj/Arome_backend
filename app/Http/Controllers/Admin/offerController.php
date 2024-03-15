@@ -164,6 +164,7 @@ class offerController extends Controller
         return view('admin.offer.view_offer', compact('offer', 'products', 'productImages', 'category'));
     }
 
+    
 
 
 }

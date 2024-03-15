@@ -90,21 +90,26 @@ class OrderController extends Controller
         // Retrieve the order details
         $order = Order::find($id);
 
-        // Retrieve all product IDs associated with the order
-        $orderProductIds = OrderProducts::where('order_id', '=', $id)->pluck('product_id');
+        // Retrieve all order products associated with the order
+        $orderProducts = OrderProducts::where('order_id', '=', $id)->get();
 
         // Retrieve product images for each product
-        $productImages = []; // Changed variable name to productImages
-        foreach ($orderProductIds as $productId) {
-            // Retrieve the first product image for each product
-            $productImage = ProductImage::where('product_id', '=', $productId)->first();
-            if ($productImage) {
-                // Add the product image to the array
-                $productImages[] = $productImage; // Append to productImages array
+        $productImages = [];
+        foreach ($orderProducts as $orderProduct) {
+            $productId = $orderProduct->product_id;
+
+            // Retrieve the product images for the current product
+            $productImagesForProduct = ProductImage::where('product_id', '=', $productId)->get();
+            if ($productImagesForProduct->isNotEmpty()) {
+                // Add the product images to the array
+                $productImages[] = [
+                    'orderProduct' => $orderProduct,
+                    'productImages' => $productImagesForProduct,
+                ];
             }
         }
 
-        return view('admin.order.view_order', compact('order', 'productImages'));
+        return view('admin.order.view_order', compact('order', 'orderProducts', 'productImages'));
     }
 
 

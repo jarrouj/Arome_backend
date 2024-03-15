@@ -93,7 +93,7 @@
                                  <div class="row">
                                     <div class="col-12">
                                         <div class="d-block w-50 m-auto">
-                                            <form action="{{ url('/admin/search_user') }}" method="POST">
+                                            {{-- <form action="{{ url('/admin/search_user') }}" method="POST">
                                                 @csrf
                                                 <p for="" class="text-center form-label">Search Names, Emails or Phone
                                                     Number
@@ -114,7 +114,7 @@
 
                                                 </div>
 
-                                            </form>
+                                            </form> --}}
                                         </div>
                                        <div class="col-12">
                                          <!-- Product Table -->

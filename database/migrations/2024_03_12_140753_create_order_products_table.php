@@ -16,6 +16,8 @@ return new class extends Migration
             $table->integer('product_id');
             $table->integer('order_id');
             $table->boolean('offer')->default(0);//0 ->no offer ,  1 -> offer
+            $table->integer('qty');
+            $table->integer('size_id');
             $table->timestamps();
         });
     }

@@ -27,14 +27,14 @@
                         <label for="exampleFormControlSelect1" class="form-label">Color</label>
                         <select class="form-select" name="color" id="exampleFormControlSelect1" required>
                             <option value="" disabled selected>Select a color</option>
-                            <option value="#007bff" class="bg-primary text-light">Blue</option>
-                            <option value="#6c757d" class="bg-secondary text-light">Gray</option>
-                            <option value="#28a745" class="bg-success text-light">Green</option>
-                            <option value="#dc3545" class="bg-danger text-light">Red</option>
-                            <option value="#ffc107" class="bg-warning text-dark">Yellow</option>
-                            <option value="#17a2b8" class="bg-info text-light">Light Blue</option>
-                            <option value="#f8f9fa" class="bg-light text-dark">White</option>
-                            <option value="#343a40" class="bg-dark text-light">Black</option>
+                            <option value="primary" class="bg-primary text-light">Blue</option>
+                            <option value="secondary" class="bg-secondary text-light">Gray</option>
+                            <option value="success" class="bg-success text-light">Green</option>
+                            <option value="danger" class="bg-danger text-light">Red</option>
+                            <option value="warning" class="bg-warning text-dark">Orange</option>
+                            <option value="info" class="bg-info text-light">Light Blue</option>
+                            <option value="light" class="bg-light text-dark">White</option>
+                            <option value="dark" class="bg-dark text-light">Black</option>
                         </select>
                     </div>
 

@@ -71,21 +71,39 @@
                                 <div class="col-md-4">
                                     <div class="mb-3 text-center">
                                         <label for="exampleFormControlInput1" class="form-label">Paid</label>
-                                        <p class="text-xs font-weight-bold mb-0">{{ $order->paid }} </p>
+                                        <p class=" font-weight-bold mb-0">
+                                            @if($order->paid == 1)
+                                            <span class="badge badge-sm bg-gradient-success ">Paid</span>
+                                            @else
+                                            <span class="badge badge-sm bg-gradient-danger ">Not Paid</span>
+                                            @endif
+                                         </p>
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="mb-3 text-center">
                                         <label for="exampleFormControlInput1" class="form-label">Method</label>
-                                        <p class="text-xs font-weight-bold mb-0">{{ $order->method }} </p>
+                                        <p class=" font-weight-bold mb-0">
+                                            @if($order->method == 1)
+                                            <span class="badge badge-sm bg-gradient-success ">Cash</span>
+                                            @else
+                                            <span class="badge badge-sm bg-gradient-success ">Points</span>
+                                            @endif
+                                         </p>
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="mb-3 text-center">
                                         <label for="exampleFormControlInput1" class="form-label">Delivered</label>
-                                        <p class="text-xs font-weight-bold mb-0">{{ $order->delivered }} </p>
+                                        <p class=" font-weight-bold mb-0">
+                                            @if($order->delivered == 1)
+                                            <span class="badge badge-sm bg-gradient-success ">Delivered</span>
+                                            @else
+                                            <span class="badge badge-sm bg-gradient-danger ">Not Delivered</span>
+                                            @endif
+                                         </p>
                                     </div>
                                 </div>
 
@@ -104,8 +122,14 @@
                                 <div class="col-md-4">
                                     <div class="mb-3 text-center">
                                         <label for="exampleFormControlInput1" class="form-label">Registered</label>
-                                        <p class="text-xs font-weight-bold mb-0">{{ $order->registered }} </p>
-                                    </div>
+                                        <p class=" font-weight-bold mb-0">
+                                            @if($order->registered == 1)
+                                            <span class="badge badge-sm bg-gradient-success ">Registered</span>
+                                            @else
+                                            <span class="badge badge-sm bg-gradient-danger ">Not Registered</span>
+                                            @endif
+                                         </p>
+                                        </div>
                                 </div>
 
                                 <div class="col-md-4">
@@ -114,8 +138,13 @@
                                 <div class="col-md-4">
                                     <div class="mb-3 text-center">
                                         <label for="exampleFormControlInput1" class="form-label">Offer</label>
-                                        <p class="text-xs font-weight-bold mb-0">{{ $order->offer }} </p>
-                                    </div>
+                                        <p class=" font-weight-bold mb-0">
+                                            @if($order->offer == 1)
+                                            <span class="badge badge-sm bg-gradient-success ">Offer</span>
+                                            @else
+                                            <span class="badge badge-sm bg-gradient-danger ">Not Offer</span>
+                                            @endif
+                                         </p>                                    </div>
                                 </div>
 
 
@@ -180,6 +209,24 @@
                                                                 Image
                                                             </th>
 
+                                                            <th
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                                            Product Name
+                                                        </th>
+
+
+                                                        <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                                        Size
+                                                        </th>
+                                                        <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                                        Quantity
+                                                        </th>
+
 
 
                                                             <th class="text-secondary opacity-7"></th>
@@ -191,11 +238,25 @@
                                                             <tr class="text-center">
 
                                                                 <td>
-                                                                        <img src="/productimage/{{ $data->img }}" width="100px" />
+                                                                    @foreach ($data['productImages'] as $productImage)
+                                                                        <img src="/productimage/{{ $productImage->img }}" width="100px" />
+                                                                    @endforeach
                                                                 </td>
-
-
-
+                                                                <td>
+                                                                    <p class="text-xs font-weight-bold mb-0">
+                                                                        {{ $data['orderProduct']->product_id }}
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <p class="text-xs font-weight-bold mb-0">
+                                                                        {{ $data['orderProduct']->size_id }}
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <p class="text-xs font-weight-bold mb-0">
+                                                                        {{ $data['orderProduct']->qty }}
+                                                                    </p>
+                                                                </td>
 
 
                                                         @empty

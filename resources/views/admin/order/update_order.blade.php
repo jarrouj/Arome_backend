@@ -65,6 +65,8 @@
                                         <div class="mb-3">
                                             <select id="methodSelect" class="form-select" name="method" required>
                                                 <option value="1" selected>Cash</option>
+                                                <option value="0" selected>Points</option>
+
                                             </select>
                                         </div>
                                     </div>

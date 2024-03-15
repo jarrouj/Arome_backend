@@ -249,8 +249,8 @@
                                                 <td>
                                                     @if($data->method == 1)
                                                     <span class="badge badge-sm bg-gradient-success">Cash</span>
-                                                    {{-- @else
-                                                    <span class="badge badge-sm bg-gradient-danger ">Not Active</span> --}}
+                                                    @else
+                                                    <span class="badge badge-sm bg-gradient-danger ">Points</span>
                                                     @endif
                                                 </td>
 

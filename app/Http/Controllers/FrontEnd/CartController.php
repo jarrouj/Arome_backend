@@ -43,26 +43,36 @@ class CartController extends Controller
 
     private function api_add_cart(Request $request)
     {
-
-        $productIds = (array) $request->product_id;
+        $productData = $request->only('product_id', 'size', 'qty');
+        $productIds = (array) $productData['product_id'];
+        $sizes = (array) $productData['size'];
+        $quantities = (array) $productData['qty'];
 
         if (Auth::user()) {
-            $cart = new Cart();
+            $user = Auth::user();
 
-            $cart->user_id = Auth::user()->id;
+            foreach ($productIds as $index => $productId) {
+                $cart = new Cart();
 
-            $cart->product_id = $request->product_id;
+                $cart->user_id = $user->id;
+                $cart->product_id = $productId;
+                $cart->size = $sizes[$index];
+                $cart->quantity = $quantities[$index];
 
-            $cart->save();
-
-        }
-        else
-        {
+                $cart->save();
+            }
+        } else {
             // Get the existing cart array from the session
             $cart = session()->get('cart.products', []);
 
-            // Merge the existing cart array with the new product IDs
-            $cart = array_merge($cart, $productIds);
+            // Merge the existing cart array with the new product data
+            foreach ($productIds as $index => $productId) {
+                $cart[] = [
+                    'product_id' => $productId,
+                    'size' => $sizes[$index],
+                    'quantity' => $quantities[$index]
+                ];
+            }
 
             // Store the updated cart array in the session
             session()->put('cart.products', $cart);
@@ -70,7 +80,6 @@ class CartController extends Controller
 
         return response()->json(['data' => $cart]);
     }
-
 
     public function delete_cart(Request $request) ////////////////////to fix
 {

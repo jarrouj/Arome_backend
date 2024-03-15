@@ -64,13 +64,15 @@
                                                     </p>
                                                 </td>
 
-                                                <td class="p-3">
-                                                    <input type="color" class="m-auto form-control form-control-color"
-                                                        id="exampleColorInput" value="{{ $data->color }}"
-                                                        title="Choose your color" disabled>
+
+
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+
+                                                            <span class="badge w-50 rounded-pill text-bg-{{ $data->color }}">{{ $data->name }}</span>
+
+                                                    </p>
                                                 </td>
-
-
 
 
 

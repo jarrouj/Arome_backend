@@ -32,14 +32,14 @@
                         <label for="exampleFormControlSelect1" class="form-label">Color</label>
                         <select class="form-select" name="color" id="exampleFormControlSelect1" required>
                             <option value="" disabled>Select a color</option>
-                            <option value="#007bff" class="bg-primary text-light" {{ $data->color === '#007bff' ? 'selected' : '' }}>Blue</option>
-                            <option value="#6c757d" class="bg-secondary text-light" {{ $data->color === '#6c757d' ? 'selected' : '' }}>Gray</option>
-                            <option value="#28a745" class="bg-success text-light" {{ $data->color === '#28a745' ? 'selected' : '' }}>Green</option>
-                            <option value="#dc3545" class="bg-danger text-light" {{ $data->color === '#dc3545' ? 'selected' : '' }}>Red</option>
-                            <option value="#ffc107" class="bg-warning text-dark" {{ $data->color === '#ffc107' ? 'selected' : '' }}>Yellow</option>
-                            <option value="#17a2b8" class="bg-info text-light" {{ $data->color === '#17a2b8' ? 'selected' : '' }}>Light Blue</option>
-                            <option value="#f8f9fa" class="bg-light text-dark" {{ $data->color === '#f8f9fa' ? 'selected' : '' }}>White</option>
-                            <option value="#343a40" class="bg-dark text-light" {{ $data->color === '#343a40' ? 'selected' : '' }}>Black</option>
+                            <option value="primary" class="bg-primary text-light" {{ $data->color === 'primary' ? 'selected' : '' }}>Blue</option>
+                            <option value="secondary" class="bg-secondary text-light" {{ $data->color === 'secondary' ? 'selected' : '' }}>Gray</option>
+                            <option value="success" class="bg-success text-light" {{ $data->color === 'success' ? 'selected' : '' }}>Green</option>
+                            <option value="danger" class="bg-danger text-light" {{ $data->color === 'danger' ? 'selected' : '' }}>Red</option>
+                            <option value="warning" class="bg-warning text-dark" {{ $data->color === 'warning' ? 'selected' : '' }}>Orange</option>
+                            <option value="info" class="bg-info text-light" {{ $data->color === 'info' ? 'selected' : '' }}>Light Blue</option>
+                            <option value="light" class="bg-light text-dark" {{ $data->color === 'light' ? 'selected' : '' }}>White</option>
+                            <option value="dark" class="bg-dark text-light" {{ $data->color === 'dark' ? 'selected' : '' }}>Black</option>
                         </select>
                     </div>
 

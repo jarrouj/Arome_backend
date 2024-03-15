@@ -56,38 +56,35 @@
                             </div>
                         </div>
 
-                        <div class="card-body">
-                            <div class="container-fluid">
-                                <div class="row p-3">
-                                    <!-- Name  -->
-                                    <div class="col-md-4 mb-3 pl-0"> <!-- Adjusted the left padding -->
-                                        <label for="name" class="form-label">Name</label>
-                                        <p class="text-xs font-weight-bold mb-0">
-                                            {{ $offer->name }}
-                                        </p>
-                                    </div>
-                                    <!-- Price  -->
-                                    <div class="col-md-4 mb-3">
-                                        <label for="price" class="form-label">Price</label>
-                                        <p class="text-xs font-weight-bold mb-0">
-                                            {{ $offer->price }}
-                                        </p>
-                                    </div>
-                                    <!-- Active Select -->
-                                    <div class="col-md-4 mb-3">
-                                        <label for="active" class="form-label">Active</label>
-                                        <div>
-                                            @if($offer->active == 1)
-                                            <span class="badge badge-sm bg-gradient-success">Active</span>
-                                            @else
-                                            <span class="badge badge-sm bg-gradient-danger">Not Active</span>
-                                            @endif
-                                        </div>
-                                    </div>
+                        <div class="mt-4 row">
+                            <div class="col-md-4">
+                                <div class="mb-3 text-center">
+                                    <label for="exampleFormControlInput1" class="form-label">Name</label>
+                                    <p class="text-xs font-weight-bold mb-0">{{ $offer->name }}</p>
                                 </div>
                             </div>
-                        </div>
 
+                            <div class="col-md-4">
+                                <div class="mb-3 text-center">
+                                    <label for="exampleFormControlInput1" class="form-label">Price</label>
+                                    <p class="text-xs font-weight-bold mb-0">{{ $offer->price }}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label for="active" class="form-label">Active</label>
+                                <div>
+                                    @if($offer->active == 1)
+                                    <span class="badge badge-sm bg-gradient-success">Active</span>
+                                    @else
+                                    <span class="badge badge-sm bg-gradient-danger">Not Active</span>
+                                    @endif
+                                </div>
+                            </div>
+
+
+                        </div>
+                      
 
 
                                  <!-- Image -->

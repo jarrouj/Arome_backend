@@ -71,11 +71,17 @@ class OrderController extends Controller
         $cartProductIds = session()->get('cart.products', []);
 
         // Create OrderProducts for each cart item
-        foreach ($cartProductIds as $productId) {
+        foreach ($cartProductIds as $cartItem) {
+            $productId = $cartItem['product_id'];
+            $size = $cartItem['size'];
+            $qty = $cartItem['quantity'];
+
             $orderProduct = new OrderProducts();
-            $orderProduct->order_id   = $order->id;
+            $orderProduct->order_id = $order->id;
             $orderProduct->product_id = $productId;
-            // $orderProduct->offer      = $order->offer;
+            $orderProduct->size_id = $size;
+            $orderProduct->qty = $qty;
+
             $orderProduct->save();
         }
     }
