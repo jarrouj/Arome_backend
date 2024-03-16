@@ -169,7 +169,7 @@
                                 <div class="col-md-4">
                                     <div class="mb-3 text-center">
                                         <label for="exampleFormControlInput1" class="form-label">Total (USD)</label>
-                                        <p class="text-xs font-weight-bold mb-0">{{ $order->total_usd }} </p>
+                                        <p class="text-xs font-weight-bold mb-0">${{ $order->total_usd }} </p>
                                     </div>
                                 </div>
 
@@ -227,6 +227,12 @@
                                                         Quantity
                                                         </th>
 
+                                                        <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                                        Price
+                                                        </th>
+
 
 
                                                             <th class="text-secondary opacity-7"></th>
@@ -255,6 +261,19 @@
                                                                 <td>
                                                                     <p class="text-xs font-weight-bold mb-0">
                                                                         {{ $data['orderProduct']->qty }}
+                                                                    </p>
+                                                                </td>
+
+                                                                <td>
+                                                                    <p class="text-xs font-weight-bold mb-0">
+                                                                            @php
+                                                                                // Retrieve the Size model for the current size_id
+                                                                                $size = \App\Models\Size::find($data['orderProduct']->size_id );
+                                                                                $price = $size->price * $data['orderProduct']->qty ;
+                                                                            @endphp
+                                                                            ${{ $price }}
+                                                                            <!-- Optionally, if you want to display prices for multiple size_ids -->
+                                                                            <br> <!-- Add a line break for clarity -->
                                                                     </p>
                                                                 </td>
 

@@ -170,14 +170,14 @@
                                                         @elseif ($data->confirm === 1)
                                                             <form action="{{ route('update-status', ['id' => $data->id]) }}" method="POST">
                                                                 @csrf
-                                                                <button type="submit" name="conf" value="1" class="btn btn-primary btn-sm me-1" disabled>
+                                                                <button type="submit" name="conf" value="1" class="btn btn-success btn-sm me-1" disabled>
                                                                     <i class="bi bi-check" style="font-size: 1rem;"></i>
                                                                 </button>
                                                             </form>
                                                         @else
                                                             <form action="{{ route('update-status', ['id' => $data->id]) }}" method="POST">
                                                                 @csrf
-                                                                <button type="submit" name="conf" value="1" class="btn btn-primary btn-sm me-1">
+                                                                <button type="submit" name="conf" value="1" class="btn btn-success btn-sm me-1">
                                                                     <i class="bi bi-check" style="font-size: 1rem;"></i>
                                                                 </button>
                                                             </form>
@@ -200,13 +200,21 @@
 
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">
-                                                        @foreach ($users as $user)
-                                                        @if ($user->id == $data->user_id)
-                                                        {{ $user->f_name}} {{ $user->l_name}}
+                                                        @if($data->user_id)
+                                                           @foreach ($users as $user)
+                                                           @if ($user->id == $data->user_id)
+                                                           {{ $user->f_name}} {{ $user->l_name}}
+
+                                                            @endif
+                                                            @endforeach
+
+                                                        @else
+
+                                                            <p class="text-xs font-weight-bold mb-0">
+                                                                {{ $data->f_name }}  {{ $data->l_name}}
+                                                            </p>
 
                                                         @endif
-                                                        @endforeach
-
                                                     </p>
                                                 </td>
 

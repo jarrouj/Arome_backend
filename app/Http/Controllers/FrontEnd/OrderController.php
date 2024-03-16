@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\FrontEnd;
 
-use App\Http\Controllers\Controller;
 use App\Models\Cart;
-use App\Models\Order;
-use App\Models\OrderProducts;
+use App\Models\Size;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Models\OrderProducts;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -43,14 +44,14 @@ class OrderController extends Controller
             // $orderProduct->offer      = $order->offer;
             $orderProduct->save();
         }
-    } else {
+    }
+    else {
         // Store user data in session if not authenticated
         session()->put('order.userinfo', [
             'f_name' => $request->f_name,
             'l_name' => $request->l_name,
             'email'  => $request->email,
             'phone'  => $request->phone
-
         ]);
 
         // Create a new order instance
@@ -62,29 +63,47 @@ class OrderController extends Controller
         $order->phone     = $request->phone;
         $order->total_lbp = $request->total_lbp;
         $order->total_pts = $request->total_pts;
-        $order->total_usd = $request->total_usd;
         // Save the order
         $order->save();
-
 
         // Get the cart items from session
         $cartProductIds = session()->get('cart.products', []);
 
-        // Create OrderProducts for each cart item
+        // Calculate the total USD price for the order
+        $totalUSD = 0;
+
         foreach ($cartProductIds as $cartItem) {
             $productId = $cartItem['product_id'];
-            $size = $cartItem['size'];
+            $sizeId = $cartItem['size'];
             $qty = $cartItem['quantity'];
 
-            $orderProduct = new OrderProducts();
-            $orderProduct->order_id = $order->id;
-            $orderProduct->product_id = $productId;
-            $orderProduct->size_id = $size;
-            $orderProduct->qty = $qty;
+            // Retrieve the size information
+            $size = Size::find($sizeId);
 
-            $orderProduct->save();
+            if ($size) {
+                // Calculate the total price for the current order product based on the size price and quantity
+                $totalPrice = $size->price * $qty;
+
+                // Add the total price to the total USD
+                $totalUSD += $totalPrice;
+
+                // Create a new OrderProduct instance
+                $newOrderProduct = new OrderProducts();
+                $newOrderProduct->order_id = $order->id;
+                $newOrderProduct->product_id = $productId;
+                $newOrderProduct->size_id = $sizeId;
+                $newOrderProduct->qty = $qty;
+                // $newOrderProduct->total_price = $totalPrice; // Store the total price for the order product
+
+                $newOrderProduct->save();
+            }
         }
+
+        // Update the total_usd attribute of the Order model
+        $order->total_usd = $totalUSD;
+        $order->save();
     }
+
 
     // Update order details
     // $order->total_lbp = $request->total_lbp;

@@ -107,17 +107,84 @@ class offerController extends Controller
     {
         $products = Product::all();
         $category = Category::all();
+        $offer = Offer::find($id);
+
 
         // Group images by product_id and retrieve the first image for each product
         $productImages = ProductImage::all()->groupBy('product_id')->map(function ($images) {
             return $images->first();
         });
 
-        return view('admin.offer.update_offer', compact('products', 'productImages', 'category'));
+        return view('admin.offer.update_offer', compact('products', 'productImages', 'category' , 'offer'));
     }
 
     public function update_offer_confirm(Request $request , $id)
     {
+
+         // Check if product_id is not null
+         if (!is_null($request->product_id) && is_array($request->product_id)) {
+
+            foreach ($request->product_id as $product_id) {
+
+                $offer = Offer::find($id);
+
+                $img = $request->img;
+
+
+                if($img)
+                {
+                    $imgname = Str::random(20) . '.' . $img->getClientOriginalExtension();
+
+                    //Save the original image
+                    $request->img->move('offer', $imgname);
+
+                    //change the image quality using Intervention Image
+                    $img = Image::make(public_path('offer/' . $imgname));
+
+                    $img->encode($img->extension, 10)->save(public_path('offer/' . $imgname));
+
+                    $offer->img = $imgname;
+                }
+
+                $offer->name   = $request->name;
+                $offer->all_products = $request->all_products;
+                $offer->price  = $request->price;
+                $offer->active = $request->active;
+
+                $offer->product_id = $product_id;
+
+                $offer->save();
+            }
+        } else { //if all_product is checked
+            $offer = Offer::find($id);
+
+            $img = $request->img;
+
+
+            if($img)
+            {
+                $imgname = Str::random(20) . '.' . $img->getClientOriginalExtension();
+
+                //Save the original image
+                $request->img->move('offer', $imgname);
+
+                //change the image quality using Intervention Image
+                $img = Image::make(public_path('offer/' . $imgname));
+
+                $img->encode($img->extension, 10)->save(public_path('offer/' . $imgname));
+
+                $offer->img = $imgname;
+            }
+
+            $offer->name   = $request->name;
+            $offer->all_products = $request->all_products;
+            $offer->price  = $request->price;
+            $offer->active = $request->active;
+
+            $offer->save();
+        }
+
+        return redirect('/admin/show_offer')->with('success', 'Offer created');
 
     }
 
@@ -164,7 +231,7 @@ class offerController extends Controller
         return view('admin.offer.view_offer', compact('offer', 'products', 'productImages', 'category'));
     }
 
-    
+
 
 
 }

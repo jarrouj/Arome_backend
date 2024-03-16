@@ -24,9 +24,9 @@ return new class extends Migration
             $table->boolean('delivered')->default(0);//not delivered
             $table->boolean('registered')->default(0);//not registered
             $table->boolean('offer')->default(0);//no offer
-            $table->double('total_lbp');
-            $table->integer('total_pts');
-            $table->double('total_usd');
+            $table->double('total_lbp')->nullable();
+            $table->integer('total_pts')->nullable();
+            $table->double('total_usd')->nullable();
             $table->boolean('confirm')->nullable(); // 1-confirmed 2-not confirmed
             $table->timestamps();
         });

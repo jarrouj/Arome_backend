@@ -69,7 +69,7 @@
                                     <!-- Price Input -->
                                     <div class="col-md-4 mb-3">
                                         <label for="price" class="form-label">Price</label>
-                                        <input type="number" class="form-control" id="price" name="price">
+                                        <input type="number" class="form-control" id="price" name="price" step="any">
                                     </div>
                                     <!-- Active Select -->
                                     <div class="col-md-4 mb-3">
@@ -126,7 +126,7 @@
                                                     <tr class="text-center">
                                                         <th class="text-secondary opacity-7">
                                                             <div class="form-check">
-                                                                <label class="form-check-label" for="check-all">All Products</label>
+                                                                {{-- <label class="form-check-label" for="check-all">All Products</label> --}}
 
                                                                 <input class="form-check-input" type="checkbox" id="check-all"
                                                                     value="0" name="all_products" onchange="toggleAllProducts(this)">

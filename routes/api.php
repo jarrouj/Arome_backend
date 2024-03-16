@@ -36,7 +36,7 @@ Route::post('/add_order', [OrderController::class, 'add_order'])->middleware('we
 
 
 // {{ Transaction }}
-Route::get('/show_transaction', [TransactionController::class, 'show_transaction'])->middleware('web');
+Route::get('/add_transaction', [TransactionController::class, 'add_transaction'])->middleware('web');
 
 
 //{{ User }}

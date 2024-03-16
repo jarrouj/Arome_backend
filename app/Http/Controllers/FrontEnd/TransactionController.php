@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
-    public function show_transaction()
+    public function add_transaction()
     {
         if (Auth::user())
         {

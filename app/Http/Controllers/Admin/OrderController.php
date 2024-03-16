@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Order;
-use App\Models\OrderProducts;
-use App\Models\ProductImage;
+use App\Models\Size;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use App\Models\OrderProducts;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -88,7 +89,9 @@ class OrderController extends Controller
     public function view_order($id)
     {
         // Retrieve the order details
-        $order = Order::find($id);
+        $order         = Order::find($id);
+        $orderProducts = OrderProducts::where('order_id', $order->id)->get();
+        // $size          = Size::find('product_id' , '=' , $orderProducts->product_id)->get();
 
         // Retrieve all order products associated with the order
         $orderProducts = OrderProducts::where('order_id', '=', $id)->get();
@@ -109,7 +112,7 @@ class OrderController extends Controller
             }
         }
 
-        return view('admin.order.view_order', compact('order', 'orderProducts', 'productImages'));
+        return view('admin.order.view_order', compact('order', 'orderProducts', 'productImages' ));
     }
 
 
