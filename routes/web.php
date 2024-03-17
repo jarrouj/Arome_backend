@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\offerController;
 use App\Http\Controllers\Admin\PrivacyController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\CollectionController;
+use App\Http\Controllers\Admin\GeneralController;
 use App\Http\Controllers\Admin\LandingController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
@@ -158,6 +159,11 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/update_offer_confirm/{id}', [OfferController::class, 'update_offer_confirm']);
     Route::get('/delete_offer/{id}', [OfferController::class, 'delete_offer']);
     Route::get('/view_offer/{id}', [OfferController::class,'view_offer']);
+
+    // {{ General }}
+    Route::get('/show_general' , [GeneralController::class , 'show_general']);
+    Route::get('/update_general/{id}' , [GeneralController::class , 'update_general']);
+    Route::post('/update_general_confirm/{id}' , [GeneralController::class , 'update_general_confirm']);
 
 
 });
