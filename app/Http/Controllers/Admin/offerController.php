@@ -104,19 +104,24 @@ class offerController extends Controller
     }
 
     public function update_offer($id)
-    {
-        $products = Product::all();
-        $category = Category::all();
-        $offer = Offer::find($id);
+{
+    $offer = Offer::find($id);
 
+    // Find all product IDs with the same offer name
+    $productIds = Offer::where('name', $offer->name)->pluck('product_id')->toArray();
 
-        // Group images by product_id and retrieve the first image for each product
-        $productImages = ProductImage::all()->groupBy('product_id')->map(function ($images) {
-            return $images->first();
-        });
+    // Fetch products and category
+    $products = Product::all();
+    $category = Category::all();
 
-        return view('admin.offer.update_offer', compact('products', 'productImages', 'category' , 'offer'));
-    }
+    // Group images by product_id and retrieve the first image for each product
+    $productImages = ProductImage::all()->groupBy('product_id')->map(function ($images) {
+        return $images->first();
+    });
+
+    return view('admin.offer.update_offer', compact('products', 'productImages', 'category', 'offer', 'productIds'));
+}
+
 
     public function update_offer_confirm(Request $request , $id)
     {
