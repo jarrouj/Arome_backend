@@ -36,12 +36,7 @@
                                         </label>
                                         <div>
                                             <div class="mb-3">
-                                                <select id="userSelect" class="form-select" name="user_id">
-                                                    <option value="" disabled selected>Select a User</option>
-                                                    @foreach($users as $user)
-                                                        <option value="{{ $user->id }}" {{ $user->id == $order->user_id ? 'selected' : '' }}>{{ $user->f_name }} {{$user->l_name}}</option>
-                                                    @endforeach
-                                                </select>
+                                               {{$order->f_name }} {{ $order->l_name }}
                                             </div>
                                         </div>
                                     </div>
@@ -64,8 +59,8 @@
                                         </label>
                                         <div class="mb-3">
                                             <select id="methodSelect" class="form-select" name="method" required>
-                                                <option value="1" selected>Cash</option>
-                                                <option value="0" selected>Points</option>
+                                                <option value="1" {{ $order->method == 1 ? 'selected' : ''}}>Cash</option>
+                                                <option value="0" {{ $order->method == 0 ? 'selected' : ''}}>Points</option>
 
                                             </select>
                                         </div>
@@ -113,7 +108,7 @@
                                     </div>
                                 </div>
 
-                                <div class="mt-4 row">
+                                {{-- <div class="mt-4 row">
                                     <div class="col-4">
                                         <label for="exampleFormControlInput1" class="form-label">
                                             Total Points
@@ -145,7 +140,7 @@
 
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="d-flex justify-content-center">
                                     <button type="submit" class="btn mt-3 btn-dark">Submit</button>

@@ -81,45 +81,39 @@ class CartController extends Controller
         return response()->json(['data' => $cart]);
     }
 
-    public function delete_cart(Request $request) ////////////////////to fix
-{
-    $id = $request->input('product_id');
+    public function delete_cart($id)
+    {
+        // Check if the user is authenticated
+        if (Auth::check()) {
+            // If authenticated, delete the product from the user's cart in the database
+            $cart = Cart::where('user_id', Auth::user()->id)
+                ->where('product_id', $id)
+                ->delete();
 
-    if (Auth::check()) {
-        // If user is authenticated, delete from the database
-        $UserCart = Cart::where('user_id', Auth::user()->id)
-                        ->where('product_id', $id)
-                        ->delete();
+                return response()->json(['data' => $cart], 200);
 
-        return response()->json(['message' => 'Cart item deleted'], 200);
-    } else {
-        $productIds = session()->get('cart.products', []);
-        $updatedProductIds = [];
-
-        // Loop through products in the session
-        foreach ($productIds as $productId) {
-            // If product ID matches, skip it
-            if ($productId == $id) {
-                continue;
-            }
-            // Otherwise, add it to the updated array
-            $updatedProductIds[] = $productId;
-        }
-
-        // Update session with the updated product IDs
-        session()->put('cart.products', $updatedProductIds);
-
-        // Check if product was found and deleted from the session
-        if (count($productIds) !== count($updatedProductIds)) {
-            return response()->json(['message' => 'Product removed from session cart'], 200);
         } else {
-            return response()->json(['message' => 'Product not found in session cart'], 404);
+
+            // If user is not authenticated, remove the product from the session cart
+            $cartProductIds = session()->get('cart.products', []);
+
+            // Filter out the product ID to be removed
+            $updatedCartProductIds = array_filter($cartProductIds, function ($item) use ($id) {
+                return $item['product_id'] != $id;
+            });
+
+            // Check if any items were removed
+            if (count($cartProductIds) !== count($updatedCartProductIds)) {
+
+                // Update the session with the filtered array
+                session()->put('cart.products', $updatedCartProductIds);
+
+                return response()->json(['data' => $updatedCartProductIds], 200);
+            } else {
+                return response()->json(['message' => 'Product not found in session cart'], 404);
+            }
         }
+
     }
-}
-
-
-
-
 
 }

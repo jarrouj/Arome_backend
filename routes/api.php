@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // {{ Cart }}
 Route::post('/add_cart', [CartController::class, 'add_cart'])->middleware('web');
 Route::get('/show_cart', [CartController::class, 'show_cart'])->middleware('web');
-Route::get('/delete_cart', [CartController::class, 'delete_cart'])->middleware('web');
+Route::get('/delete_cart/{id}', [CartController::class, 'delete_cart'])->middleware('web');
 
 
 // {{ Order }}

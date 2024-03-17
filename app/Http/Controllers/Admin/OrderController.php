@@ -35,24 +35,13 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
 
-        $user = User::find($request->user_id);
 
-        //Get Data from the user Table
-        $order->user_id    = $user->id;
-        $order->f_name     = $user->f_name;
-        $order->l_name     = $user->l_name;
-        $order->address    = $user->address;
-        $order->email      = $user->email;
-        $order->phone      = $user->phone;
 
         $order->paid       = $request->paid;
         $order->method     = $request->method;
         $order->delivered  = $request->delivered;
         $order->registered = $request->registered;
         $order->offer      = $request->offer;
-        $order->total_lbp  = $request->total_lbp;
-        $order->total_pts  = $request->total_pts;
-        $order->total_usd  = $request->total_usd;
 
         $order->save();
 

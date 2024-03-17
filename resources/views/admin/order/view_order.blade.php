@@ -192,8 +192,8 @@
                             <div class="mt-4 row">
 
                                 <div class="col-12">
-                                    <label for="exampleInputPassword1" class="form-label">
-                                       Products
+                                    <label for="exampleInputPassword1" class="form-label ">
+                                        <h6 class="ms-3">Products</h6>
                                     </label>
 
                                     <div class="mb-3">
@@ -233,7 +233,11 @@
                                                         Price
                                                         </th>
 
+                                                        <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
+                                                        Points
+                                                        </th>
 
                                                             <th class="text-secondary opacity-7"></th>
                                                             <th class="text-secondary opacity-7"></th>
@@ -272,12 +276,21 @@
                                                                                 $price = $size->price * $data['orderProduct']->qty ;
                                                                             @endphp
                                                                             ${{ $price }}
-                                                                            <!-- Optionally, if you want to display prices for multiple size_ids -->
-                                                                            <br> <!-- Add a line break for clarity -->
+                                                                            <br>
                                                                     </p>
                                                                 </td>
 
-
+                                                                <td>
+                                                                    <p class="text-xs font-weight-bold mb-0">
+                                                                            @php
+                                                                                // Retrieve the Size model for the current size_id
+                                                                                $size = \App\Models\Size::find($data['orderProduct']->size_id );
+                                                                                $points = $size->points * $data['orderProduct']->qty ;
+                                                                            @endphp
+                                                                            {{ $points }}
+                                                                            <br>
+                                                                    </p>
+                                                                </td>
                                                         @empty
                                                             <tr>
                                                                 <td colspan="16">
