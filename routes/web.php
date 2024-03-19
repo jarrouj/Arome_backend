@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\SmellController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\FrontEnd\CartController as FrontEndCartController;
@@ -164,6 +165,10 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/show_general' , [GeneralController::class , 'show_general']);
     Route::get('/update_general/{id}' , [GeneralController::class , 'update_general']);
     Route::post('/update_general_confirm/{id}' , [GeneralController::class , 'update_general_confirm']);
+
+    // {{ Transaction }}
+    Route::get('/show_transaction' , [TransactionController::class , 'show_transaction']);
+
 
 
 });

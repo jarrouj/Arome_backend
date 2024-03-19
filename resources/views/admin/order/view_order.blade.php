@@ -137,14 +137,15 @@
 
                                 <div class="col-md-4">
                                     <div class="mb-3 text-center">
-                                        <label for="exampleFormControlInput1" class="form-label">Offer</label>
+                                        <label for="exampleFormControlInput1" class="form-label">Promo</label>
                                         <p class=" font-weight-bold mb-0">
-                                            @if($order->offer == 1)
-                                            <span class="badge badge-sm bg-gradient-success ">Offer</span>
+                                            @if($order->promo != null)
+                                            <p class="text-xs font-weight-bold mb-0">{{ $order->promo }}</p>
                                             @else
-                                            <span class="badge badge-sm bg-gradient-danger ">Not Offer</span>
+                                            <i class="fa fa-times text-danger"></i>
                                             @endif
-                                         </p>                                    </div>
+                                         </p>
+                                        </div>
                                 </div>
 
 
@@ -270,15 +271,26 @@
 
                                                                 <td>
                                                                     <p class="text-xs font-weight-bold mb-0">
-                                                                            @php
-                                                                                // Retrieve the Size model for the current size_id
-                                                                                $size = \App\Models\Size::find($data['orderProduct']->size_id );
-                                                                                $price = $size->price * $data['orderProduct']->qty ;
-                                                                            @endphp
-                                                                            ${{ $price }}
-                                                                            <br>
+                                                                        @php
+                                                                            // Retrieve the Size model for the current size_id
+                                                                            $size = \App\Models\Size::find($data['orderProduct']->size_id);
+                                                                            $price = $size->price * $data['orderProduct']->qty;
+
+                                                                            // Check if the product has an active offer
+                                                                            $offer = \App\Models\Offer::where('product_id', $data['orderProduct']->product_id)->where('active', 1)->first();
+
+                                                                            if ($offer) {
+                                                                                // Calculate the discount based on the offer percentage
+                                                                                $discountPercentage = $offer->price / 100;
+                                                                                $discountedPrice = $price - ($price * $discountPercentage);
+                                                                                $price = $discountedPrice;
+                                                                            }
+                                                                        @endphp
+                                                                        ${{ $price }}
+                                                                        <br>
                                                                     </p>
                                                                 </td>
+
 
                                                                 <td>
                                                                     <p class="text-xs font-weight-bold mb-0">

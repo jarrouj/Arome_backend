@@ -131,7 +131,7 @@
                                 <th
                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
-                                    Offer
+                                    Promo
                                 </th>
 
                                 <th
@@ -273,8 +273,10 @@
 
 
                                                 <td>
-                                                    @if ($data->offer == 1)
-                                                        <i class="fa fa-check text-success"></i>
+                                                    @if ($data->promo != null)
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $data->promo }}
+                                                    </p>
                                                     @else
                                                         <i class="fa fa-times text-danger"></i>
                                                     @endif

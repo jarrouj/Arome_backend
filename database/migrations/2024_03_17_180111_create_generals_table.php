@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('generals', function (Blueprint $table) {
             $table->id();
-            $table->string('api');
+            $table->longtext('api');
             $table->string('info_guide')->nullable();
             $table->double('shipping_cost');
             $table->string('shipping_text')->nullable();
             $table->string('additional_info')->nullable();
             $table->double('subscriber_discount')->nullable();
             $table->string('new_user')->nullable();
-            $table->string('pixel')->nullable();
-            $table->string('meta_script')->nullable();
+            $table->longtext('pixel')->nullable();
+            $table->longtext('meta_script')->nullable();
             $table->timestamps();
         });
     }

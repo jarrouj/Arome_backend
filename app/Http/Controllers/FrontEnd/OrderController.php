@@ -9,6 +9,8 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\OrderProducts;
 use App\Http\Controllers\Controller;
+use App\Models\Offer;
+use App\Models\Promo;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -27,9 +29,7 @@ class OrderController extends Controller
             $order->address   = $user->address;
             $order->email     = $user->email;
             $order->phone     = $user->phone;
-            $order->total_lbp = $request->total_lbp;
-            $order->total_pts = $request->total_pts;
-            $order->total_usd = $request->total_usd;
+
 
             $order->save();
 
@@ -81,16 +81,27 @@ class OrderController extends Controller
                 $size = Size::find($sizeId);
 
                 if ($size) {
-                    // Calculate the total price for the current order product based on the size price and quantity
-                    $totalPrice  = $size->price * $qty;
-                    $totalPts    = $size->points * $qty;
+                    // Initialize variables to store total price and points
+                    $totalPrice = $size->price * $qty;
+                    $totalPts = $size->points * $qty;
+
+                    // Check if the product has an active offer
+                    $offer = Offer::where('product_id', $productId)->where('active', 1)->first();
+
+                    if ($offer) {
+                        // Calculate the discount based on the percentage
+                        $discountPercentage = $offer->price / 100;
+                        $discountAmount = $totalPrice * $discountPercentage;
+
+                        // Apply the discount to the total price
+                        $totalPrice -= $discountAmount;
+                    }
 
                     // Add the total price to the total USD
                     $totalUSD += $totalPrice;
 
-                    //Sum the points
+                    // Sum the points
                     $totalPoints += $totalPts;
-
 
                     // Create a new OrderProduct instance
                     $newOrderProduct = new OrderProducts();
@@ -103,8 +114,32 @@ class OrderController extends Controller
                 }
             }
 
-            // Update the total_usd attribute of the Order model
-            $order->total_usd = $totalUSD;
+
+            $promoCode = Promo::where('promo', '=', $request->promo)->first();
+
+            if ($promoCode) {
+                // Check if the promo exists and is active
+
+                if ($promoCode->active == 1) {
+
+                    $order->promo = $request->promo;
+
+                    // Calculate the discount based on the percentage
+                    $discountPercentage = 1 - $promoCode->discount / 100;
+                    $discountAmount = $totalUSD * $discountPercentage;
+
+                    $order->total_usd = $discountAmount;
+                } else {
+                    $order->total_usd = $totalUSD;
+                }
+            }
+
+            if (!$promoCode) //if promo not found
+            {
+                $order->total_usd = $totalUSD;
+            }
+
+
             $order->total_pts = $totalPoints;
             $order->save();
         }

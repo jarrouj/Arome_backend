@@ -23,7 +23,7 @@ return new class extends Migration
             $table->boolean('method')->default(1);//cash , 0 points
             $table->boolean('delivered')->default(0);//not delivered
             $table->boolean('registered')->default(0);//not registered
-            $table->boolean('offer')->default(0);//no offer
+            $table->string('promo')->nullable(); //get the promo after pressing on place order (if there is promo)
             $table->double('total_lbp')->nullable();
             $table->integer('total_pts')->nullable();
             $table->double('total_usd')->nullable();

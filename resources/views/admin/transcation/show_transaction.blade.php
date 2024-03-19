@@ -17,93 +17,73 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h6>Slider</h6>
+                            <h6>Transactions</h6>
                         </div>
 
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <div class="d-flex justify-content-center">
 
-                                    @include('admin.landing.add_landing')
-
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr class="text-center">
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Image
-                                            </th>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Title
-                                            </th>
+
                                             <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
-                                            Subtitle
+                                            User
                                         </th>
+
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                            Email
+                                        </th>
+
                                         <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
-                                        Text 1
-                                    </th> <th
+                                        Phone
+                                    </th>
+
+                                    <th
                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
-                                    Text 2
+                                    Points
                                 </th>
 
-                                            <th class="text-secondary opacity-7"></th>
-                                            <th class="text-secondary opacity-7"></th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($landing as $data)
+                                        @forelse ($transaction as $data)
                                             <tr class="text-center">
-                                                <td class="bg-primary">
-                                                        <img src="/landing/{{ $data->img }}" async class="d-block m-auto" width="50px" alt="">
-
-                                                </td>
-
 
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->title }}
+                                                        {{ $data->f_name }} {{ $data->l_name }}
                                                     </p>
                                                 </td>
 
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->subtitle }}
+                                                        {{ $data->email }}
                                                     </p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->text1 }}
-                                                    </p>
-                                                </td>   <td>
-                                                    <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $data->text2 }}
-                                                    </p>
-                                                </td>
-                                                <td class="align-middle">
-                                                  @include('admin.landing.update_landing')
                                                 </td>
 
-                                                <td class="align-middle">
-                                                    <a href="{{ url('admin/delete_landing', $data->id) }}"
-                                                        class="text-danger font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit landing"
-                                                        onclick="return confirm('Are you sure you want to delete this landing?')">
-                                                        Delete
-                                                        <i class="bi bi-trash"></i>
-                                                    </a>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $data->phone }}
+                                                    </p>
                                                 </td>
+
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $data->points }}
+                                                    </p>
+                                                </td>
+
+
                                             </tr>
                                         @empty
                                             <tr>
@@ -116,7 +96,7 @@
                                         @endforelse
                                     </tbody>
                                 </table>
-                                {{ $landing->render('admin.pagination') }}
+                                {{ $transaction->render('admin.pagination') }}
                             </div>
                         </div>
                     </div>
