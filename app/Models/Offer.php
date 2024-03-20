@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Offer extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['id', 'name', 'all_products', 'price', 'active'];
+
 }

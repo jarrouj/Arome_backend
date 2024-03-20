@@ -56,7 +56,7 @@
                             </div>
                         </div>
 
-                        <form action="{{ url('/admin/update_offer_confirm') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url('/admin/update_offer_confirm/' . $offer->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body px-0 pt-0 pb-2">
 
@@ -102,28 +102,7 @@
                                  <div class="row">
                                     <div class="col-12">
                                         <div class="d-block w-50 m-auto">
-                                            {{-- <form action="{{ url('/admin/search_user') }}" method="POST">
-                                                @csrf
-                                                <p for="" class="text-center form-label">Search Names, Emails or Phone
-                                                    Number
-                                                </p>
 
-                                                <div class="d-flex justify-content-center">
-
-                                                    <div class="input-group mb-3 w-75">
-
-                                                        <input type="text" name="text" class="form-control"
-                                                            placeholder="example@gmail.com" style="height: 41px ">
-
-                                                        <button class="btn btn-dark" type="submit">
-                                                            <i class="bi bi-search"></i>
-                                                        </button>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </form> --}}
                                         </div>
                                        <div class="col-12">
                                          <!-- Product Table -->
@@ -138,7 +117,7 @@
                                                                 <label class="form-check-label" for="check-all">All Products</label>
 
                                                                 <input class="form-check-input" type="checkbox" id="check-all"
-                                                                    value="0" name="all_products" onchange="toggleAllProducts(this)" {{ $offer->all_products == 0 ? 'checked' : ''}}>
+                                                                    value="0" name="all_products" onchange="toggleAllProducts(this)" >
                                                             </div>
                                                         </th>
                                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
