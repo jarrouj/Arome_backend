@@ -23,12 +23,12 @@ class ProductController extends Controller
         $tag          = Tag::all();
         $products     = Product::all();
 
-         // Group images by product_id and retrieve the first image for each product
-      $productImages = ProductImage::all()->groupBy('product_id')->map(function ($images) {
-        return $images->first();
-      });
+        // Group images by product_id and retrieve the first image for each product
+        $productImages = ProductImage::all()->groupBy('product_id')->map(function ($images) {
+            return $images->first();
+        });
 
-        return view('admin.product.show_product', compact('product', 'category', 'tag' , 'productImages' , 'products'));
+        return view('admin.product.show_product', compact('product', 'category', 'tag', 'productImages', 'products'));
     }
 
     public function add_product(Request $request)
@@ -56,8 +56,7 @@ class ProductController extends Controller
 
         $img = $request->file('img');
 
-        if ($img)
-        {
+        if ($img) {
             foreach ($img as $image) {
                 // Generate a unique filename for each image
                 $imgname = Str::random(20) . '.' . $image->getClientOriginalExtension();
@@ -109,7 +108,7 @@ class ProductController extends Controller
         $category     = Category::all();
         $tag          = Tag::all();
 
-        return view('admin.product.update_product', compact('product', 'category', 'tag' , 'productImage' , 'size' , 'smell'));
+        return view('admin.product.update_product', compact('product', 'category', 'tag', 'productImage', 'size', 'smell'));
     }
 
     public function update_product_confirm(Request $request, $id)
@@ -145,13 +144,13 @@ class ProductController extends Controller
     public function view_product($id)
     {
         $product      = Product::find($id);
-        $productImage = ProductImage::where('product_id' , '=' , $id)->get();
-        $size         = Size::where('product_id' , '=' , $id)->paginate(10);
-        $smell        = Smell::where('product_id' , '=' , $id)->paginate(10);
+        $productImage = ProductImage::where('product_id', '=', $id)->get();
+        $size         = Size::where('product_id', '=', $id)->paginate(10);
+        $smell        = Smell::where('product_id', '=', $id)->paginate(10);
         $category     = Category::all();
         $tag          = Tag::all();
 
-        return view('admin.product.view_product' , compact('product' , 'productImage' , 'size' , 'smell' , 'category' , 'tag'));
+        return view('admin.product.view_product', compact('product', 'productImage', 'size', 'smell', 'category', 'tag'));
     }
 
 
@@ -160,21 +159,9 @@ class ProductController extends Controller
 
         $query = $request->get('query');
 
-        $product = Product::where('name', 'Like', "%$query%")
-            // ->orWhere('category', 'Like', "%$query%")
-            // ->orWhere('tag', 'Like', "%$query%")
-            ->paginate(10);
+        $product = Product::where('name', 'Like', "%$query%")->get();
 
-            $category     = Category::all();
-            $tag          = Tag::all();
-            $products     = Product::all();
 
-             // Group images by product_id and retrieve the first image for each product
-          $productImages = ProductImage::all()->groupBy('product_id')->map(function ($images) {
-            return $images->first();
-          });
-
-            return view('admin.product.show_product', compact('product', 'category', 'tag' , 'productImages' , 'products'));
-        }
-
+        return response()->json($product);
+    }
 }

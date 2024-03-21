@@ -45,7 +45,7 @@
                                             <div class="input-group mb-3 w-75">
 
                                                 <input type="text" name="query" class="form-control"
-                                                    placeholder="example@gmail.com" style="height: 41px ">
+                                                    placeholder="example@gmail.com" style="height: 41px " id="searchInput">
 
                                                 <button class="btn btn-dark" type="submit">
                                                     <i class="bi bi-search"></i>
@@ -120,13 +120,13 @@
                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
                                     Tag
-                                </th>
+                                  </th>
 
                                             <th class="text-secondary opacity-7"></th>
                                             <th class="text-secondary opacity-7"></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="searchResults">
                                         @forelse ($product as $data)
                                             <tr class="text-center">
                                                 <td>
@@ -143,9 +143,9 @@
 
                                                 <td>
                                                     @if ($data->description)
-                                                        <i class="fa fa-check text-success"></i> <!-- Replace with the appropriate checked logo icon -->
+                                                        <i class="fa fa-check text-success"></i>
                                                     @else
-                                                        <i class="fa fa-times text-danger"></i> <!-- Replace with the appropriate X icon -->
+                                                        <i class="fa fa-times text-danger"></i>
                                                     @endif
                                                 </td>
                                                 <td>
@@ -173,7 +173,8 @@
                                                         class="text-primary font-weight-bold text-xs"
                                                         data-toggle="tooltip">
                                                         View
-                                                        <i class="bi bi-eye"></i>                                                    </a>
+                                                        <i class="bi bi-eye"></i>
+                                                    </a>
                                                 </td>
 
 
@@ -217,7 +218,34 @@
         </div>
     </main>
 
+
     @include('admin.script')
+
+    <script>
+        $(document).ready(function() {
+    $('#searchInput').on('keyup', function() {
+      var searchInput = $('#searchInput').val();
+
+      $.ajax({
+        url: '{{ url('admin/search_product') }}',
+        type : 'get',
+        data: {
+         query:searchInput
+        },
+        success: function (product) {
+
+            console.log(product);
+                $('#searchResults').html(product);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+
+              });
+          });
+      });
+      </script>
+
 
 </body>
 
