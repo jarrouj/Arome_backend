@@ -117,7 +117,7 @@
                                                                 <label class="form-check-label" for="check-all">All Products</label>
 
                                                                 <input class="form-check-input" type="checkbox" id="check-all"
-                                                                    value="0" name="all_products" onchange="toggleAllProducts(this)" >
+                                                                    value="1" name="all_products" onchange="toggleAllProducts(this)" {{ $offer->all_products == 1 ? 'checked ' : ''}} >
                                                             </div>
                                                         </th>
                                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -138,7 +138,8 @@
                                                             <!-- Checkbox Column -->
                                                             <td>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input checkbox" type="checkbox" name="product_id[]" value="{{ $data->id }}" {{ in_array($data->id, $productIds) ? 'checked' : '' }}>
+                                                                    <input class="form-check-input checkbox" type="checkbox" name="product_id[]" value="{{ $data->id }}" {{ in_array($data->id, $productIds) ? 'checked' : '' }}
+                                                                    {{ $offer->all_products == 1 ? 'checked disabled' : ''}}>
                                                                     <label class="form-check-label" for="check-{{ $data->id }}"></label>
                                                                 </div>
                                                             </td>

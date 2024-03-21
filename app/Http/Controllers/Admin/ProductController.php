@@ -155,5 +155,26 @@ class ProductController extends Controller
     }
 
 
-    
+    public function search_product(Request $request)
+    {
+
+        $query = $request->get('query');
+
+        $product = Product::where('name', 'Like', "%$query%")
+            // ->orWhere('category', 'Like', "%$query%")
+            // ->orWhere('tag', 'Like', "%$query%")
+            ->paginate(10);
+
+            $category     = Category::all();
+            $tag          = Tag::all();
+            $products     = Product::all();
+
+             // Group images by product_id and retrieve the first image for each product
+          $productImages = ProductImage::all()->groupBy('product_id')->map(function ($images) {
+            return $images->first();
+          });
+
+            return view('admin.product.show_product', compact('product', 'category', 'tag' , 'productImages' , 'products'));
+        }
+
 }

@@ -224,6 +224,7 @@ class offerController extends Controller
         // Update the existing offer
         $existingOffer->name = $request->name;
         $existingOffer->price = $request->price;
+        $existingOffer->all_products = $request->all_products;
         $existingOffer->active = $request->active;
 
         $img = $request->img;
@@ -248,6 +249,7 @@ class offerController extends Controller
             $newOffer->product_id = $newProductId;
             // Copy other attributes if necessary
             $newOffer->price = $existingOffer->price;
+            $newOffer->all_products = $existingOffer->all_products;
             $newOffer->active = $existingOffer->active;
             $newOffer->img = $existingOffer->img; // Copy image if necessary
             $newOffer->save();
@@ -282,7 +284,7 @@ class offerController extends Controller
 
         $products = [];
 
-        if ($offer->all_products !== 0) {
+        if ($offer->all_products !== 1) {
 
             // Fetch product IDs associated with the offer name
             $productIds = Offer::where('name', $offer->name)->pluck('product_id')->toArray();

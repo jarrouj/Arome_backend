@@ -20,7 +20,7 @@
                         <label for="exampleFormControlInput1" class="form-label">
                             Image
                         </label>
-                        <input type="file" name="img[]" class="form-control" required multiple>
+                        <input type="file" name="img[]" class="form-control" required multiple >
                     </div>
 
                     <div class="mb-3">

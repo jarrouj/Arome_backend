@@ -34,7 +34,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="d-block w-50 m-auto">
-                                    <form action="{{ url('/admin/search_user') }}" method="POST">
+                                    <form action="{{ url('/admin/search_product') }}" method="GET">
                                         @csrf
                                         <p for="" class="text-center form-label">Search Names, Emails or Phone
                                             Number
@@ -44,7 +44,7 @@
 
                                             <div class="input-group mb-3 w-75">
 
-                                                <input type="text" name="text" class="form-control"
+                                                <input type="text" name="query" class="form-control"
                                                     placeholder="example@gmail.com" style="height: 41px ">
 
                                                 <button class="btn btn-dark" type="submit">

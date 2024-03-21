@@ -49,6 +49,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/update_user_confirm/{id}', [UserController::class, 'update_user_confirm']);
     Route::get('/delete_user/{id}', [UserController::class, 'delete_user']);
 
+
     // {{ Social }}
     Route::get('/show_social',[SocialController::class,'show_social']);
     Route::post('/update_social_confirm/{id}',[SocialController::class,'update_social_confirm']);
@@ -115,6 +116,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/view_product/{id}' , [ProductController::class , 'view_product']);
     Route::post('/update_product_confirm/{id}' , [ProductController::class , 'update_product_confirm']);
     Route::get('/delete_product/{id}' , [ProductController::class , 'delete_product']);
+    Route::get('/search_product' , [ProductController::class , 'search_product']);
+
 
     // {{ Product Image }}
     Route::post('/add_product_image' , [ProductImageController::class , 'add_product_image']);
