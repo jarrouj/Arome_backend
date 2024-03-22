@@ -161,27 +161,27 @@
                                                 <td>
                                                     <div class="d-flex">
                                                         @if ($data->confirm === 0)
-                                                            <form action="{{ url('/update-status', ['id' => $data->id]) }}" method="POST">
+                                                            <form action="{{ route('update-status', ['id' => $data->id]) }}" method="POST">
                                                                 @csrf
                                                                 <button type="submit" name="conf" value="0" class="btn btn-danger btn-sm" disabled>
                                                                     <i class="bi bi-x" style="font-size: 1rem;"></i>
                                                                 </button>
                                                             </form>
                                                         @elseif ($data->confirm === 1)
-                                                            <form action="{{ url('/update-status', ['id' => $data->id]) }}" method="POST">
+                                                            <form action="{{ route('update-status', ['id' => $data->id]) }}" method="POST">
                                                                 @csrf
                                                                 <button type="submit" name="conf" value="1" class="btn btn-success btn-sm me-1" disabled>
                                                                     <i class="bi bi-check" style="font-size: 1rem;"></i>
                                                                 </button>
                                                             </form>
                                                         @else
-                                                            <form action="{{ url('/update-status', ['id' => $data->id]) }}" method="POST">
+                                                            <form action="{{ route('update-status', ['id' => $data->id]) }}" method="POST">
                                                                 @csrf
                                                                 <button type="submit" name="conf" value="1" class="btn btn-success btn-sm me-1">
                                                                     <i class="bi bi-check" style="font-size: 1rem;"></i>
                                                                 </button>
                                                             </form>
-                                                            <form action="{{ url('/update-status', ['id' => $data->id]) }}" method="POST">
+                                                            <form action="{{ route('update-status', ['id' => $data->id]) }}" method="POST">
                                                                 @csrf
                                                                 <button type="submit" name="conf" value="0" class="btn btn-danger btn-sm">
                                                                     <i class="bi bi-x" style="font-size: 1rem;"></i>

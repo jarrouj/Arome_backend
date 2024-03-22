@@ -158,7 +158,7 @@ class OrderController extends Controller
 
     public function get_userInfo()
     {
-        $userInfo = session()->get('userinfo', []);
+        $userInfo = session()->get('order.userinfo', []);
 
         return response()->json(['user_data' => $userInfo]);
     }

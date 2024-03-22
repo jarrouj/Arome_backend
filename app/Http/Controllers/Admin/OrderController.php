@@ -106,7 +106,8 @@ class OrderController extends Controller
             else // If user is not logged in
             {
                 $UserInfo = session()->get('order.userinfo', []);
-
+//                 Session::forget('order.userinfo');
+// dd($UserInfo);
                 // dd($UserInfo);
 
                 $points = isset($UserInfo['points']) ? $UserInfo['points'] :80;
@@ -122,7 +123,7 @@ class OrderController extends Controller
                 }
                 $UserInfo['points'] = $points;
 
-                session()->put('userinfo', $UserInfo);
+                session()->put('order.userinfo', $UserInfo);
 
             }
             return redirect()->back()->with('message', $message);

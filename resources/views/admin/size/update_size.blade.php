@@ -1,16 +1,16 @@
-<a type="button"   class="text-primary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $data->id }}">
+<a type="button"   class="text-primary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#exampleModalSize{{ $data->id }}">
 
     Edit
     <i class="bi bi-pencil"></i>
 
 </a>
 
-<div class="modal fade" id="exampleModal{{ $data->id }}" tabindex="-1"
-    aria-labelledby="exampleModal{{ $data->id }}Label{{ $data->id }}" aria-hidden="true">
+<div class="modal fade" id="exampleModalSize{{ $data->id }}" tabindex="-1"
+    aria-labelledby="exampleModalSize{{ $data->id }}Label{{ $data->id }}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModal{{ $data->id }}Label{{ $data->id }}">
+                <h5 class="modal-title" id="exampleModalSize{{ $data->id }}Label{{ $data->id }}">
                     Size
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

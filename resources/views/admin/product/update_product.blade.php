@@ -96,110 +96,7 @@
                                 </div>
 
                             </div>
-                             {{-- Size --}}
-                            <div class="mt-4 row">
 
-                                <div class="col-12">
-                                    <label for="exampleInputPassword1" class="form-label">
-                                       Size
-                                    </label>
-
-
-                                    <div class="mb-3">
-                                        <div class="card-body px-0 pt-0 pb-2">
-                                            <div class="table-responsive p-0">
-                                                <table class="table align-items-center mb-0">
-                                                    <thead>
-                                                        <tr class="text-center">
-
-                                                            <th
-                                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-
-                                                                Size
-                                                            </th>
-
-                                                            <th
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-
-                                                            Price
-                                                        </th>
-
-                                                        <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-
-                                                        Quantity
-                                                    </th>
-
-                                                    <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-
-                                                    Points
-                                                </th>
-
-                                                            <th class="text-secondary opacity-7"></th>
-                                                            <th class="text-secondary opacity-7"></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @forelse ($size as $data)
-                                                            <tr class="text-center">
-
-                                                                <td>
-                                                                    <p class="text-xs font-weight-bold mb-0">
-                                                                        {{ $data->size }}
-                                                                    </p>
-                                                                </td>
-
-                                                                <td>
-                                                                    <p class="text-xs font-weight-bold mb-0">
-                                                                        {{ $data->price }}
-                                                                    </p>
-                                                                </td>
-
-                                                                <td>
-                                                                    <p class="text-xs font-weight-bold mb-0">
-                                                                        {{ $data->qty_tq }}
-                                                                    </p>
-                                                                </td>
-
-                                                                <td>
-                                                                    <p class="text-xs font-weight-bold mb-0">
-                                                                        {{ $data->points }}
-                                                                    </p>
-                                                                </td>
-
-                                                                <td class="align-middle">
-                                                                  @include('admin.size.update_size')
-                                                                </td>
-
-                                                                <td class="align-middle">
-                                                                    <a href="{{ url('admin/delete_size', $data->id) }}"
-                                                                        class="text-danger font-weight-bold text-xs"
-                                                                        data-toggle="tooltip" data-original-title="Edit size"
-                                                                        onclick="return confirm('Are you sure you want to delete this Size?')">
-                                                                        Delete
-                                                                        <i class="bi bi-trash"></i>
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-                                                        @empty
-                                                            <tr>
-                                                                <td colspan="16">
-                                                                    <p class="text-xs text-center text-danger font-weight-bold mb-0">
-                                                                        No Data !
-                                                                    </p>
-                                                                </td>
-                                                            </tr>
-                                                        @endforelse
-                                                    </tbody>
-                                                </table>
-                                                {{ $size->render('admin.pagination') }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
 
                           {{-- Smell --}}
                             <div class="mt-4 row">
@@ -334,6 +231,110 @@
 
 
 
+                                  {{-- Size --}}
+                            <div class="mt-4 row">
+
+                                <div class="col-12">
+                                    <label for="exampleInputPassword1" class="form-label">
+                                       Size
+                                    </label>
+
+
+                                    <div class="mb-3">
+                                        <div class="card-body px-0 pt-0 pb-2">
+                                            <div class="table-responsive p-0">
+                                                <table class="table align-items-center mb-0">
+                                                    <thead>
+                                                        <tr class="text-center">
+
+                                                            <th
+                                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                                                Size
+                                                            </th>
+
+                                                            <th
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                                            Price
+                                                        </th>
+
+                                                        <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                                        Quantity
+                                                    </th>
+
+                                                    <th
+                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                                    Points
+                                                </th>
+
+                                                            <th class="text-secondary opacity-7"></th>
+                                                            <th class="text-secondary opacity-7"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @forelse ($size as $data)
+                                                            <tr class="text-center">
+
+                                                                <td>
+                                                                    <p class="text-xs font-weight-bold mb-0">
+                                                                        {{ $data->size }}
+                                                                    </p>
+                                                                </td>
+
+                                                                <td>
+                                                                    <p class="text-xs font-weight-bold mb-0">
+                                                                        {{ $data->price }}
+                                                                    </p>
+                                                                </td>
+
+                                                                <td>
+                                                                    <p class="text-xs font-weight-bold mb-0">
+                                                                        {{ $data->qty_tq }}
+                                                                    </p>
+                                                                </td>
+
+                                                                <td>
+                                                                    <p class="text-xs font-weight-bold mb-0">
+                                                                        {{ $data->points }}
+                                                                    </p>
+                                                                </td>
+
+                                                                <td class="align-middle">
+                                                                  @include('admin.size.update_size')
+                                                                </td>
+
+                                                                <td class="align-middle">
+                                                                    <a href="{{ url('admin/delete_size', $data->id) }}"
+                                                                        class="text-danger font-weight-bold text-xs"
+                                                                        data-toggle="tooltip" data-original-title="Edit size"
+                                                                        onclick="return confirm('Are you sure you want to delete this Size?')">
+                                                                        Delete
+                                                                        <i class="bi bi-trash"></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        @empty
+                                                            <tr>
+                                                                <td colspan="16">
+                                                                    <p class="text-xs text-center text-danger font-weight-bold mb-0">
+                                                                        No Data !
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+                                                        @endforelse
+                                                    </tbody>
+                                                </table>
+                                                {{ $size->render('admin.pagination') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
 
                                 <div class="d-flex justify-content-center">
                                     <button type="submit" class="btn mt-3 btn-dark">Submit</button>
