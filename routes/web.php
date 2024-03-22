@@ -154,7 +154,6 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/view_order/{id}' , [OrderController::class , 'view_order']);
 
 
-
     // {{ Offer }}
     Route::get('/show_offer', [OfferController::class,'show_offer']);
     Route::get('/add_offer', [OfferController::class, 'add_offer']);
@@ -187,4 +186,4 @@ Route::get('/api/show_cart', [FrontEndCartController::class, 'show_cart']);
 Route::post('/register_user',[RegisterController::class,'register'])->name('register');
 
 
-Route::post('/update-status/{id}',[OrderController::class,'update_status'])->name('update-status');
+Route::post('/update-status/{id}',[OrderController::class,'update_status'])->middleware('web');

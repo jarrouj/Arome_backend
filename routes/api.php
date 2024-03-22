@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontEnd\CartController;
 use App\Http\Controllers\FrontEnd\OrderController;
 use App\Http\Controllers\FrontEnd\TransactionController;
+use App\Http\Controllers\Admin\OrderController as BackOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,4 @@ Route::get('/add_transaction', [TransactionController::class, 'add_transaction']
 
 //{{ User }}
 Route::get('/show_userinfo', [OrderController::class, 'get_userInfo'])->middleware('web');
+

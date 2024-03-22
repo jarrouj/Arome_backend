@@ -50,7 +50,8 @@ class OrderController extends Controller
                 'f_name' => $request->f_name,
                 'l_name' => $request->l_name,
                 'email'  => $request->email,
-                'phone'  => $request->phone
+                'phone'  => $request->phone,
+                'points' => 0
             ]);
 
             // Create a new order instance
@@ -76,6 +77,7 @@ class OrderController extends Controller
                 $productId = $cartItem['product_id'];
                 $sizeId = $cartItem['size'];
                 $qty = $cartItem['quantity'];
+
 
                 // Retrieve the size information
                 $size = Size::find($sizeId);
@@ -156,7 +158,7 @@ class OrderController extends Controller
 
     public function get_userInfo()
     {
-        $userInfo = session()->get('order.userinfo', []);
+        $userInfo = session()->get('userinfo', []);
 
         return response()->json(['user_data' => $userInfo]);
     }

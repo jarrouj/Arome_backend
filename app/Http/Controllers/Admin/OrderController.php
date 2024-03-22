@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Size;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Transaction;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use App\Models\OrderProducts;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -69,6 +71,60 @@ class OrderController extends Controller
 
             $message = $request->conf == 1 ? 'Order Confirmed' : 'Order Canceled';
 
+            if($request->conf == 1) {
+
+                   $transaction = new Transaction();
+
+                   $transaction->user_id = $order->user_id;
+                   $transaction->f_name  = $order->f_name;
+                   $transaction->l_name  = $order->l_name;
+                   $transaction->email   = $order->email;
+                   $transaction->phone   = $order->phone;
+                   $transaction->addsub  = $order->method; //if method= 1 then cash =>we add the pts else the client paid with points then we remove points
+                   $transaction->points += $order->total_pts;
+
+
+                   $transaction->save();
+            }
+
+            if($order->user_id != null)// Update the user points in the user table
+            {
+                $user = User::find($order->user_id);
+                if($order->method == 1) // if the user paid with cash we add to his points
+                {
+                    $user->points += $order->total_pts;
+
+                }
+                else if($order->method == 2) // if the user paid with points we reduce from his points
+                {
+                    $user->points -= $order->total_pts;
+                }
+
+                $user->save();
+
+            }
+            else // If user is not logged in
+            {
+                $UserInfo = session()->get('order.userinfo', []);
+
+                // dd($UserInfo);
+
+                $points = isset($UserInfo['points']) ? $UserInfo['points'] :80;
+
+                if ($order->method == 1) {
+                    // If the user paid with cash, add points to the session
+                    // dd($order->total_pts);
+
+                    $points += $transaction->points;
+                } else if ($order->method == 2) {
+                    // If the user paid with points, subtract points from the session
+                    $points -= $transaction->points;
+                }
+                $UserInfo['points'] = $points;
+
+                session()->put('userinfo', $UserInfo);
+
+            }
             return redirect()->back()->with('message', $message);
         } else {
             return response()->json(['fail' => false, 'message' => 'Confirmation cannot be updated']);
@@ -77,7 +133,7 @@ class OrderController extends Controller
 
     public function view_order($id)
     {
-        // Retrieve the order details
+
         $order         = Order::find($id);
         $orderProducts = OrderProducts::where('order_id', $order->id)->get();
         // $size          = Size::find('product_id' , '=' , $orderProducts->product_id)->get();
