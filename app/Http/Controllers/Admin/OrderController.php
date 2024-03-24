@@ -23,8 +23,6 @@ class OrderController extends Controller
         return view('admin.order.show_order' , compact('order' , 'users'));
     }
 
-
-
     public function update_order($id)
     {
         $order  = Order::find($id);
@@ -63,6 +61,7 @@ class OrderController extends Controller
     public function update_status(Request $request, $id)
     {
         $order = Order::find($id);
+
 
         if ($order->confirm === null) {
 
@@ -103,29 +102,28 @@ class OrderController extends Controller
                 $user->save();
 
             }
-            else // If user is not logged in
-            {
-                $UserInfo = session()->get('order.userinfo', []);
-//                 Session::forget('order.userinfo');
-// dd($UserInfo);
-                // dd($UserInfo);
+            // else // If user is not logged in
+            // {
 
-                $points = isset($UserInfo['points']) ? $UserInfo['points'] :80;
+            //     $UserInfo = session()->get('userData', []);
+            //     dd($UserInfo);
 
-                if ($order->method == 1) {
-                    // If the user paid with cash, add points to the session
-                    // dd($order->total_pts);
+            //     $points = isset($UserInfo['points']) ? $UserInfo['points'] :80;
 
-                    $points += $transaction->points;
-                } else if ($order->method == 2) {
-                    // If the user paid with points, subtract points from the session
-                    $points -= $transaction->points;
-                }
-                $UserInfo['points'] = $points;
+            //     if ($order->method == 1) {
+            //         // If the user paid with cash, add points to the session
+            //         // dd($order->total_pts);
 
-                session()->put('order.userinfo', $UserInfo);
+            //         $points += $transaction->points;
+            //     } else if ($order->method == 2) {
+            //         // If the user paid with points, subtract points from the session
+            //         $points -= $transaction->points;
+            //     }
+            //     $UserInfo['points'] = $points;
 
-            }
+            //     session()->put('order.userinfo', $UserInfo);
+
+            // }
             return redirect()->back()->with('message', $message);
         } else {
             return response()->json(['fail' => false, 'message' => 'Confirmation cannot be updated']);

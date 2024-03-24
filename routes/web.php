@@ -186,4 +186,4 @@ Route::get('/api/show_cart', [FrontEndCartController::class, 'show_cart']);
 Route::post('/register_user',[RegisterController::class,'register'])->name('register');
 
 
-Route::post('/api/update-status/{id}',[OrderController::class,'update_status'])->name('update-status')->middleware('web');
+Route::post('/update-status/{id}',[OrderController::class,'update_status'])->name('update-status')->middleware('web');

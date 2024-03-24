@@ -15,7 +15,7 @@
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ url('/admin/update_size/' . $data->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('/admin/update_size/' . $data->id) }}" method="POST" enctype="multipart/form-data" id="SizeForm">
                 @csrf
 
                 <div class="modal-body">
@@ -68,3 +68,10 @@
         </div>
     </div>
 </div>
+<script>
+    function submitInnerForm(event) {
+        event.stopPropagation(); // Prevent the outer form submission
+        // Handle inner form submission here
+        document.getElementById('SizeForm').submit();
+    }
+</script>

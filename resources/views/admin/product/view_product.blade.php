@@ -73,8 +73,20 @@
                         </div>
 
 
+                        <div class="mt-4 row justify-content-center">
+                            <div class="col-4"></div>
+                            <div class="col-4 col-md-2">
+                                <div class="mb-3 text-center">
+                                    <label for="exampleInputPassword1" class="form-label">
+                                        Images
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
                             {{-- Images --}}
                             <div class="container d-flex justify-content-center">
+
                                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="max-width: 400px;">
                                     <ol class="carousel-indicators">
                                         @foreach($productImage as $index => $image)

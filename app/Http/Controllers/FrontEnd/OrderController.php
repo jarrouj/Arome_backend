@@ -5,12 +5,13 @@ namespace App\Http\Controllers\FrontEnd;
 use App\Models\Cart;
 use App\Models\Size;
 use App\Models\User;
+use App\Models\Offer;
 use App\Models\Order;
+use App\Models\Promo;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\OrderProducts;
 use App\Http\Controllers\Controller;
-use App\Models\Offer;
-use App\Models\Promo;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -45,14 +46,7 @@ class OrderController extends Controller
                 $orderProduct->save();
             }
         } else {
-            // Store user data in session if not authenticated
-            session()->put('order.userinfo', [
-                'f_name' => $request->f_name,
-                'l_name' => $request->l_name,
-                'email'  => $request->email,
-                'phone'  => $request->phone,
-                'points' => 0
-            ]);
+
 
             // Create a new order instance
             $order = new Order();
@@ -150,16 +144,12 @@ class OrderController extends Controller
     }
 
 
+
+
     public function add_order(Request $request)
     {
         return $this->api_add_order($request);
     }
 
 
-    public function get_userInfo()
-    {
-        $userInfo = session()->get('order.userinfo', []);
-
-        return response()->json(['user_data' => $userInfo]);
-    }
 }

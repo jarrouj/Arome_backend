@@ -36,3 +36,74 @@
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{ asset('cms/js/argon-dashboard.min.js') }}"></script>
 <script src="{{ asset('cms/js/argon-dashboard.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var dropdownToggle = document.getElementById("websiteContentDropdown");
+        var dropdownMenu = document.getElementById("websiteContentCollapse");
+
+        dropdownToggle.addEventListener('click', function () {
+            var isOpen = dropdownMenu.classList.contains('show');
+            if (!isOpen) {
+                dropdownMenu.classList.add('show');
+            } else {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var dropdownToggle = document.getElementById("marketingDropdown");
+        var dropdownMenu = document.getElementById("marketingCollapse");
+
+        dropdownToggle.addEventListener('click', function () {
+            var isOpen = dropdownMenu.classList.contains('show');
+            if (!isOpen) {
+                dropdownMenu.classList.add('show');
+            } else {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var dropdownToggle = document.getElementById("settingDropdown");
+        var dropdownMenu = document.getElementById("settingCollapse");
+
+        dropdownToggle.addEventListener('click', function () {
+            var isOpen = dropdownMenu.classList.contains('show');
+            if (!isOpen) {
+                dropdownMenu.classList.add('show');
+            } else {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var dropdownToggle = document.getElementById("productDropdown");
+        var dropdownMenu = document.getElementById("productCollapse");
+
+        dropdownToggle.addEventListener('click', function () {
+            var isOpen = dropdownMenu.classList.contains('show');
+            if (!isOpen) {
+                dropdownMenu.classList.add('show');
+            } else {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+    });
+</script>
+
+<script>
+    function submitInnerForm(event) {
+        event.stopPropagation(); // Prevent the outer form submission
+        // Handle inner form submission here
+        document.getElementById('SizeForm').submit();
+    }
+</script>

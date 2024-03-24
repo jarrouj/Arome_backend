@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontEnd\CartController;
 use App\Http\Controllers\FrontEnd\OrderController;
 use App\Http\Controllers\FrontEnd\TransactionController;
-use App\Http\Controllers\Admin\OrderController as BackOrderController;
+use App\Http\Controllers\FrontEnd\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,5 +41,7 @@ Route::get('/add_transaction', [TransactionController::class, 'add_transaction']
 
 
 //{{ User }}
-Route::get('/show_userinfo', [OrderController::class, 'get_userInfo'])->middleware('web');
+Route::get('/show_userinfo', [UserController::class, 'get_userInfo'])->middleware('web');
 
+// Route::post('/update-status/{id}',[OrderController::class,'update_status'])->name('update-status')->middleware('web');
+Route::post('/add_user',[UserController::class,'add_user'])->middleware('web');
