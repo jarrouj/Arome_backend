@@ -66,6 +66,8 @@
             }
         });
     });
+
+
 </script>
 
 <script>
@@ -107,3 +109,4 @@
         document.getElementById('SizeForm').submit();
     }
 </script>
+

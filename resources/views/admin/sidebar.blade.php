@@ -34,7 +34,7 @@
                 </a>
             </li>
 
-            {{-- DropDown --}}
+            {{-- DropDown Website Content --}}
             <div class="dropdown  text-center rounded">
                 <div class="w-100 mb-3 dropdown-toggle fw-bold pt-2" id="websiteContentDropdown"
                     role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -85,7 +85,7 @@
                                 href="{{ url('/admin/show_privacy') }}">
                                 <div
                                     class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-kanban-fill text-success text-sm opacity-10"></i>
+                                    <i class="bi bi-lock-fill text-success text-sm opacity-10"></i>
                                 </div>
                                 <span class="nav-link-text ms-1">Privacy</span>
                             </a>
@@ -120,7 +120,7 @@
             {{-- Drop Down End --}}
 
 
-            {{-- DropDown --}}
+            {{-- DropDown Marketing --}}
             <div class="dropdown  text-center rounded mt-2">
                 <div class="w-100 mb-3 dropdown-toggle fw-bold  pt-2" id="marketingDropdown" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -135,7 +135,7 @@
                                 <div
                                     class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                     {{-- <i class="bi bi-collection text-danger text-sm opacity-10"></i> --}}
-                                    <i class="bi bi-motherboard-fill text-danger text-sm opacity-10"></i>
+                                    <i class="bi bi-bag-check-fill text-danger text-sm opacity-10"></i>
                                 </div>
                                 <span class="nav-link-text ms-1">Promo</span>
                             </a>
@@ -146,7 +146,7 @@
                                 href="{{ url('/admin/show_offer') }}">
                                 <div
                                     class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-kanban-fill text-success text-sm opacity-10"></i>
+                                    <i class="bi bi-bookmark-star-fill text-success text-sm opacity-10"></i>
                                 </div>
                                 <span class="nav-link-text ms-1">Offer</span>
                             </a>
@@ -157,7 +157,7 @@
             {{-- Drop Down End --}}
 
 
-            {{-- DropDown --}}
+            {{-- DropDown Product Content --}}
             <div class="dropdown text-center rounded mt-2">
                 <div class="w-100 mb-3 dropdown-toggle fw-bold  pt-2" id="productDropdown" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -172,7 +172,7 @@
                                 href="{{ url('/admin/show_collection') }}">
                                 <div
                                     class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-person-fill text-success text-sm opacity-10"></i>
+                                    <i class="bi bi-archive-fill text-success text-sm opacity-10"></i>
                                 </div>
                                 <span class="nav-link-text ms-1">Collections</span>
                             </a>
@@ -183,7 +183,7 @@
                                 href="{{ url('/admin/show_category') }}">
                                 <div
                                     class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-bookmarks-fill text-primary text-sm opacity-10"></i>
+                                    <i class="bi bi-boxes text-primary text-sm opacity-10"></i>
                                 </div>
                                 <span class="nav-link-text ms-1">Category</span>
                             </a>
@@ -199,7 +199,7 @@
                                 <div
                                     class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                     {{-- <i class="bi bi-collection text-danger text-sm opacity-10"></i> --}}
-                                    <i class="bi bi-motherboard-fill text-danger text-sm opacity-10"></i>
+                                    <i class="bi bi-box-seam-fill text-danger text-sm opacity-10"></i>
                                 </div>
                                 <span class="nav-link-text ms-1">Products</span>
                             </a>
@@ -217,7 +217,7 @@
                     href="{{ url('/admin/show_order') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-bookmarks-fill text-primary text-sm opacity-10"></i>
+                        <i class="bi bi-bag-fill text-primary text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Order</span>
                 </a>
@@ -229,7 +229,7 @@
                     href="{{ url('/admin/show_transaction') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-house-door-fill text-primary text-sm opacity-10"></i>
+                        <i class="bi bi-currency-exchange text-primary text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Transaction</span>
                 </a>
@@ -242,7 +242,7 @@
                     href="{{ url('/admin/show_tag') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-card-text text-secondary-emphasis text-sm opacity-10"></i>
+                        <i class="bi bi-tag-fill text-secondary-emphasis text-sm opacity-10"></i>
 
                     </div>
                     <span class="nav-link-text ms-1">Tag</span>
@@ -258,7 +258,7 @@
                     href="{{ url('/admin/show_subscriber') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-bullseye text-primary text-sm opacity-10"></i>
+                        <i class="bi bi-people-fill text-primary text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Subscriber</span>
                 </a>
