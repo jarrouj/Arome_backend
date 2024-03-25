@@ -34,12 +34,9 @@
 
                                             <div class="input-group mb-3 w-75">
 
-                                                <input type="text" name="text" class="form-control"
-                                                    placeholder="example@gmail.com" style="height: 41px ">
+                                                <input type="text" name="query" class="form-control"
+                                                    placeholder="example@gmail.com" style="height: 41px " id="searchInput">
 
-                                                <button class="btn btn-dark" type="submit">
-                                                    <i class="bi bi-search"></i>
-                                                </button>
 
                                             </div>
 
@@ -88,7 +85,7 @@
                                             <th class="text-secondary opacity-7"></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="tbody">
                                         @forelse ($user as $data)
                                             <tr>
                                                 <td>
@@ -101,8 +98,8 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0">
+                                                <td class="align-middle text-center text-sm">
+
                                                         @if ($data->usertype == 1)
                                                             <span
                                                                 class="badge badge-sm bg-gradient-success">Admin</span>
@@ -110,7 +107,7 @@
                                                             <span
                                                                 class="badge badge-sm bg-gradient-secondary">Customer</span>
                                                         @endif
-                                                    </p>
+
                                                 </td>
                                                 <td class="align-middle text-center text-sm">
                                                     @if (Cache::has('user-is-online-' . $data->id))
@@ -175,6 +172,72 @@
     </main>
 
     @include('admin.script')
+
+
+    <script>
+        $(document).ready(function() {
+            $('#searchInput').on('keyup', function() {
+                var searchInput = $('#searchInput').val();
+
+                $.ajax({
+                    url: '{{ url('admin/search_user') }}',
+                    type: 'get',
+                    data: {
+                        query: searchInput
+                    },
+                    success: function(response) {
+                        var usersHtml = '';
+                        response.forEach(function(user) {
+                            var userType = user.usertype == 1 ? 'Admin' : 'Customer';
+                            var onlineStatus = user.online ? 'Online' : 'Offline';
+
+                            usersHtml += `
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">${user.f_name} ${user.l_name}</h6>
+                                                <p class="text-xs text-secondary mb-0">${user.email}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm ${user.usertype == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary'}">${userType}</span>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm ${user.online ? 'bg-gradient-success' : 'text-secondary'}">${onlineStatus}</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">${user.address}</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">${user.points}</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">${user.created_at}</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">${user.last_seen}</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="{{ url('admin/update_user') }}/${user.id}" class="text-success font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Edit <i class="bi bi-pencil"></i></a>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="{{ url('admin/delete_user') }}/${user.id}" class="text-danger font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete user" onclick="return confirm('Are you sure you want to delete this User?')">Delete <i class="bi bi-trash"></i></a>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+                        $('tbody').html(usersHtml);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+
 
 </body>
 

@@ -48,6 +48,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/update_user/{id}', [UserController::class, 'update_user']);
     Route::post('/update_user_confirm/{id}', [UserController::class, 'update_user_confirm']);
     Route::get('/delete_user/{id}', [UserController::class, 'delete_user']);
+    Route::get('/search_user', [UserController::class, 'search_user']);
 
 
     // {{ Social }}
@@ -152,6 +153,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/update_order_confirm/{id}' , [OrderController::class , 'update_order_confirm']);
     Route::get('/delete_order/{id}' , [OrderController::class , 'delete_order']);
     Route::get('/view_order/{id}' , [OrderController::class , 'view_order']);
+    Route::get('/search_order' , [OrderController::class , 'search_order']);
 
 
     // {{ Offer }}
@@ -162,6 +164,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/update_offer_confirm/{id}', [OfferController::class, 'update_offer_confirm']);
     Route::get('/delete_offer/{id}', [OfferController::class, 'delete_offer']);
     Route::get('/view_offer/{id}', [OfferController::class,'view_offer']);
+    Route::get('/search_product_offer' , [offerController::class , 'search_product_offer']);
+    Route::get('/search_offer' , [offerController::class , 'search_offer']);
 
     // {{ General }}
     Route::get('/show_general' , [GeneralController::class , 'show_general']);

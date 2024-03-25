@@ -45,4 +45,15 @@ class UserController extends Controller
 
         return redirect()->back()->with('message', 'User Deleted');
     }
+
+    public function search_user(Request $request)
+    {
+        $query = $request->get('query');
+
+        $user = User::where('f_name', 'like', '%' . $query . '%')
+            ->orWhere('l_name', 'like', '%' . $query . '%')
+            ->orWhere('email', 'like', '%' . $query . '%')->get();
+
+        return response()->json($user);
+    }
 }

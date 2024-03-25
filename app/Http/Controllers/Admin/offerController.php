@@ -117,67 +117,13 @@ class offerController extends Controller
             return $images->first();
         });
 
-        return view('admin.offer.update_offer', compact('products', 'productImages', 'category', 'offer', 'productIds'));
+        $selectedProductIds = [];
+
+        return view('admin.offer.update_offer', compact('products', 'productImages', 'category', 'offer', 'productIds', 'selectedProductIds'));
     }
 
 
 
-
-
-
-    // public function update_offer_confirm(Request $request, $id)
-    // {
-    //     // Retrieve the existing offer
-    //     $existingOffer = Offer::find($id);
-
-    //     // Retrieve offers with the same name
-    //     $offersWithSameName = Offer::where('name', $existingOffer->name)->get();
-
-    //     foreach ($offersWithSameName as $offerWithSameName) {
-    //         // Retrieve existing product ID for the current offer with the same name
-    //         $existingProductId = $offerWithSameName->product_id;
-
-    //         // Check if the existing product ID is not present in the requested product IDs
-    //         if (!in_array($existingProductId, $request->product_id)) {
-    //             // Delete the offer if it has a missing product ID
-    //             $offerWithSameName->delete();
-    //         }
-    //     }
-
-    //     // Update the existing offer
-    //     $existingOffer->name = $request->name;
-    //     $existingOffer->price = $request->price;
-    //     $existingOffer->active = $request->active;
-
-    //     $img = $request->img;
-    //     if ($img) {
-    //         $imgname = Str::random(20) . '.' . $img->getClientOriginalExtension();
-    //         // Save the original image
-    //         $request->img->move('offer', $imgname);
-    //         // Change the image quality using Intervention Image
-    //         $img = Image::make(public_path('offer/' . $imgname));
-    //         $img->encode($img->extension, 10)->save(public_path('offer/' . $imgname));
-    //         $existingOffer->img = $imgname;
-    //     }
-
-    //     $existingOffer->save();
-
-    //     // Add new offers with the same name for new product IDs
-    //     $existingProductId = $existingOffer->product_id; // Update the existing product ID
-    //     $newProductIds = array_diff($request->product_id, [$existingProductId]);
-    //     foreach ($newProductIds as $newProductId) {
-    //         $newOffer = new Offer();
-    //         $newOffer->name = $existingOffer->name;
-    //         $newOffer->product_id = $newProductId;
-    //         // Copy other attributes if necessary
-    //         $newOffer->price = $existingOffer->price;
-    //         $newOffer->active = $existingOffer->active;
-    //         $newOffer->img = $existingOffer->img; // Copy image if necessary
-    //         $newOffer->save();
-    //     }
-
-    //     return redirect('/admin/show_offer')->with('success', 'Offer updated');
-    // }
 
     public function update_offer_confirm(Request $request, $id)
     {
@@ -298,5 +244,25 @@ class offerController extends Controller
         // dd($products);
 
         return view('admin.offer.view_offer', compact('offer', 'products', 'productImages', 'category'));
+    }
+
+    public function search_product_offer(Request $request)
+    {
+        $query = $request->get('query');
+
+        $offerProducts = Product::where('name' , 'like' , "%$query%")->get();
+
+        return response()->json($offerProducts);
+
+    }
+
+    public function search_offer(Request $request)
+    {
+        $query = $request->get('query');
+
+        $offers = Offer::where('name' , 'like' , "%$query%")->get();
+
+        return response()->json($offers);
+
     }
 }

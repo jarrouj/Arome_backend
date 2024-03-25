@@ -159,6 +159,20 @@ class OrderController extends Controller
         return view('admin.order.view_order', compact('order', 'orderProducts', 'productImages' ));
     }
 
+    public function search_order(Request $request)
+    {
+        $query = $request->get('query');
+
+        $order = Order::where('id' , 'like' , "%$query%")
+                       ->orWhere('email' , 'like' , "%$query%")
+                       ->orWhere('phone' , 'like' , "%$query%")
+                       ->orWhere('f_name' , 'like' , "%$query%")
+                       ->orWhere('l_name' , 'like' , "%$query%")
+                       ->get();
+
+        return response()->json($order);
+
+    }
 
 
 }

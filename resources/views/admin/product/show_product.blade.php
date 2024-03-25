@@ -45,7 +45,8 @@
                                             <div class="input-group mb-3 w-75">
 
                                                 <input type="text" name="query" class="form-control"
-                                                    placeholder="example@gmail.com" style="height: 41px " id="searchInput">
+                                                    placeholder="example@gmail.com" style="height: 41px "
+                                                    id="searchInput">
 
                                                 <button class="btn btn-dark" type="submit">
                                                     <i class="bi bi-search"></i>
@@ -78,11 +79,11 @@
                             </div>
                             {{-- Add Smell Button --}}
                             <div class="col-4">
-                                        <div class="d-flex justify-content-center">
+                                <div class="d-flex justify-content-center">
 
-                                            @include('admin.smell.add_smell')
+                                    @include('admin.smell.add_smell')
 
-                                        </div>
+                                </div>
                             </div>
                         </div>
 
@@ -105,22 +106,22 @@
                                             </th>
 
                                             <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
-                                            Description
-                                        </th>
+                                                Description
+                                            </th>
 
-                                        <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
-                                        Category
-                                    </th>
+                                                Category
+                                            </th>
 
-                                    <th
-                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
-                                    Tag
-                                  </th>
+                                                Tag
+                                            </th>
 
                                             <th class="text-secondary opacity-7"></th>
                                             <th class="text-secondary opacity-7"></th>
@@ -130,9 +131,10 @@
                                         @forelse ($product as $data)
                                             <tr class="text-center">
                                                 <td>
-                                                    @if(isset($productImages[$data->id]))
-                                                    <img src="{{ asset('productimage/' . $productImages[$data->id]->img) }}" alt="Product Image" width="60px">
-                                                @endif
+                                                    @if (isset($productImages[$data->id]))
+                                                        <img src="{{ asset('productimage/' . $productImages[$data->id]->img) }}"
+                                                            alt="Product Image" width="60px">
+                                                    @endif
                                                 </td>
 
                                                 <td>
@@ -151,18 +153,19 @@
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">
                                                         @foreach ($category as $categoryy)
-                                                        @if ($categoryy->id == $data->category_id)
-                                                            {{ $categoryy->name }}
-                                                        @endif
+                                                            @if ($categoryy->id == $data->category_id)
+                                                                {{ $categoryy->name }}
+                                                            @endif
                                                         @endforeach
                                                     </p>
                                                 </td>
 
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">
-                                                        @foreach($tag as $tagItem)
-                                                            @if($tagItem->id == $data->tag_id)
-                                                            <span class="badge rounded-pill text-bg-{{ $tagItem->color }}">{{ $tagItem->name }}</span>
+                                                        @foreach ($tag as $tagItem)
+                                                            @if ($tagItem->id == $data->tag_id)
+                                                                <span
+                                                                    class="badge rounded-pill text-bg-{{ $tagItem->color }}">{{ $tagItem->name }}</span>
                                                             @endif
                                                         @endforeach
                                                     </p>
@@ -217,19 +220,18 @@
             @include('admin.footer')
         </div>
     </main>
-    @php
-    $productImagesJson = json_encode($productImages);
 
-@endphp
+    @php
+        $productImagesJson = json_encode($productImages);
+
+    @endphp
 
     @include('admin.script')
 
     <script>
-
-
-var productImages = JSON.parse(@json($productImagesJson));
-var categories = @json($category);
-var tags = @json($tag);
+        var productImages = JSON.parse(@json($productImagesJson));
+        var categories = @json($category);
+        var tags = @json($tag);
 
         $(document).ready(function() {
             $('#searchInput').on('keyup', function() {
@@ -244,15 +246,17 @@ var tags = @json($tag);
                     success: function(response) {
                         var productsHtml = '';
                         response.forEach(function(product) {
-                            var category     = categories.find(cat => cat.id === product.category_id);
+                            var category = categories.find(cat => cat.id === product
+                                .category_id);
                             var categoryName = category.name;
 
 
 
-                            var tag     = tags.find(tag => tag.id === product.tag_id);
+                            var tag = tags.find(tag => tag.id === product.tag_id);
 
                             var tagsHtml = '';
-                            tagsHtml += `<span class="badge rounded-pill text-bg-${tag.color}">${tag.name}</span>`;
+                            tagsHtml +=
+                                `<span class="badge rounded-pill text-bg-${tag.color}">${tag.name}</span>`;
 
                             productsHtml += `
                                 <tr class="text-center">
