@@ -217,37 +217,91 @@
             @include('admin.footer')
         </div>
     </main>
+    @php
+    $productImagesJson = json_encode($productImages);
 
+@endphp
 
     @include('admin.script')
 
     <script>
 
+
+var productImages = JSON.parse(@json($productImagesJson));
+var categories = @json($category);
+var tags = @json($tag);
+
         $(document).ready(function() {
-     $('#searchInput').on('keyup', function() {
-      var searchInput = $('#searchInput').val();
+            $('#searchInput').on('keyup', function() {
+                var searchInput = $('#searchInput').val();
 
-      $.ajax({
-        url: '{{ url('admin/search_product') }}',
-        type : 'get',
-        data: {
-         query:searchInput
-        },
-        success: function (product) {
+                $.ajax({
+                    url: '{{ url('admin/search_product') }}',
+                    type: 'get',
+                    data: {
+                        query: searchInput
+                    },
+                    success: function(response) {
+                        var productsHtml = '';
+                        response.forEach(function(product) {
+                            var category     = categories.find(cat => cat.id === product.category_id);
+                            var categoryName = category.name;
 
-            console.log(product.html);
-                $('#searchResults').html(product.html);
-                },
-                error: function (error) {
-                    console.log(error);
-                }
 
-              });
-          });
-      });
-      </script>
 
-      
+                            var tag     = tags.find(tag => tag.id === product.tag_id);
+
+                            var tagsHtml = '';
+                            tagsHtml += `<span class="badge rounded-pill text-bg-${tag.color}">${tag.name}</span>`;
+
+                            productsHtml += `
+                                <tr class="text-center">
+                                    <td>
+                                        ${product.image ? '' : `<img src="{{ asset('productimage/') }}/${productImages[product.id].img}" alt="Product Image" width="60px">`}
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">${product.name}</p>
+                                    </td>
+                                    <td>
+                                        ${product.description ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times text-danger"></i>'}
+                                    </td>
+                                    <td>
+                                <p class="text-xs font-weight-bold mb-0">${categoryName}</p>
+                            </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">${tagsHtml}</p>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="{{ url('admin/view_product') }}/${product.id}" class="text-primary font-weight-bold text-xs" data-toggle="tooltip">
+                                            View
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="{{ url('admin/update_product') }}/${product.id}" class="text-success font-weight-bold text-xs" data-toggle="tooltip">
+                                            Update
+                                            <i class="bi bi-pen"></i>
+                                        </a>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="{{ url('admin/delete_product') }}/${product.id}" class="text-danger font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit product" onclick="return confirm('Are you sure you want to delete this product?')">
+                                            Delete
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+                        $('#searchResults').html(productsHtml);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+
 
 
 </body>
