@@ -222,8 +222,9 @@
     @include('admin.script')
 
     <script>
+
         $(document).ready(function() {
-    $('#searchInput').on('keyup', function() {
+     $('#searchInput').on('keyup', function() {
       var searchInput = $('#searchInput').val();
 
       $.ajax({
@@ -234,8 +235,8 @@
         },
         success: function (product) {
 
-            console.log(product);
-                $('#searchResults').html(product);
+            console.log(product.html);
+                $('#searchResults').html(product.html);
                 },
                 error: function (error) {
                     console.log(error);
@@ -245,6 +246,8 @@
           });
       });
       </script>
+
+      
 
 
 </body>
