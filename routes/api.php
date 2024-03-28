@@ -2,10 +2,11 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\FrontEnd\CartController;
+use App\Http\Controllers\FrontEnd\UserController;
 use App\Http\Controllers\FrontEnd\OrderController;
 use App\Http\Controllers\FrontEnd\TransactionController;
-use App\Http\Controllers\FrontEnd\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +22,6 @@ use App\Http\Controllers\FrontEnd\UserController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-// Route::post('/api/add_order', [OrderController::class, 'api_add_order']);
 
 
 
@@ -42,6 +41,32 @@ Route::get('/add_transaction', [TransactionController::class, 'add_transaction']
 
 //{{ User }}
 Route::get('/show_userinfo', [UserController::class, 'get_userInfo'])->middleware('web');
-
-// Route::post('/update-status/{id}',[OrderController::class,'update_status'])->name('update-status')->middleware('web');
 Route::post('/add_user',[UserController::class,'add_user'])->middleware('web');
+
+
+// {{ Api Routes}}
+
+Route::get('/get-about',[ApiController::class,'getAbout']);
+Route::get('/get-about-image',[ApiController::class,'getAboutImage']);
+Route::get('/get-about-point',[ApiController::class,'getAboutPoint']);
+Route::get('/get-general',[ApiController::class,'getGeneral']);
+Route::get('/get-category',[ApiController::class,'getCategory']);
+Route::get('/get-product',[ApiController::class,'getProduct']);
+Route::get('/get-product-image',[ApiController::class,'getProductImage']);
+Route::get('/get-social',[ApiController::class,'getSocial']);
+Route::get('/get-size',[ApiController::class,'getSize']);
+Route::get('/get-smell',[ApiController::class,'getSmell']);
+Route::get('/get-tag',[ApiController::class,'getTag']);
+Route::get('/get-promo',[ApiController::class,'getPromo']);
+Route::get('/get-offer',[ApiController::class,'getOffer']);
+Route::get('/get-cart',[ApiController::class,'getCart']);
+Route::get('/get-transaction',[ApiController::class,'getTransaction']);
+Route::get('/get-order',[ApiController::class,'getOrder']);
+Route::get('/get-privacy',[ApiController::class,'getPrivacy']);
+Route::get('/get-order-status',[ApiController::class,'getOrderStatus']);
+Route::get('/get-term',[ApiController::class,'getTerm']);
+Route::get('/get-collection',[ApiController::class,'getCollection']);
+Route::get('/get-landing',[ApiController::class,'getLanding']);
+
+
+

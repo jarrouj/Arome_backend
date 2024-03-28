@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CmsController extends Controller
 {
     public function dash()
     {
-        return view('admin.home');
+        $user =  User::latest()->paginate(5);
+        return view('admin.home' , compact('user'));
     }
 }

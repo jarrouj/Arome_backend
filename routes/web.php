@@ -154,6 +154,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/delete_order/{id}' , [OrderController::class , 'delete_order']);
     Route::get('/view_order/{id}' , [OrderController::class , 'view_order']);
     Route::get('/search_order' , [OrderController::class , 'search_order']);
+    Route::post('/update-status/{id}',[OrderController::class,'update_status'])->name('update-status');
 
 
     // {{ Offer }}
@@ -190,4 +191,3 @@ Route::get('/api/show_cart', [FrontEndCartController::class, 'show_cart']);
 Route::post('/register_user',[RegisterController::class,'register'])->name('register');
 
 
-Route::post('/update-status/{id}',[OrderController::class,'update_status'])->name('update-status')->middleware('web');

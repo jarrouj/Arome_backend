@@ -13,7 +13,7 @@
         @include('admin.navbar')
 
         <div class="container-fluid py-4">
-            {{--
+
             <div class="row">
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                     <div class="card">
@@ -50,7 +50,7 @@
                                     <div class="numbers">
                                         <p class="text-sm mb-0 text-uppercase font-weight-bold">Number of Vehicles</p>
                                         <h5 class="font-weight-bolder">
-                                            {{ $product }}
+                                            5
                                         </h5>
                                     </div>
                                 </div>
@@ -73,7 +73,7 @@
                                     <div class="numbers">
                                         <p class="text-sm mb-0 text-uppercase font-weight-bold">Number of Users</p>
                                         <h5 class="font-weight-bolder">
-                                            {{ $usern }}
+                                            admin
                                         </h5>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
                                         <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Subscribers
                                         </p>
                                         <h5 class="font-weight-bolder">
-                                            {{ $subs }}
+                                            3
                                         </h5>
                                     </div>
                                 </div>
@@ -144,7 +144,7 @@
                 <div class="col-lg-12 mb-lg-0 mb-4">
                     @include('admin.home-users')
                 </div>
-            </div> --}}
+            </div>
 
             @include('admin.footer')
         </div>
