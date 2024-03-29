@@ -110,3 +110,20 @@
     }
 </script>
 
+
+<script>
+    // Add event listeners to date fields
+    document.getElementById('from_date').addEventListener('change', checkFields);
+    document.getElementById('to_date').addEventListener('change', checkFields);
+
+    // Function to check if both fields are filled and submit form
+    function checkFields() {
+        var fromDate = document.getElementById('from_date').value;
+        var toDate = document.getElementById('to_date').value;
+
+        if (fromDate && toDate) {
+            document.getElementById('dateForm').submit();
+        }
+    }
+</script>
+

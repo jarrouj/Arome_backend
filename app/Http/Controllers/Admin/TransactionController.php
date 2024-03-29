@@ -10,7 +10,21 @@ class TransactionController extends Controller
 {
     public function show_transaction()
     {
-       $transaction = Transaction::latest()->paginate(10);
+
+        $Dates = session()->get('selected_date_range', []);
+
+        $startDate = $Dates[0] ?? null;
+        $endDate   = $Dates[1] ?? null;
+
+        if($startDate && $endDate)
+        {
+            $transaction = Transaction::whereBetween('created_at' , [$startDate , $endDate])
+                                        ->latest()->paginate(10);
+        }
+        else
+        {
+            $transaction = Transaction::latest()->paginate(10);
+        }
 
        return view('admin.transcation.show_transaction' , compact('transaction'));
     }
@@ -21,5 +35,5 @@ class TransactionController extends Controller
 
         return view('admin.transcation.view_transaction',compact('transaction'));
     }
-    
+
 }

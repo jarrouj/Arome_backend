@@ -17,10 +17,22 @@ class OrderController extends Controller
 {
     public function show_order()
     {
-        $order = Order::latest()->paginate(10);
+        $Dates = session()->get('selected_date_range', []);
+
+        $startDate = $Dates[0] ?? null;
+        $endDate   = $Dates[1] ?? null;
+
+        if ($startDate && $endDate) {
+
+            $order = Order::whereBetween('created_at', [$startDate, $endDate])->latest()->paginate(10);
+        } else {
+
+            $order = Order::latest()->paginate(10);
+        }
+
         $users = User::all();
 
-        return view('admin.order.show_order' , compact('order' , 'users'));
+        return view('admin.order.show_order', compact('order', 'users'));
     }
 
     public function update_order($id)
@@ -28,7 +40,7 @@ class OrderController extends Controller
         $order  = Order::find($id);
         $users  = User::all();
 
-        return view('admin.order.update_order' , compact('order' , 'users'));
+        return view('admin.order.update_order', compact('order', 'users'));
     }
 
     public function update_order_confirm(Request $request, $id)
@@ -55,7 +67,7 @@ class OrderController extends Controller
 
         $order->delete();
 
-        return redirect()->back()->with('message' , 'Order Deleted');
+        return redirect()->back()->with('message', 'Order Deleted');
     }
 
     public function update_status(Request $request, $id)
@@ -70,37 +82,34 @@ class OrderController extends Controller
 
             $message = $request->conf == 1 ? 'Order Confirmed' : 'Order Canceled';
 
-            if($request->conf == 1) {
+            if ($request->conf == 1) {
 
-                   $transaction = new Transaction();
+                $transaction = new Transaction();
 
-                   $transaction->user_id = $order->user_id;
-                   $transaction->f_name  = $order->f_name;
-                   $transaction->l_name  = $order->l_name;
-                   $transaction->email   = $order->email;
-                   $transaction->phone   = $order->phone;
-                   $transaction->addsub  = $order->method; //if method= 1 then cash =>we add the pts else the client paid with points then we remove points
-                   $transaction->points += $order->total_pts;
+                $transaction->user_id = $order->user_id;
+                $transaction->f_name  = $order->f_name;
+                $transaction->l_name  = $order->l_name;
+                $transaction->email   = $order->email;
+                $transaction->phone   = $order->phone;
+                $transaction->addsub  = $order->method; //if method= 1 then cash =>we add the pts else the client paid with points then we remove points
+                $transaction->points += $order->total_pts;
 
 
-                   $transaction->save();
+                $transaction->save();
             }
 
-            if($order->user_id != null)// Update the user points in the user table
+            if ($order->user_id != null) // Update the user points in the user table
             {
                 $user = User::find($order->user_id);
-                if($order->method == 1) // if the user paid with cash we add to his points
+                if ($order->method == 1) // if the user paid with cash we add to his points
                 {
                     $user->points += $order->total_pts;
-
-                }
-                else if($order->method == 2) // if the user paid with points we reduce from his points
+                } else if ($order->method == 2) // if the user paid with points we reduce from his points
                 {
                     $user->points -= $order->total_pts;
                 }
 
                 $user->save();
-
             }
             // else // If user is not logged in
             // {
@@ -156,23 +165,31 @@ class OrderController extends Controller
             }
         }
 
-        return view('admin.order.view_order', compact('order', 'orderProducts', 'productImages' ));
+        return view('admin.order.view_order', compact('order', 'orderProducts', 'productImages'));
     }
 
     public function search_order(Request $request)
     {
+        $Dates = session()->get('selected_date_range', []);
+
+        $startDate = $Dates[0] ?? null;
+        $endDate   = $Dates[1] ?? null;
+
         $query = $request->get('query');
 
-        $order = Order::where('id' , 'like' , "%$query%")
-                       ->orWhere('email' , 'like' , "%$query%")
-                       ->orWhere('phone' , 'like' , "%$query%")
-                       ->orWhere('f_name' , 'like' , "%$query%")
-                       ->orWhere('l_name' , 'like' , "%$query%")
-                       ->get();
+
+        if ($startDate && $endDate) {
+            $orders = Order::whereBetween('created_at', [$startDate, $endDate]);
+        }
+
+        $order = $orders->where(function ($queryBuilder) use ($query) {
+            $queryBuilder->where('id', 'like', "%$query%")
+                ->orWhere('email', 'like', "%$query%")
+                ->orWhere('phone', 'like', "%$query%")
+                ->orWhere('f_name', 'like', "%$query%")
+                ->orWhere('l_name', 'like', "%$query%");
+        })->get();
 
         return response()->json($order);
-
     }
-
-
 }

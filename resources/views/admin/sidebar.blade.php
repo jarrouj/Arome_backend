@@ -7,10 +7,25 @@
         <a class="" href="{{ url('/') }}">
             <img src="/logo/codergize.svg" width="250px" class="d-block mx-auto p-3" alt="main_logo">
         </a>
+
     </div>
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+        <form action="{{ route('filter_date') }}" method="GET" id="dateForm">
+            @csrf
+            <div class="input-group mb-3 w-90 ms-2">
+                <span class="input-group-text">From:</span>
+                <input type="date" class="form-control" id="from_date" name="start_date" value="{{ session('selected_date_range.0') ?? '' }}">
+            </div>
+            <div class="input-group mb-3 w-90 ms-2">
+                <span class="input-group-text">To:</span>
+                <input type="date" class="form-control"  id="to_date" name="end_date" value="{{ session('selected_date_range.1') ?? '' }}">
+            </div>
+        </form>
+
+
         <ul class="navbar-nav">
+
 
             <li class="nav-item">
                 <a class="nav-link rounded-3 {{ 'admin' == request()->path() ? 'main-color' : '' }}"
@@ -35,7 +50,7 @@
             </li>
 
             {{-- DropDown Website Content --}}
-            <div class="dropdown  text-center rounded">
+            <div class="dropdown  ms-3 rounded">
                 <div class="w-100 mb-3 dropdown-toggle fw-bold pt-2" id="websiteContentDropdown"
                     role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Website Content
@@ -121,7 +136,7 @@
 
 
             {{-- DropDown Marketing --}}
-            <div class="dropdown  text-center rounded mt-2">
+            <div class="dropdown  ms-3 rounded mt-2">
                 <div class="w-100 mb-3 dropdown-toggle fw-bold  pt-2" id="marketingDropdown" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     Marketing
@@ -158,7 +173,7 @@
 
 
             {{-- DropDown Product Content --}}
-            <div class="dropdown text-center rounded mt-2">
+            <div class="dropdown ms-3  rounded mt-2">
                 <div class="w-100 mb-3 dropdown-toggle fw-bold  pt-2" id="productDropdown" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     Product Content
@@ -265,7 +280,7 @@
             </li>
 
               {{-- DropDown --}}
-              <div class="dropdown  text-center rounded mt-2">
+              <div class="dropdown  ms-3 rounded mt-2">
                 <div class="w-100 mb-3 dropdown-toggle fw-bold  pt-2" id="settingDropdown" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     Settings

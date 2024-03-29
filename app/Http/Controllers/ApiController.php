@@ -22,6 +22,7 @@ use App\Models\About;
 use App\Models\Category;
 use App\Models\About_img;
 use App\Models\About_point;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller

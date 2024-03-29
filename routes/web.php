@@ -177,6 +177,9 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/show_transaction' , [TransactionController::class , 'show_transaction']);
 
 
+    // {{ Date }}
+
+    Route::get('/filter_date', [CmsController::class, 'filterDate'])->name('filter_date')->middleware('web');
 
 });
 
@@ -191,3 +194,4 @@ Route::get('/api/show_cart', [FrontEndCartController::class, 'show_cart']);
 Route::post('/register_user',[RegisterController::class,'register'])->name('register');
 
 
+Route::get('/get_filter_date', [CmsController::class, 'get_filter_date'])->middleware('web');
