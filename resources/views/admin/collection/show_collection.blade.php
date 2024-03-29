@@ -52,7 +52,7 @@
                                     <tbody>
                                         @forelse ($collection as $data)
                                             <tr class="text-center">
-                                                <td class="bg-primary">
+                                                <td >
                                                         <img src="/collection/{{ $data->img }}" async class="d-block m-auto" width="50px" alt="">
 
                                                 </td>
@@ -64,16 +64,15 @@
                                                     </p>
                                                 </td>
 
-                                              
+
                                                 <td class="align-middle">
                                                   @include('admin.collection.update_collection')
                                                 </td>
 
                                                 <td class="align-middle">
-                                                    <a href="{{ url('admin/delete_collection', $data->id) }}"
-                                                        class="text-danger font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit collection"
-                                                        onclick="return confirm('Are you sure you want to delete this collection?')">
+                                                    <a href="#" onclick="deleteCollection({{ $data->id }})"
+                                                       class="text-danger font-weight-bold text-xs"
+                                                       data-toggle="tooltip" data-original-title="Delete collection">
                                                         Delete
                                                         <i class="bi bi-trash"></i>
                                                     </a>

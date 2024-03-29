@@ -61,6 +61,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/add_subscriber',[SubscriberController::class,'add_subscriber']);
     Route::post('/update_subscriber/{id}',[SubscriberController::class,'update_subscriber']);
     Route::get('/delete_subscriber/{id}',[SubscriberController::class,'delete_subscriber']);
+    Route::post('/send-email', [SubscriberController::class, 'sendEmailToSubscribers'])->name('send.email');
+
 
     // {{ Promo }}
     Route::get('/show_promo' , [PromoController::class , 'show_promo']);
@@ -91,6 +93,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/add_collection' , [CollectionController::class , 'add_collection']);
     Route::post('/update_collection/{id}' , [CollectionController::class , 'update_collection']);
     Route::get('/delete_collection/{id}' , [CollectionController::class , 'delete_collection']);
+    Route::get('/delete_collection_with_associate/{id}' , [CollectionController::class , 'delete_collection_with_associate']);
 
     // {{ Landing }}
     Route::get('/show_landing' , [LandingController::class , 'show_landing']);
@@ -109,6 +112,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/add_category' , [CategoriesController::class , 'add_category']);
     Route::post('/update_category/{id}' , [CategoriesController::class , 'update_category']);
     Route::get('/delete_category/{id}' , [CategoriesController::class , 'delete_category']);
+    Route::get('/delete_category_with_products/{id}' , [CategoriesController::class , 'delete_category_with_products']);
 
     // {{ Product }}
     Route::get('/show_product' , [ProductController::class , 'show_product']);

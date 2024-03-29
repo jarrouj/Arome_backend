@@ -78,10 +78,9 @@
                                                 </td>
 
                                                 <td class="align-middle">
-                                                    <a href="{{ url('admin/delete_category', $data->id) }}"
-                                                        class="text-danger font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit category"
-                                                        onclick="return confirm('Are you sure you want to delete this category?')">
+                                                    <a href="#" onclick="deleteCategory({{ $data->id }})"
+                                                       class="text-danger font-weight-bold text-xs"
+                                                       data-toggle="tooltip" data-original-title="Delete category">
                                                         Delete
                                                         <i class="bi bi-trash"></i>
                                                     </a>

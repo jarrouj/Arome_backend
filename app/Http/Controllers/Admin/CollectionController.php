@@ -78,17 +78,32 @@ class CollectionController extends Controller
 
     }
 
+    public function delete_collection_with_associate($id)
+    {
+        $collection = Collection::find($id);
+
+        $categories = Category::where('collection_id', $id)->get();
+
+        foreach ($categories as $category) {
+            $products = Product::where('category_id', $category->id)->get();
+            foreach ($products as $product) {
+                $product->delete();
+            }
+            $category->delete();
+        }
+
+        $collection->delete();
+        return redirect()->back()->with('message' , 'Collection Deleted');
+    }
+
     public function delete_collection($id)
     {
         $collection = Collection::find($id);
-        $category   = Category::where('collection_id' , '=' , $id);
-        $product    = Product::where('category_id' , '=' , $category->id);
 
-        $product->delete();
-        $category->delete();
         $collection->delete();
 
-        return redirect()->back()->with('message' , 'Delete Collection');
+        return redirect()->back()->with('message' , 'Collection Deleted');
+
     }
 
 

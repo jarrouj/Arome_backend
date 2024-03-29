@@ -47,4 +47,25 @@ class SubscriberController extends Controller
         return redirect()->back()->with( 'message' , 'Subscriber Delete');
 
     }
+
+    // public function sendEmailToSubscribers(Request $request)
+    // {
+    //     // Validate the form inputs
+    //     $request->validate([
+    //         'title' => 'required|string|max:255',
+    //         'text' => 'required|string',
+    //     ]);
+
+    //     // Get all subscribers
+    //     $subscribers = Subscriber::all();
+
+    //     // Loop through each subscriber and send email
+    //     foreach ($subscribers as $subscriber) {
+    //         // Send email to subscriber
+    //         Mail::to($subscriber->email)->send(new YourEmailMailable($request->title, $request->text));
+    //     }
+
+    //     // Redirect back with success message
+    //     return back()->with('success', 'Emails sent successfully to all subscribers.');
+    // }
 }

@@ -127,3 +127,28 @@
     }
 </script>
 
+<script>
+    function deleteCollection(collectionId) {
+        if (confirm('Are you sure you want to delete this collection?')) {
+            var deleteWithAssociated = confirm('Do you want to delete associated categories and products as well?');
+            if (deleteWithAssociated) {
+                window.location.href = "{{ url('admin/delete_collection_with_associate') }}/" + collectionId;
+            } else {
+                window.location.href = "{{ url('admin/delete_collection') }}/" + collectionId;
+            }
+        }
+    }
+</script>
+
+<script>
+    function deleteCategory(categoryId) {
+        if (confirm('Are you sure you want to delete this category?')) {
+            var deleteProducts = confirm('Do you want to delete associated products as well?');
+            if (deleteProducts) {
+                window.location.href = "{{ url('admin/delete_category_with_products') }}/" + categoryId;
+            } else {
+                window.location.href = "{{ url('admin/delete_category') }}/" + categoryId;
+            }
+        }
+    }
+</script>

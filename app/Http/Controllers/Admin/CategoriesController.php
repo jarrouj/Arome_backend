@@ -42,17 +42,29 @@ class CategoriesController extends Controller
         return redirect()->back()->with('message' , 'Category Updated');
 
     }
-    
-    public function  delete_category($id)
+
+    public function delete_category($id)
     {
-
         $category = Category::find($id);
-        $product  = Product::where('category_id' , '=' , $id);
-
-        $product->delete();
         $category->delete();
 
-        return redirect()->back()->with('message' , 'Category Deleted');
+        return redirect()->back()->with('message', 'Category Deleted');
     }
+
+    public function delete_category_with_products($id)
+    {
+        $category = Category::find($id);
+
+        $products = Product::where('category_id', $id)->get();
+
+        foreach ($products as $product) {
+            $product->delete();
+        }
+
+        $category->delete();
+
+        return redirect()->back()->with('message', 'Category and associated products have been deleted successfully.');
+    }
+
 
 }
