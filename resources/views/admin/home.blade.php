@@ -206,6 +206,10 @@
                 </div>
             </div>
 
+            <div class="mt-5">
+                <canvas id="myChart"></canvas>
+              </div>
+
 
             {{-- <div class="row">
                 <div class="col-12 my-4">
@@ -245,7 +249,32 @@
         </div>
     </main>
 
+{{-- {{ Charts}} --}}
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June' , 'July' , 'August' ,
+         'September' , 'October' , 'November' , 'December'],
+        datasets: [{
+          label: 'Revenue',
+          data: {!! json_encode(array_values($revenue)) !!},
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
     @include('admin.script')
 
 

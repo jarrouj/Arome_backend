@@ -111,28 +111,7 @@ class OrderController extends Controller
 
                 $user->save();
             }
-            // else // If user is not logged in
-            // {
-
-            //     $UserInfo = session()->get('userData', []);
-            //     dd($UserInfo);
-
-            //     $points = isset($UserInfo['points']) ? $UserInfo['points'] :80;
-
-            //     if ($order->method == 1) {
-            //         // If the user paid with cash, add points to the session
-            //         // dd($order->total_pts);
-
-            //         $points += $transaction->points;
-            //     } else if ($order->method == 2) {
-            //         // If the user paid with points, subtract points from the session
-            //         $points -= $transaction->points;
-            //     }
-            //     $UserInfo['points'] = $points;
-
-            //     session()->put('order.userinfo', $UserInfo);
-
-            // }
+           
             return redirect()->back()->with('message', $message);
         } else {
             return response()->json(['fail' => false, 'message' => 'Confirmation cannot be updated']);

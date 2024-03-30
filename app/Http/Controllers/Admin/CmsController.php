@@ -52,6 +52,28 @@ class CmsController extends Controller
             }
         }
 
+        //{{ Rvenue Array }}
+
+        $revenue = [];
+
+if ($startDate && $endDate) {
+    $orders = Order::where('confirm', 1)
+        ->where('method', 1)
+        ->whereBetween('created_at', [$startDate, $endDate])
+        ->get();
+} else {
+    $orders = Order::where('confirm', 1)
+        ->where('method', 1)
+        ->get();
+}
+
+for ($month = 1; $month <= 12; $month++) {
+    $startDateOfMonth = date('Y-m-01', strtotime(date('Y-' . $month . '-01')));
+    $endDateOfMonth = date('Y-m-t', strtotime(date('Y-' . $month . '-01')));
+
+    $revenue[$month] = $orders->whereBetween('created_at', [$startDateOfMonth, $endDateOfMonth])->sum('total_usd');
+}
+
 
 
         return view('admin.home', compact('user' ,
@@ -61,7 +83,8 @@ class CmsController extends Controller
                                           'NumberOfOrdersNonConfirmed' ,
                                           'NumberOfActiveOffers' ,
                                           'NumberOfProducts' ,
-                                          'NumberOfSubscribers'
+                                          'NumberOfSubscribers',
+                                          'revenue'
                                         ));
     }
 
