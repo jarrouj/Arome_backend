@@ -84,7 +84,9 @@ for ($month = 1; $month <= 12; $month++) {
                                           'NumberOfActiveOffers' ,
                                           'NumberOfProducts' ,
                                           'NumberOfSubscribers',
-                                          'revenue'
+                                          'revenue',
+                                          'startDate',
+                                          'endDate'
                                         ));
     }
 

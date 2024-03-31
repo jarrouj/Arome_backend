@@ -16,7 +16,7 @@
 
             <div class="row">
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-8">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-8">
@@ -67,7 +67,7 @@
                 </div>
 
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-8">
@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-8">
@@ -115,14 +115,14 @@
 
             <div class="row mt-2">
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-8">
                                     <div class="numbers">
                                         <p class="text-sm mb-0 text-uppercase font-weight-bold">Revenue</p>
                                         <h5 class="font-weight-bolder">
-                                            {{ $Revenue }}
+                                            {{ $Revenue }}$
                                         </h5>
                                     </div>
                                 </div>
@@ -137,7 +137,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-8">
@@ -160,7 +160,7 @@
                 </div>
 
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-8">
@@ -182,7 +182,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-8">
@@ -253,28 +253,52 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
     const ctx = document.getElementById('myChart');
+    const monthLabels = {!! json_encode(array_keys($revenue)) !!};
+    const revenueData = {!! json_encode(array_values($revenue)) !!};
+
+    let labelsToShow = [];
+    let dataToShow = [];
+
+    // Check if startDate and endDate are available
+    if ({!! json_encode($startDate && $endDate) !!}) {
+        // Loop through monthLabels and include only the months within the date range
+        for (let i = 0; i < monthLabels.length; i++) {
+            const month = monthLabels[i];
+            if (month >= {!! json_encode(date('n', strtotime($startDate))) !!} && month <= {!! json_encode(date('n', strtotime($endDate))) !!}) {
+                labelsToShow.push(monthNames[month - 1]);
+                dataToShow.push(revenueData[i]);
+            }
+        }
+    } else {
+        // If startDate and endDate are not available, include all months
+        labelsToShow = monthLabels.map(month => monthNames[month - 1]);
+        dataToShow = revenueData;
+    }
 
     new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June' , 'July' , 'August' ,
-         'September' , 'October' , 'November' , 'December'],
-        datasets: [{
-          label: 'Revenue',
-          data: {!! json_encode(array_values($revenue)) !!},
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+        type: 'line',
+        data: {
+            labels: labelsToShow,
+            datasets: [{
+                label: 'Revenue',
+                data: dataToShow,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
         }
-      }
     });
-  </script>
+</script>
+
+
     @include('admin.script')
 
 
