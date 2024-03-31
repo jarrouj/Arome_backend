@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\FrontEnd;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use App\Models\Cart;
-use App\Models\Product;
 use App\Models\User;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -115,5 +116,54 @@ class CartController extends Controller
         }
 
     }
+
+//     public function deleteOldCartItems()
+// {
+//     // Get the current date and time
+//     $now = Carbon::now();
+
+//     // Calculate the date and time 10 days ago
+//     $tenDaysAgo = $now->subDays(10);
+
+//     // Check if the user is authenticated
+//     if (Auth::check()) {
+//         // If authenticated, delete the old items from the user's cart in the database
+//         Cart::where('user_id', Auth::user()->id)
+//             ->where('created_at', '<', $tenDaysAgo)
+//             ->delete();
+//     } else {
+//         // If user is not authenticated, remove the old items from the session cart
+//         $cartProductIds = session()->get('cart.products', []);
+
+//         // Filter out the old items
+//         $updatedCartProductIds = array_filter($cartProductIds, function ($item) use ($tenDaysAgo) {
+//             return Carbon::parse($item['created_at'])->greaterThanOrEqualTo($tenDaysAgo);
+//         });
+
+//         // Update the session with the filtered array
+//         session()->put('cart.products', $updatedCartProductIds);
+//     }
+// }
+
+public function deleteOldCartItems()
+{
+    $now = Carbon::now();
+
+    $oneMinuteAgo = $now->subMinutes(1);
+
+    if (Auth::check()) {
+        Cart::where('user_id', Auth::user()->id)
+            ->where('created_at', '<', $oneMinuteAgo)
+            ->delete();
+    } else {
+        $cartProductIds = session()->get('cart.products', []);
+
+        $updatedCartProductIds = array_filter($cartProductIds, function ($item) use ($oneMinuteAgo) {
+            return Carbon::parse($item['created_at'])->greaterThanOrEqualTo($oneMinuteAgo);
+        });
+
+        session()->put('cart.products', $updatedCartProductIds);
+    }
+}
 
 }
