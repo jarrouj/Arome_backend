@@ -138,7 +138,7 @@
                                                             <td>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input checkbox"
-                                                                        type="checkbox" name="product_id[]"
+                                                                        type="checkbox" name="product_id[]" id="product_id"
                                                                         value="{{ $data->id }}" {{ in_array($data->id,
                                                                     $productIds) ? 'checked' : '' }}
                                                                     {{ $offer->all_products == 1 ? 'checked disabled' :
@@ -220,7 +220,7 @@ $productImagesJson = json_encode($productImages);
 
 @endphp
 
-<script>
+{{-- <script>
     function toggleAllProducts(checkbox) {
         var productCheckboxes = document.querySelectorAll('.checkbox');
         productCheckboxes.forEach(function(checkbox) {
@@ -228,8 +228,40 @@ $productImagesJson = json_encode($productImages);
         });
     }
 </script>
+<script>
+    $(document).ready(function () {
+        $(document).on('change', '.checkbox', function () {
+            if ($(this).is(':checked')) {
+                var offerName = document.getElementById('name').value;
+                var offerPrice = document.getElementById('price').value;
+                var offerActive = document.getElementById('active').value;
+                var productId = $(this).val(); // Get product_id from the checkbox value
 
-@include('admin.script')
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/add-single-offer",
+                    data: {
+                        product_id: productId,
+                        name: offerName,
+                        price: offerPrice,
+                        active: offerActive,
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            console.log('Selected product added to the database.');
+                            // Update the checkbox state based on the response
+                            $('#product_id_' + productId).prop('checked', true);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+        });
+    });
+</script>
 
 
 <script>
@@ -292,7 +324,132 @@ $productImagesJson = json_encode($productImages);
             }, 300); // Debounce delay in milliseconds
         });
     });
+</script> --}}
+
+<script>
+    var selectedProducts = [];
+
+    function toggleAllProducts(checkbox) {
+        var productCheckboxes = document.querySelectorAll('.checkbox');
+        productCheckboxes.forEach(function(checkbox) {
+            checkbox.disabled = checkbox.checked = checkbox.disabled ? false : true;
+        });
+    }
+
+    $(document).ready(function () {
+        $(document).on('change', '.checkbox', function () {
+            var productId = $(this).val();
+            toggleSelection(productId);
+            if ($(this).is(':checked')) {
+                var offerName = document.getElementById('name').value;
+                var offerPrice = document.getElementById('price').value;
+                var offerActive = document.getElementById('active').value;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/add-single-offer",
+                    data: {
+                        product_id: productId,
+                        name: offerName,
+                        price: offerPrice,
+                        active: offerActive,
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            console.log('Selected product added to the database.');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+        });
+    });
+
+    function toggleSelection(productId) {
+        var index = selectedProducts.indexOf(productId);
+        if (index === -1) {
+            selectedProducts.push(productId);
+        } else {
+            selectedProducts.splice(index, 1);
+        }
+    }
+
+    function updateCheckboxes() {
+        selectedProducts.forEach(function(productId) {
+            $('#product_id_' + productId).prop('checked', true);
+        });
+    }
+
+    var productImages = JSON.parse(@json($productImagesJson));
+    var categories = @json($category);
+    var products = @json($products);
+    var offer = @json($offer);
+    var productIds = @json($productIds);
+    var searchTimeout;
+
+    $(document).ready(function() {
+        $('#searchInput').on('keyup', function() {
+            clearTimeout(searchTimeout);
+            var searchInput = $(this).val().trim();
+
+            searchTimeout = setTimeout(function() {
+                $.ajax({
+                    url: '{{ url('admin/search_product_offer') }}',
+                    type: 'get',
+                    data: {
+                        query: searchInput
+                    },
+                    success: function(response) {
+                        var productsHtml = '';
+                        response.forEach(function(product) {
+                            var category = categories.find(cat => cat.id === product.category_id);
+                            var categoryName = category.name;
+                            var imageUrl = productImages[product.id] ? '{{ asset('productimage') }}/' + productImages[product.id].img : '';
+                            productsHtml += `
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input checkbox" type="checkbox" name="product_id[]" id="product_id_${product.id}" value="${product.id}" ${productIds.includes(product.id) ? 'checked' : ''} ${offer.all_products == 1 ? 'checked disabled' : ''}>
+                                            <label class="form-check-label" for="check-${product.id}"></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="${imageUrl}" alt="Product Image" width="60px">
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">${product.name}</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">${categoryName}</p>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+                        $('#SearchResults').html(productsHtml);
+                        updateCheckboxes(); // Update checkboxes after loading new content
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }, 300);
+        });
+    });
 </script>
+
+
+
+
+
+@include('admin.script')
+
+
+
+
+
 
 </body>
 

@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Offer;
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-use Illuminate\Support\Str;
+use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 
 class offerController extends Controller
@@ -265,4 +265,51 @@ class offerController extends Controller
         return response()->json($offers);
 
     }
+
+    public function addSelectedProduct(Request $request)
+{
+    // Retrieve product_id from the request data
+    $productId = $request->input('product_id');
+
+    $productName = $request->input('name');
+    $productPrice = $request->input('price');
+    $active = $request->input('active');
+
+    // Insert into the database
+    Offer::create([
+        'product_id' => $productId,
+        'name' => $productName,
+        'price' => $productPrice,
+        'active' => $active,
+        // You can add more fields if needed
+    ]);
+
+    return response()->json(['success' => true]);
+}
+
+public function checkProductStatus(Request $request)
+{
+    // Retrieve the product ID and offer name from the request
+    $productId = $request->query('product_id');
+    $offerName = $request->query('offer_name');
+
+    // Check if an offer with the same name exists in the database
+    $offerExists = Offer::where('name', $offerName)->where('product_id' , $productId)->exists();
+
+    // Return true if the offer with the same name exists, otherwise return false
+    return response()->json(['success' => $offerExists]);
+}
+
+public function reloadTableData()
+{
+    // Retrieve products and related data from the database
+    $products = Product::all(); // Example: Fetch all products
+
+    // Pass the products data to a view and return the rendered HTML
+    $html = view('partials.products_table', compact('products'))->render();
+
+    return $html;
+}
+
+
 }

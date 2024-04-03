@@ -9,6 +9,6 @@ class Offer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'name', 'all_products', 'price', 'active'];
+    protected $fillable = ['id', 'name', 'all_products', 'price', 'active' , 'product_id'];
 
 }

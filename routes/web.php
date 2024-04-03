@@ -171,6 +171,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/view_offer/{id}', [OfferController::class,'view_offer']);
     Route::get('/search_product_offer' , [offerController::class , 'search_product_offer']);
     Route::get('/search_offer' , [offerController::class , 'search_offer']);
+    Route::post('/add-single-offer', [offerController::class, 'addSelectedProduct']);
+    Route::get('/reload_table_data', [offerController::class, 'reloadTableData'])->name('admin.reload_table_data');
 
     // {{ General }}
     Route::get('/show_general' , [GeneralController::class , 'show_general']);
