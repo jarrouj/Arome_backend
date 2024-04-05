@@ -9,17 +9,29 @@
         </a>
 
     </div>
+
     <hr class="horizontal dark mt-0">
+
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+        <form action="{{ route('clear_session') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-secondary">
+                <i class="bi bi-arrow-clockwise bi-sm"></i>
+            </button>
+        </form>
+
         <form action="{{ route('filter_date') }}" method="GET" id="dateForm">
             @csrf
             <div class="input-group mb-3 w-90 ms-2">
                 <span class="input-group-text">From:</span>
-                <input type="date" class="form-control" id="from_date" name="start_date" value="{{ session('selected_date_range.0') ?? '' }}">
+                <input type="date" class="form-control" id="from_date" name="start_date" value="{{session('selected_date_range.0') ?? Date('Y-m-d')}}">
             </div>
+            {{-- @php
+                echo Date('m-d-Y');
+            @endphp --}}
             <div class="input-group mb-3 w-90 ms-2">
                 <span class="input-group-text">To:</span>
-                <input type="date" class="form-control"  id="to_date" name="end_date" value="{{ session('selected_date_range.1') ?? '' }}">
+                <input type="date" class="form-control"  id="to_date" name="end_date" value="{{ session('selected_date_range.1') ?? Date('Y-m-d');}}">
             </div>
         </form>
 

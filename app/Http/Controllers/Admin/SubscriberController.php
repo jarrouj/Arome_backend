@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Models\Subscriber;
-
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+use App\Mail\SendEmailToSubscribers;
+use Illuminate\Support\Facades\Mail;
 
 class SubscriberController extends Controller
 {
@@ -68,4 +70,20 @@ class SubscriberController extends Controller
     //     // Redirect back with success message
     //     return back()->with('success', 'Emails sent successfully to all subscribers.');
     // }
+
+    public function message(Request $request)
+{
+    $subscribers = Subscriber::all();
+
+    $data = [
+        'title' => $request->input('title'),
+        'text' => $request->input('text')
+    ];
+
+    foreach ($subscribers as $subscriber) {
+        Mail::to($subscriber->email)->send(new SendEmailToSubscribers($data));
+    }
+
+    return back()->with('success', 'Emails sent successfully to all subscribers.');
+}
 }

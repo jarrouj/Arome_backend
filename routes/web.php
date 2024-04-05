@@ -61,8 +61,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/add_subscriber',[SubscriberController::class,'add_subscriber']);
     Route::post('/update_subscriber/{id}',[SubscriberController::class,'update_subscriber']);
     Route::get('/delete_subscriber/{id}',[SubscriberController::class,'delete_subscriber']);
-    Route::post('/send-email', [SubscriberController::class, 'sendEmailToSubscribers'])->name('send.email');
-
+    Route::post('/send_email', [SubscriberController::class, 'message'])->name('send.email');
 
     // {{ Promo }}
     Route::get('/show_promo' , [PromoController::class , 'show_promo']);
@@ -201,3 +200,4 @@ Route::post('/register_user',[RegisterController::class,'register'])->name('regi
 
 
 Route::get('/get_filter_date', [CmsController::class, 'get_filter_date'])->middleware('web');
+Route::post('/clear-session', [CmsController::class, 'clearDateSession'])->name('clear_session')->middleware('web');

@@ -9,16 +9,18 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class Subscriber extends Mailable
+class SendEmailToSubscribers extends Mailable
 {
     use Queueable, SerializesModels;
+
+    public $messageData;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($messageData)
     {
-        //
+        $this->messageData = $messageData;
     }
 
     /**
@@ -27,7 +29,7 @@ class Subscriber extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Subscriber',
+            subject: 'Aroma',
         );
     }
 
@@ -37,7 +39,7 @@ class Subscriber extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'admin.emails.message',
         );
     }
 

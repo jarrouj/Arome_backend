@@ -206,7 +206,7 @@
                 </div>
             </div>
 
-            <div class="mt-5">
+            <div class="mt-5 w-70 m-auto">
                 <canvas id="myChart"></canvas>
               </div>
 
@@ -253,29 +253,36 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
     const ctx = document.getElementById('myChart');
-    const monthLabels = {!! json_encode(array_keys($revenue)) !!};
-    const revenueData = {!! json_encode(array_values($revenue)) !!};
+    const revenueData = {!! json_encode($revenue) !!};
 
-    let labelsToShow = [];
-    let dataToShow = [];
+    let dates = Object.keys(revenueData);
+    let firstDate = new Date(dates[0]);
+    let lastDate = new Date(dates[dates.length - 1]);
+    let durationInDays = (lastDate - firstDate) / (1000 * 3600 * 24);
 
-    // Check if startDate and endDate are available
-    if ({!! json_encode($startDate && $endDate) !!}) {
-        // Loop through monthLabels and include only the months within the date range
-        for (let i = 0; i < monthLabels.length; i++) {
-            const month = monthLabels[i];
-            if (month >= {!! json_encode(date('n', strtotime($startDate))) !!} && month <= {!! json_encode(date('n', strtotime($endDate))) !!}) {
-                labelsToShow.push(monthNames[month - 1]);
-                dataToShow.push(revenueData[i]);
+    let labelsToShow;
+    if (durationInDays > 30) {
+        // Calculate monthly revenue and show only month names
+        let monthlyRevenue = {};
+        dates.forEach(dateString => {
+            const date = new Date(dateString);
+            const monthYear = `${date.toLocaleString('en-US', { month: 'long' })} ${date.getFullYear()}`;
+            if (monthlyRevenue[monthYear]) {
+                monthlyRevenue[monthYear] += revenueData[dateString];
+            } else {
+                monthlyRevenue[monthYear] = revenueData[dateString];
             }
-        }
+        });
+        labelsToShow = Object.keys(monthlyRevenue);
+        dataToShow = Object.values(monthlyRevenue);
     } else {
-        // If startDate and endDate are not available, include all months
-        labelsToShow = monthLabels.map(month => monthNames[month - 1]);
-        dataToShow = revenueData;
+        // Show dates as "Month Day"
+        labelsToShow = dates.map(dateString => {
+            const date = new Date(dateString);
+            return `${date.toLocaleString('en-US', { month: 'long' })} ${date.getDate()}`;
+        });
+        dataToShow = Object.values(revenueData);
     }
 
     new Chart(ctx, {
@@ -297,6 +304,8 @@
         }
     });
 </script>
+
+
 
 
     @include('admin.script')
