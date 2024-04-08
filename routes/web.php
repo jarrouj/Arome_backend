@@ -41,7 +41,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/admin')->middleware('auth')->group(function () {
 
-    Route::get('/', [CmsController::class, 'dash']);
+    Route::get('/{start_date}/{end_date}', [CmsController::class, 'dash']);
 
     // {{ User }}
     Route::get('/show_user', [UserController::class, 'show_user']);

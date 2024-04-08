@@ -29,7 +29,7 @@ class SendEmailToSubscribers extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Aroma',
+            subject: 'Aroma Noir',
         );
     }
 

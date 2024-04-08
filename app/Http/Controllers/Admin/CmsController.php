@@ -156,19 +156,19 @@ class CmsController extends Controller
             ->where('method', 1)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->get();
-
-        foreach ($orders as $order) {
-            $Revenue += $order->total_usd;
-        }
     } else {
+        // If start_date and end_date are not provided, calculate revenue for today
         $orders = Order::where('confirm', 1)
             ->where('method', 1)
+            ->whereDate('created_at', now()->format('Y-m-d'))
             ->get();
-
-        foreach ($orders as $order) {
-            $Revenue += $order->total_usd;
-        }
     }
+
+    // Calculate revenue
+    foreach ($orders as $order) {
+        $Revenue += $order->total_usd;
+    }
+
 
         // Calculate revenue for each day within the date range
         $revenue = [];
@@ -184,7 +184,7 @@ class CmsController extends Controller
                     ->whereDate('created_at', $startDateObj->format('Y-m-d'))
                     ->sum('total_usd');
 
-                $startDateObj->addDay(); // Move to the next day
+                $startDateObj->addDay();
             }
         }
 
@@ -236,16 +236,11 @@ class CmsController extends Controller
         $fromDate = $request->start_date;
         $toDate = $request->end_date;
 
-
-
         session()->put('selected_date_range', [$fromDate, $toDate]);
 
-        // $session = session()->get('selected_date_range', []);
-
-        // dd($session);
-
-        return redirect()->back();
+        return redirect("/admin/{$fromDate}/{$toDate}");
     }
+
 
     public function clearDateSession()
     {

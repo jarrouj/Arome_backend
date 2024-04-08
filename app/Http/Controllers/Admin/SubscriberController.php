@@ -19,13 +19,21 @@ class SubscriberController extends Controller
 
     public function add_subscriber(Request $request)
     {
-        $subscriber = new Subscriber;
+        if(User::where('email', '=', $request->email)->exists()){
+            $subscriber = new Subscriber;
 
-        $subscriber->email = $request->email;
+            $subscriber->email = $request->email;
 
-        $subscriber->save();
+            Mail::to($subscriber->email)->send(new SendEmailToSubscribers($subscriber));
 
-        return redirect()->back()->with( 'message' , 'Subscriber Added');
+            $subscriber->save();
+
+
+            return redirect()->back()->with( 'message' , 'Subscriber Added');
+        }else
+        {
+            return redirect()->back()->with( 'error' , 'Email Already Exists');
+        }
     }
 
     public function update_subscriber(Request $request , $id)

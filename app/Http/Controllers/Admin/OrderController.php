@@ -40,6 +40,8 @@ class OrderController extends Controller
         $order  = Order::find($id);
         $users  = User::all();
 
+        return $order;
+
         return view('admin.order.update_order', compact('order', 'users'));
     }
 
@@ -111,7 +113,7 @@ class OrderController extends Controller
 
                 $user->save();
             }
-           
+
             return redirect()->back()->with('message', $message);
         } else {
             return response()->json(['fail' => false, 'message' => 'Confirmation cannot be updated']);

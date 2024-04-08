@@ -10,6 +10,8 @@
 
     </div>
 
+
+
     <hr class="horizontal dark mt-0">
 
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
@@ -31,24 +33,36 @@
             @endphp --}}
             <div class="input-group mb-3 w-90 ms-2">
                 <span class="input-group-text">To:</span>
-                <input type="date" class="form-control"  id="to_date" name="end_date" value="{{ session('selected_date_range.1') ?? Date('Y-m-d');}}">
+                <input type="date" class="form-control"  id="to_date" name="end_date" value="{{ session('selected_date_range.1') ?? Date('Y-m-d') }}">
             </div>
         </form>
+
+
+        @php
+        $start_date = session('selected_date_range.0', 0);
+        $end_date = session('selected_date_range.1', 0);
+    @endphp
+
+
 
 
         <ul class="navbar-nav">
 
 
             <li class="nav-item">
-                <a class="nav-link rounded-3 {{ 'admin' == request()->path() ? 'main-color' : '' }}"
-                    href="{{ url('/admin') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <a class="nav-link rounded-3 {{ Request::is('admin') && request()->filled('start_date') && request()->filled('end_date') ? 'main-color' : '' }}"
+                    href="{{ url('/admin', ['start_date' => $start_date, 'end_date' => $end_date]) }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
+
+
+
+
+
 
             <li class="nav-item">
                 <a class="nav-link rounded-3 {{ 'admin/show_user' == request()->path() ? 'main-color' : '' }}"
