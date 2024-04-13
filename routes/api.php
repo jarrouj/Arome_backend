@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Controllers\FrontEnd\CartController;
 use App\Http\Controllers\FrontEnd\UserController;
 use App\Http\Controllers\FrontEnd\OrderController;
+use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\FrontEnd\TransactionController;
 
 /*
@@ -70,3 +71,4 @@ Route::get('/get-landing',[ApiController::class,'getLanding']);
 Route::get('/get-product-image-first/{productId}',[ApiController::class,'getProductImageFirst']);
 Route::get('/get-testimonial',[ApiController::class,'getTestimonial']);
 
+Route::post('/add_subscriber',[SubscriberController::class,'add_subscriber']);

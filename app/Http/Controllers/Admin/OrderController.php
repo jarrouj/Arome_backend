@@ -35,20 +35,18 @@ class OrderController extends Controller
         return view('admin.order.show_order', compact('order', 'users'));
     }
 
-    public function update_order($id)
+    public function update_order($start_date,$end_date,$id)
     {
         $order  = Order::find($id);
         $users  = User::all();
 
-        return $order;
 
         return view('admin.order.update_order', compact('order', 'users'));
     }
 
-    public function update_order_confirm(Request $request, $id)
+    public function update_order_confirm($start_date, $end_date,Request $request, $id)
     {
         $order = Order::find($id);
-
 
 
         $order->paid       = $request->paid;

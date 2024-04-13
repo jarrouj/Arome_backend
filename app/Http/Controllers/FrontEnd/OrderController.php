@@ -10,16 +10,19 @@ use App\Models\Order;
 use App\Models\Promo;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Mail\SendMailOnOrder;
 use App\Models\OrderProducts;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
 
     private function api_add_order(Request $request)
     {
-        if (Auth::user()) {
+        if (Auth::user())
+        {
             $user = Auth::user();
 
             // Create a new order instance
@@ -45,6 +48,8 @@ class OrderController extends Controller
                 // $orderProduct->offer      = $order->offer;
                 $orderProduct->save();
             }
+            Mail::to('georgesjarrouj3@gmail.com')->send(new SendMailOnOrder($order , $orderProduct));
+
         } else {
 
 
@@ -66,6 +71,9 @@ class OrderController extends Controller
             $totalUSD = 0;
 
             $totalPoints = 0;
+
+            $orderProducts = [];
+
 
             foreach ($cartProductIds as $cartItem) {
                 $productId = $cartItem['product_id'];
@@ -106,10 +114,34 @@ class OrderController extends Controller
                     $newOrderProduct->size_id = $sizeId;
                     $newOrderProduct->qty = $qty;
 
+
+
+
                     $newOrderProduct->save();
+
+                    $orderProducts[] = $newOrderProduct;
+
+
                 }
             }
 
+
+
+
+            //   $orders = [
+            //     'fname' => $order->fname,
+            //     'lname' => $order->lname,
+            //     'address' => $order->address,
+            //     'email' => $order->email,
+            //     'phone' => $order->phone,
+            //     'total_lbp' => $order->total_lbp,
+            //     'total_usd' => $totalUSD,
+            //     'total_points' => $totalPoints,
+            // ];
+
+
+
+            Mail::to('georgesjarrouj3@gmail.com')->send(new SendMailOnOrder($order , $orderProducts));
 
             $promoCode = Promo::where('promo', '=', $request->promo)->first();
 
@@ -139,6 +171,7 @@ class OrderController extends Controller
             $order->total_pts = $totalPoints;
             $order->save();
         }
+
 
         return response()->json(['order' => $order]);
     }
