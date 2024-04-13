@@ -1,31 +1,31 @@
 <?php
 
-use App\Http\Controllers\Admin\AboutController;
-use App\Http\Controllers\Admin\CartController;
-use App\Http\Controllers\Admin\CategoriesController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Admin\CmsController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\SocialController;
-use App\Http\Controllers\Admin\SubscriberController;
-use App\Http\Controllers\Admin\PromoController;
+use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\CartController;
+use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\TermController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\offerController;
-use App\Http\Controllers\Admin\PrivacyController;
-use App\Http\Controllers\Admin\TestimonialController;
-use App\Http\Controllers\Admin\CollectionController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PromoController;
+use App\Http\Controllers\Admin\SmellController;
+use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\GeneralController;
 use App\Http\Controllers\Admin\LandingController;
-use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PrivacyController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\ProductImageController;
-use App\Http\Controllers\Admin\SizeController;
-use App\Http\Controllers\Admin\SmellController;
-use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\CollectionController;
+use App\Http\Controllers\Admin\SubscriberController;
+use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\TransactionController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\FrontEnd\CartController as FrontEndCartController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,7 +58,6 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     // {{ Subscriber }}
     Route::get('/show_subscriber',[SubscriberController::class,'show_subscriber']);
-    Route::post('/add_subscriber',[SubscriberController::class,'add_subscriber']);
     Route::post('/update_subscriber/{id}',[SubscriberController::class,'update_subscriber']);
     Route::get('/delete_subscriber/{id}',[SubscriberController::class,'delete_subscriber']);
     Route::post('/send_email', [SubscriberController::class, 'message'])->name('send.email');
@@ -152,8 +151,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     // {{ Order }}
     Route::get('/show_order' , [OrderController::class , 'show_order']);
     Route::post('/add_order' , [OrderController::class , 'add_order']);
-    Route::get('/update_order/{id}' , [OrderController::class , 'update_order']);
-    Route::post('/update_order_confirm/{id}' , [OrderController::class , 'update_order_confirm']);
+    Route::get('/{start_date}/{end_date}/update_order/{id}' , [OrderController::class , 'update_order']);
+    Route::post('/{start_date}/{end_date}/update_order_confirm/{id}' , [OrderController::class , 'update_order_confirm']);
     Route::get('/delete_order/{id}' , [OrderController::class , 'delete_order']);
     Route::get('/view_order/{id}' , [OrderController::class , 'view_order']);
     Route::get('/search_order' , [OrderController::class , 'search_order']);

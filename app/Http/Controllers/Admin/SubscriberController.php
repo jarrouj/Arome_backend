@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use App\Models\User;
+use App\Models\Promo;
+use App\Models\General;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,20 +22,32 @@ class SubscriberController extends Controller
 
     public function add_subscriber(Request $request)
     {
-        if(User::where('email', '=', $request->email)->exists()){
+
+        if(Subscriber::where('email', '=', $request->email)->exists()){
+
+            Mail::to($request->email)->send(new SendEmailToSubscribers([], true));
+
+            return redirect()->back()->with( 'error' , 'Email Already Exists');
+        }else
+        {
+            $promo = Promo::where('promo' , '=' , 'NEWSUB15')->first();
+            $general = General::find(1);
             $subscriber = new Subscriber;
 
             $subscriber->email = $request->email;
 
-            Mail::to($subscriber->email)->send(new SendEmailToSubscribers($subscriber));
+            $subscriberData = [
+                'discount' => $general->subscriber_discount,
+                'promo'    => $promo->promo,
+
+            ];
+
+            Mail::to($subscriber->email)->send(new SendEmailToSubscribers($subscriberData , false));
 
             $subscriber->save();
 
 
             return redirect()->back()->with( 'message' , 'Subscriber Added');
-        }else
-        {
-            return redirect()->back()->with( 'error' , 'Email Already Exists');
         }
     }
 

@@ -158,190 +158,203 @@
                                     </thead>
                                     <tbody id="SearchResults">
                                         @forelse ($order as $data)
-                                        <tr class="text-center">
-                                            <td>
-                                                <div class="d-flex">
-                                                    @if ($data->confirm === 0)
-                                                    <form action="{{ route('update-status', ['id' => $data->id]) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        <button type="submit" name="conf" value="0"
-                                                            class="btn btn-danger btn-sm" disabled>
-                                                            <i class="bi bi-x" style="font-size: 1rem;"></i>
-                                                        </button>
-                                                    </form>
-                                                    @elseif ($data->confirm === 1)
-                                                    <form action="{{ route('update-status', ['id' => $data->id]) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        <button type="submit" name="conf" value="1"
-                                                            class="btn btn-success btn-sm me-1" disabled>
-                                                            <i class="bi bi-check" style="font-size: 1rem;"></i>
-                                                        </button>
-                                                    </form>
+                                            <tr class="text-center">
+                                                <td>
+                                                    <div class="d-flex">
+                                                        @if ($data->confirm === 0)
+                                                            <form
+                                                                action="{{ route('update-status', ['id' => $data->id]) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                <button type="submit" name="conf" value="0"
+                                                                    class="btn btn-danger btn-sm" disabled>
+                                                                    <i class="bi bi-x" style="font-size: 1rem;"></i>
+                                                                </button>
+                                                            </form>
+                                                        @elseif ($data->confirm === 1)
+                                                            <form
+                                                                action="{{ route('update-status', ['id' => $data->id]) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                <button type="submit" name="conf" value="1"
+                                                                    class="btn btn-success btn-sm me-1" disabled>
+                                                                    <i class="bi bi-check" style="font-size: 1rem;"></i>
+                                                                </button>
+                                                            </form>
+                                                        @else
+                                                            <form
+                                                                action="{{ route('update-status', ['id' => $data->id]) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                <button type="submit" name="conf" value="1"
+                                                                    class="btn btn-success btn-sm me-1">
+                                                                    <i class="bi bi-check" style="font-size: 1rem;"></i>
+                                                                </button>
+                                                            </form>
+                                                            <form
+                                                                action="{{ route('update-status', ['id' => $data->id]) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                <button type="submit" name="conf" value="0"
+                                                                    class="btn btn-danger btn-sm">
+                                                                    <i class="bi bi-x" style="font-size: 1rem;"></i>
+                                                                </button>
+                                                            </form>
+                                                        @endif
+                                                    </div>
+                                                </td>
+
+
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        #{{ $data->id }}
+                                                    </p>
+                                                </td>
+
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        @if ($data->user_id)
+                                                            @foreach ($users as $user)
+                                                                @if ($user->id == $data->user_id)
+                                                                    {{ $user->f_name }} {{ $user->l_name }}
+                                                                @endif
+                                                            @endforeach
+                                                        @else
+                                                            <p class="text-xs font-weight-bold mb-0">
+                                                                {{ $data->f_name }} {{ $data->l_name }}
+                                                            </p>
+                                                        @endif
+                                                    </p>
+                                                </td>
+
+                                                <td>
+                                                    @if ($data->address !== null)
+                                                        <i class="fa fa-check text-success"></i>
                                                     @else
-                                                    <form action="{{ route('update-status', ['id' => $data->id]) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        <button type="submit" name="conf" value="1"
-                                                            class="btn btn-success btn-sm me-1">
-                                                            <i class="bi bi-check" style="font-size: 1rem;"></i>
-                                                        </button>
-                                                    </form>
-                                                    <form action="{{ route('update-status', ['id' => $data->id]) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        <button type="submit" name="conf" value="0"
-                                                            class="btn btn-danger btn-sm">
-                                                            <i class="bi bi-x" style="font-size: 1rem;"></i>
-                                                        </button>
-                                                    </form>
+                                                        <i class="fa fa-times text-danger"></i>
                                                     @endif
-                                                </div>
-                                            </td>
+                                                </td>
 
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $data->email }}
+                                                    </p>
+                                                </td>
 
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    #{{ $data->id }}
-                                                </p>
-                                            </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $data->phone }}
+                                                    </p>
+                                                </td>
 
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    @if ($data->user_id)
-                                                    @foreach ($users as $user)
-                                                    @if ($user->id == $data->user_id)
-                                                    {{ $user->f_name }} {{ $user->l_name }}
-                                                    @endif
-                                                    @endforeach
+                                                <td>
+                                                    @if ($data->registered == 1)
+                                                        <span
+                                                            class="badge badge-sm bg-gradient-success ">Registered</span>
                                                     @else
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $data->f_name }} {{ $data->l_name }}
-                                                </p>
-                                                @endif
-                                                </p>
-                                            </td>
+                                                        <span class="badge badge-sm bg-gradient-danger ">Not
+                                                            Registered</span>
+                                                    @endif
+                                                </td>
 
-                                            <td>
-                                                @if ($data->address !== null)
-                                                <i class="fa fa-check text-success"></i>
-                                                @else
-                                                <i class="fa fa-times text-danger"></i>
-                                                @endif
-                                            </td>
+                                                <td>
+                                                    @if ($data->paid == 1)
+                                                        <span class="badge badge-sm bg-gradient-success ">Paid</span>
+                                                    @else
+                                                        <span class="badge badge-sm bg-gradient-danger ">Not Paid</span>
+                                                    @endif
+                                                </td>
 
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $data->email }}
-                                                </p>
-                                            </td>
+                                                <td>
+                                                    @if ($data->method == 1)
+                                                        <span class="badge badge-sm bg-gradient-success">Cash</span>
+                                                    @else
+                                                        <span class="badge badge-sm bg-gradient-danger ">Points</span>
+                                                    @endif
+                                                </td>
 
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $data->phone }}
-                                                </p>
-                                            </td>
-
-                                            <td>
-                                                @if ($data->registered == 1)
-                                                <span class="badge badge-sm bg-gradient-success ">Registered</span>
-                                                @else
-                                                <span class="badge badge-sm bg-gradient-danger ">Not
-                                                    Registered</span>
-                                                @endif
-                                            </td>
-
-                                            <td>
-                                                @if ($data->paid == 1)
-                                                <span class="badge badge-sm bg-gradient-success ">Paid</span>
-                                                @else
-                                                <span class="badge badge-sm bg-gradient-danger ">Not Paid</span>
-                                                @endif
-                                            </td>
-
-                                            <td>
-                                                @if ($data->method == 1)
-                                                <span class="badge badge-sm bg-gradient-success">Cash</span>
-                                                @else
-                                                <span class="badge badge-sm bg-gradient-danger ">Points</span>
-                                                @endif
-                                            </td>
-
-                                            <td>
-                                                @if ($data->delivered == 1)
-                                                <span class="badge badge-sm bg-gradient-success ">Delivered</span>
-                                                @else
-                                                <span class="badge badge-sm bg-gradient-danger ">Not
-                                                    Delivered</span>
-                                                @endif
-                                            </td>
+                                                <td>
+                                                    @if ($data->delivered == 1)
+                                                        <span
+                                                            class="badge badge-sm bg-gradient-success ">Delivered</span>
+                                                    @else
+                                                        <span class="badge badge-sm bg-gradient-danger ">Not
+                                                            Delivered</span>
+                                                    @endif
+                                                </td>
 
 
 
-                                            <td>
-                                                @if ($data->promo != null)
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $data->promo }}
-                                                </p>
-                                                @else
-                                                <i class="fa fa-times text-danger"></i>
-                                                @endif
-                                            </td>
+                                                <td>
+                                                    @if ($data->promo != null)
+                                                        <p class="text-xs font-weight-bold mb-0">
+                                                            {{ $data->promo }}
+                                                        </p>
+                                                    @else
+                                                        <i class="fa fa-times text-danger"></i>
+                                                    @endif
+                                                </td>
 
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $data->total_pts }}
-                                                </p>
-                                            </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $data->total_pts }}
+                                                    </p>
+                                                </td>
 
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $data->total_lbp }}
-                                                </p>
-                                            </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $data->total_lbp }}
+                                                    </p>
+                                                </td>
 
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $data->total_usd }}
-                                                </p>
-                                            </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $data->total_usd }}
+                                                    </p>
+                                                </td>
 
-                                            <td class="align-middle">
-                                                <a href="{{ url('admin/view_order', $data->id) }}"
-                                                    class="text-primary font-weight-bold text-xs" data-toggle="tooltip">
-                                                    View
-                                                    <i class="bi bi-eye"></i>
-                                                </a>
-                                            </td>
+                                                <td class="align-middle">
+                                                    <a href="{{ url('admin/view_order', $data->id) }}"
+                                                        class="text-primary font-weight-bold text-xs"
+                                                        data-toggle="tooltip">
+                                                        View
+                                                        <i class="bi bi-eye"></i>
+                                                    </a>
+                                                </td>
+
+                                                @php
+                                                    $start_date = session('selected_date_range.0', 0);
+                                                    $end_date = session('selected_date_range.1', 0);
+                                                @endphp
 
 
-                                            <td class="align-middle">
-                                                <a href="{{ url('admin/update_order', $data->id) }}"
-                                                    class="text-success font-weight-bold text-xs" data-toggle="tooltip">
-                                                    Update
-                                                    <i class="bi bi-pen"></i>
-                                                </a>
-                                            </td>
+                                                <td class="align-middle">
+                                                    <a href="{{ url('admin/' . $start_date . '/' . $end_date . '/update_order/' . $data->id) }}"
+                                                        class="text-success font-weight-bold text-xs"
+                                                        data-toggle="tooltip">
+                                                        Update
+                                                        <i class="bi bi-pen"></i>
+                                                    </a>
+                                                </td>
 
-                                            <td class="align-middle">
-                                                <a href="{{ url('admin/delete_order', $data->id) }}"
-                                                    class="text-danger font-weight-bold text-xs" data-toggle="tooltip"
-                                                    data-original-title="Edit order"
-                                                    onclick="return confirm('Are you sure you want to delete this order?')">
-                                                    Delete
-                                                    <i class="bi bi-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                                <td class="align-middle">
+                                                    <a href="{{ url('admin/delete_order', $data->id) }}"
+                                                        class="text-danger font-weight-bold text-xs"
+                                                        data-toggle="tooltip" data-original-title="Edit order"
+                                                        onclick="return confirm('Are you sure you want to delete this order?')">
+                                                        Delete
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
                                         @empty
-                                        <tr>
-                                            <td colspan="16">
-                                                <p class="text-xs text-center text-danger font-weight-bold mb-0">
-                                                    No Data !
-                                                </p>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td colspan="16">
+                                                    <p class="text-xs text-center text-danger font-weight-bold mb-0">
+                                                        No Data !
+                                                    </p>
+                                                </td>
+                                            </tr>
                                         @endforelse
                                     </tbody>
                                 </table>

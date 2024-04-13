@@ -41,16 +41,30 @@
         @php
         $start_date = session('selected_date_range.0', 0);
         $end_date = session('selected_date_range.1', 0);
+
+        // Check if session values are 0
+        if ($start_date == 0 || $end_date == 0) {
+            $start_date = date('Y-m-d');
+            $end_date = date('Y-m-d');
+        }
     @endphp
+
 
 
 
 
         <ul class="navbar-nav">
 
+            {{-- <a class="nav-link rounded-3 "
+            href="{{ url('/admin', ['start_date' => $start_date, 'end_date' => $end_date]) }}">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Dashboard</span>
+        </a> --}}
 
             <li class="nav-item">
-                <a class="nav-link rounded-3 {{ Request::is('admin') && request()->filled('start_date') && request()->filled('end_date') ? 'main-color' : '' }}"
+                <a class="nav-link rounded-3 "
                     href="{{ url('/admin', ['start_date' => $start_date, 'end_date' => $end_date]) }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
