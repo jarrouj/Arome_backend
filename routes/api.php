@@ -67,6 +67,6 @@ Route::get('/get-order-status',[ApiController::class,'getOrderStatus']);
 Route::get('/get-term',[ApiController::class,'getTerm']);
 Route::get('/get-collection',[ApiController::class,'getCollection']);
 Route::get('/get-landing',[ApiController::class,'getLanding']);
-
-
+Route::get('/get-product-image-first/{productId}',[ApiController::class,'getProductImageFirst']);
+Route::get('/get-testimonial',[ApiController::class,'getTestimonial']);
 

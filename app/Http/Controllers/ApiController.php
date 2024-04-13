@@ -56,7 +56,6 @@ class ApiController extends Controller
 
     public function getCategory()
     {
-
         $category = Category::all();
 
         return response()->json($category);
@@ -76,9 +75,17 @@ class ApiController extends Controller
         return response()->json($productImage);
     }
 
+    public function getProductImageFirst($productId)
+    {
+        $productImage = ProductImage::where('product_id', $productId)->first();
+
+        return response()->json($productImage);
+    }
+
+
     public function getSocial()
     {
-        $social = Social::all();
+        $social = Social::find(1);
 
         return response()->json($social);
     }
@@ -155,7 +162,7 @@ class ApiController extends Controller
 
     public function getOffer()
     {
-        $offer = Offer::all();
+        $offer = Offer::where('active','=','1')->get();
 
         return response()->json($offer);
     }
@@ -179,6 +186,15 @@ class ApiController extends Controller
         $cart = Cart::all();
 
         return response()->json($cart);
+    }
+
+    public function getCategoryProducts($name)
+    {
+        $category = Category::where('name' , '=' , $name)->get();
+
+        $product = Product::where('category_id' , '=' ,$category->id)->get();
+
+        return response()->json($product);
     }
 
 
