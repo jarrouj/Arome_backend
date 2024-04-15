@@ -22,6 +22,64 @@ class AboutController extends Controller
         return view('admin.about.show_about' , compact('about' , 'aboutImage' , 'aboutPoint'));
     }
 
+    public function add_about_point(Request $request)
+    {
+        $aboutPoint = new About_point;
+
+        $aboutPoint->title = $request->title;
+        $aboutPoint->subtitle = $request->subtitle;
+
+        $img = $request->imgpoint;
+
+
+        if($img)
+        {
+            $imgname = Str::random(20) . '.' . $img->getClientOriginalExtension();
+
+            //Save the original image
+            $request->imgpoint->move('aboutpoint', $imgname);
+
+            //change the image quality using Intervention Image
+            $img = Image::make(public_path('aboutpoint/' . $imgname));
+
+            $img->encode($img->extension, 10)->save(public_path('aboutpoint/' . $imgname));
+
+            $aboutPoint->img = $imgname;
+        }
+
+        $aboutPoint->save();
+
+        return redirect()->back()->with('message' , 'About Point Added');
+    }
+
+    public function add_about_img(Request $request)
+    {
+        $aboutImage = new About_img();
+
+        $img = $request->img;
+
+
+        if($img)
+        {
+            $imgname = Str::random(20) . '.' . $img->getClientOriginalExtension();
+
+            //Save the original image
+            $request->img->move('aboutimage', $imgname);
+
+            //change the image quality using Intervention Image
+            $img = Image::make(public_path('aboutimage/' . $imgname));
+
+            $img->encode($img->extension, 10)->save(public_path('aboutimage/' . $imgname));
+
+            $aboutImage->img = $imgname;
+        }
+
+        $aboutImage->save();
+
+
+        return redirect()->back()->with('message' , 'About Point Added');
+    }
+
     public function update_about($id)
     {
         $about      = About::find($id);
