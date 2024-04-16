@@ -39,7 +39,7 @@ class ApiController extends Controller
     public function getAboutImage()
     {
 
-        $aboutImage = About_img::find(1);
+        $aboutImage = About_img::all();
 
         return response()->json($aboutImage);
 
@@ -48,7 +48,7 @@ class ApiController extends Controller
     public function getAboutPoint()
     {
 
-        $aboutPoint = About_point::find(1);
+        $aboutPoint = About_point::all();
 
         return response()->json($aboutPoint);
 

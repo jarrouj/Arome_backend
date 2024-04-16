@@ -16,8 +16,8 @@ class AboutController extends Controller
     public function show_about()
     {
         $about      = About::find(1);
-        $aboutImage = About_img::find(1);
-        $aboutPoint = About_point::find(1);
+        $aboutImage = About_img::latest()->paginate(10);
+        $aboutPoint = About_point::latest()->paginate(10);
 
         return view('admin.about.show_about' , compact('about' , 'aboutImage' , 'aboutPoint'));
     }

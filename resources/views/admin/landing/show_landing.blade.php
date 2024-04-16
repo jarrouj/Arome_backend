@@ -50,9 +50,9 @@
                                         </th>
                                         <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-
                                         Text 1
-                                    </th> <th
+                                    </th>
+                                    <th
                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
                                     Text 2
@@ -65,7 +65,7 @@
                                     <tbody>
                                         @forelse ($landing as $data)
                                             <tr class="text-center">
-                                                <td class="bg-primary">
+                                                <td >
                                                         <img src="/landing/{{ $data->img }}" async class="d-block m-auto" width="50px" alt="">
 
                                                 </td>
