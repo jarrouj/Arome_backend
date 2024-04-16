@@ -41,9 +41,12 @@ Route::get('/add_transaction', [TransactionController::class, 'add_transaction']
 
 
 //{{ User }}
+Route::post('/login', [UserController::class, 'login']);
+Route::post('/register', [UserController::class, 'register']);
 Route::get('/show_userinfo', [UserController::class, 'get_userInfo'])->middleware('web');
-Route::post('/add_user',[UserController::class,'add_user'])->middleware('web');
-
+// Route::post('/add_user',[UserController::class,'add_user'])->middleware('web');
+Route::post('/user/{user}', [UserController::class, 'update']);
+Route::get('/user', [UserController::class, 'delete']);
 
 // {{ Api Routes}}
 

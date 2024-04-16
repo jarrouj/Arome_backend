@@ -142,7 +142,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/update_about/{id}' , [AboutController::class , 'update_about']);
     Route::post('/update_about_confirm/{id}' , [AboutController::class , 'update_about_confirm']);
     Route::post('/add_about_img' , [AboutController::class , 'add_about_img']);
-    Route::get('/add_about_point' , [AboutController::class , 'add_about_point']);
+    Route::post('/add_about_point' , [AboutController::class , 'add_about_point']);
 
 
     // {{ Cart }}

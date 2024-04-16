@@ -26,6 +26,23 @@
                             Update
                         </a>
 
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <div class="d-flex justify-content-center">
+
+                                    @include('admin.about.add_about_point')
+
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-center">
+
+                                    @include('admin.about.add_about_image')
+
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="card-body px-0 pt-0 mt-4 pb-2">
                             <div class="row text-center">
                                 <div class="col-12">
