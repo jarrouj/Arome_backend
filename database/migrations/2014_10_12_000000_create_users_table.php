@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->longtext('address');
+            $table->longtext('address')->nullable();
             $table->integer('points')->default(0);
             $table->timestamp('last_seen')->nullable();
             $table->rememberToken();

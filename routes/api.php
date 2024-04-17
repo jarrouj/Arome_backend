@@ -43,6 +43,7 @@ Route::get('/add_transaction', [TransactionController::class, 'add_transaction']
 //{{ User }}
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/register', [UserController::class, 'register']);
+
 Route::get('/show_userinfo', [UserController::class, 'get_userInfo'])->middleware('web');
 // Route::post('/add_user',[UserController::class,'add_user'])->middleware('web');
 Route::post('/user/{user}', [UserController::class, 'update']);
@@ -75,3 +76,6 @@ Route::get('/get-product-image-first/{productId}',[ApiController::class,'getProd
 Route::get('/get-testimonial',[ApiController::class,'getTestimonial']);
 
 Route::post('/add_subscriber',[SubscriberController::class,'add_subscriber']);
+
+
+Route::get('/getUserName', [UserController::class, 'getUserName']);

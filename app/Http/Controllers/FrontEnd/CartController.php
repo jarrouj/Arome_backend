@@ -63,6 +63,7 @@ class CartController extends Controller
                 $cart->save();
             }
         } else {
+
             // Get the existing cart array from the session
             $cart = session()->get('cart.products', []);
 
@@ -77,6 +78,8 @@ class CartController extends Controller
 
             // Store the updated cart array in the session
             session()->put('cart.products', $cart);
+
+            
         }
 
         return response()->json(['data' => $cart]);

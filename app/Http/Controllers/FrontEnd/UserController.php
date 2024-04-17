@@ -51,10 +51,9 @@ class UserController extends Controller
             $access_token = $user->createToken('authToken')->plainTextToken;
 
             return response()->json([
-                'status'  => true,
-                'message' => "User Authenticated Successfully",
-                'token'   => $access_token,
-                'role'    => $user->role
+                'status' => true,
+                'token'  => $access_token,
+                'user'   => $user
             ]);
         } else {
             return response()->json([
@@ -68,11 +67,13 @@ class UserController extends Controller
     {
         $user = new User;
 
-        $user->name     = $request->name;
+        $user->f_name     = $request->f_name;
+        $user->l_name     = $request->l_name;
+        $user->address     = $request->address;
         $user->phone    = $request->phone;
         $user->email    = $request->email;
+
         $user->password = bcrypt($request->password);
-        $user->role     = $request->role;
 
         $user->save();
 
@@ -82,7 +83,6 @@ class UserController extends Controller
             'status'  => true,
             'message' => "User Registered Successfully",
             'token'   => $access_token,
-            'role'    => $user->role
         ]);
     }
 
@@ -135,5 +135,24 @@ class UserController extends Controller
                 'message' => 'Unauthorized action or invalid user ID'
             ]);
         }
+    }
+
+
+    // public function getUserName()
+    // {
+    //     $user = Auth::user();
+    //     return response()->json($user);
+    // }
+
+    public function getUserName()
+    {
+        $LoggedUser = Auth::user()->id;
+
+        $user = User::find($LoggedUser);
+
+        return response()->json([
+            'status'  => true,
+            'data' => $user
+        ]);
     }
 }
