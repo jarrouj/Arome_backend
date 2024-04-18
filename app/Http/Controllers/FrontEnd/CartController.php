@@ -37,53 +37,84 @@ class CartController extends Controller
         }
     }
 
-    public function add_cart(Request $request)
+
+
+    // public function add_cart(Request $request, $id)
+    // {
+    //     // Validate the incoming request data
+    //     $request->validate([
+    //         'size' => 'required',
+    //         'qty' => 'required|integer|min:1',
+    //     ]);
+
+    //     // Retrieve the product ID from the URL parameter
+    //     $productId = $id;
+
+    //     // Retrieve the size and quantity from the request body
+    //     $size = $request->input('size');
+    //     $quantity = $request->input('qty');
+
+    //     // Check if the user is authenticated
+    //     if (Auth::check()) {
+    //         $user = Auth::user();
+
+    //         // Create a new cart item for the authenticated user
+    //         $cart = new Cart();
+    //         $cart->user_id = $user->id;
+    //         $cart->product_id = $productId;
+    //         $cart->size = $size;
+    //         $cart->quantity = $quantity;
+    //         $cart->save();
+    //     } else {
+    //         // Get the existing cart array from the session
+    //         $cart = session()->get('cart.products', []);
+
+    //         // Add the product data to the cart array
+    //         $cart[] = [
+    //             'product_id' => $productId,
+    //             'size' => $size,
+    //             'quantity' => $quantity
+    //         ];
+
+    //         // Store the updated cart array in the session
+    //         session()->put('cart.products', $cart);
+    //     }
+
+    //     return response()->json(['data' => $cart]);
+    // }
+
+    public function add_cart(Request $request, $id)
     {
-        return $this->api_add_cart($request);
-    }
+        // Validate the incoming request data
+        $request->validate([
+            'size' => 'required',
+            'qty' => 'required|integer|min:1',
+        ]);
 
-    private function api_add_cart(Request $request)
-    {
-        $productData = $request->only('product_id', 'size', 'qty');
-        $productIds = (array) $productData['product_id'];
-        $sizes = (array) $productData['size'];
-        $quantities = (array) $productData['qty'];
+        try {
+            // Retrieve the product ID from the URL parameter
+            $productId = $id;
 
-        if (Auth::user()) {
-            $user = Auth::user();
+            // Retrieve the size and quantity from the request body
+            $size = $request->input('size');
+            $quantity = $request->input('qty');
 
-            foreach ($productIds as $index => $productId) {
-                $cart = new Cart();
+            // Create a new cart item
+            $cart = new Cart();
+            $cart->user_id = 2;
+            $cart->product_id = $productId;
+            $cart->size_id = $size;
+            $cart->qty = $quantity;
+            $cart->save();
 
-                $cart->user_id = $user->id;
-                $cart->product_id = $productId;
-                $cart->size = $sizes[$index];
-                $cart->quantity = $quantities[$index];
-
-                $cart->save();
-            }
-        } else {
-
-            // Get the existing cart array from the session
-            $cart = session()->get('cart.products', []);
-
-            // Merge the existing cart array with the new product data
-            foreach ($productIds as $index => $productId) {
-                $cart[] = [
-                    'product_id' => $productId,
-                    'size' => $sizes[$index],
-                    'quantity' => $quantities[$index]
-                ];
-            }
-
-            // Store the updated cart array in the session
-            session()->put('cart.products', $cart);
-
-            
+            return response()->json(['data' => $cart]);
+        } catch (\Exception $e) {
+            // Return error response
+            return response()->json(['error' => 'Failed to add item to cart'], 500);
         }
-
-        return response()->json(['data' => $cart]);
     }
+
+
 
     public function delete_cart($id)
     {
