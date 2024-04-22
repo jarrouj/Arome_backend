@@ -79,3 +79,6 @@ Route::post('/add_subscriber',[SubscriberController::class,'add_subscriber']);
 
 
 Route::get('/getUserName', [UserController::class, 'getUserName']);
+
+
+Route::get('/get-products-sort',[ApiController::class,'getProductsBySort']);

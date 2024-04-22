@@ -33,7 +33,6 @@ class ApiController extends Controller
         $about = About::find(1);
 
         return response()->json($about);
-
     }
 
     public function getAboutImage()
@@ -42,7 +41,6 @@ class ApiController extends Controller
         $aboutImage = About_img::all();
 
         return response()->json($aboutImage);
-
     }
 
     public function getAboutPoint()
@@ -51,7 +49,6 @@ class ApiController extends Controller
         $aboutPoint = About_point::all();
 
         return response()->json($aboutPoint);
-
     }
 
     public function getCategory()
@@ -162,7 +159,7 @@ class ApiController extends Controller
 
     public function getOffer()
     {
-        $offer = Offer::where('active','=','1')->get();
+        $offer = Offer::where('active', '=', '1')->get();
 
         return response()->json($offer);
     }
@@ -190,17 +187,67 @@ class ApiController extends Controller
 
     public function getCategoryProducts($name)
     {
-        $category = Category::where('name' , '=' , $name)->get();
+        $category = Category::where('name', '=', $name)->get();
 
-        $product = Product::where('category_id' , '=' ,$category->id)->get();
+        $product = Product::where('category_id', '=', $category->id)->get();
 
         return response()->json($product);
     }
 
+    public function getProductsBySort(Request $request)
+    {
+        $sortOption = $request->input('sort_option');
+        $categoryName = $request->input('category_name');
 
+        // Get products associated with the category name
+        $products = Product::where('category_name', $categoryName);
 
+        if ($sortOption === 'price-asc') {
+            // Order products by the minimum price among their associated sizes in ascending order
+            $products->orderBy(function ($query) {
+                $query->select('price')
+                    ->from('sizes')
+                    ->whereColumn('sizes.product_id', 'products.id')
+                    ->orderBy('price', 'asc')
+                    ->limit(1);
+            });
+        } elseif ($sortOption === 'price-desc') {
+            // Order products by the maximum price among their associated sizes in descending order
+            $products->orderByDesc(function ($query) {
+                $query->select('price')
+                    ->from('sizes')
+                    ->whereColumn('sizes.product_id', 'products.id')
+                    ->orderBy('price', 'desc')
+                    ->limit(1);
+            });
+        } else {
+            return response()->json(['error' => 'Invalid sort option'], 400);
+        }
+
+        // Retrieve the sorted products
+        $sortedProducts = $products->get();
+
+        // Iterate through sorted products to fetch and include size prices and product images
+        foreach ($sortedProducts as $product) {
+            // Fetch size prices for the current product
+            $sizePrices = Size::where('product_id', $product->id)->pluck('price')->toArray();
+
+            // Include size prices in the product object
+            $product->size_prices = $sizePrices;
+
+            // Fetch product images for the current product
+            $productImages = ProductImage::where('product_id', $product->id)->pluck('img')->toArray();
+
+            // Include product images in the product object
+            $product->product_images = $productImages;
+        }
+
+        return response()->json($sortedProducts);
     }
 
 
 
 
+
+
+}
